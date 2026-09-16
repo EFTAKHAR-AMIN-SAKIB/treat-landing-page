@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Treat 🍰✨ | Funky Foodie Feasts, Group Deals & Floor Management</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#E040A0",
+            "primary-container": "#F080C0",
+            "on-primary": "#FFFFFF",
+            "primary-fixed": "#FFD6EE",
+            "on-primary-fixed": "#3D0028",
+            "secondary": "#7C52AA",
+            "secondary-dark": "#633990",
+            "secondary-container": "#EEDCFF",
+            "on-secondary": "#FFFFFF",
+            "secondary-fixed": "#EEDCFF",
+            "on-secondary-fixed": "#1A1030",
+            "coral": "#FF6B4A",
+            "tertiary": "#0096CC",
+            "tertiary-container": "#40C0EE",
+            "on-tertiary": "#FFFFFF",
+            "tertiary-fixed": "#C8EAFF",
+            "background": "#FEF7FF",
+            "surface": "#FEF7FF",
+            "surface-low": "#FBF2FB",
+            "surface-container": "#F8EEF8",
+            "surface-container-high": "#F2E8F2",
+            "on-surface": "#2E1A28",
+            "on-surface-variant": "#604868",
+            "outline": "#907898",
+            "outline-variant": "#DCC8E0",
+            "error": "#E53E3E",
+            "error-container": "#FFE8E8"
+          },
+          fontFamily: {
+            headline: ["Plus Jakarta Sans", "DM Sans", "sans-serif"],
+            body: ["DM Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-background font-body text-on-surface antialiased selection:bg-primary selection:text-white">
+
+  <!-- Ambient Floating Orbs (Berry, Violet, Sizzling Coral) -->
+  <div class="orb-glow orb-pink -top-20 -left-20"></div>
+  <div class="orb-glow orb-purple top-1/4 -right-32"></div>
+  <div class="orb-glow orb-coral top-2/3 left-10"></div>
+
+  <!-- NAVIGATION BAR (Clean & Minimal: Logo + Admin + Download) -->
+  <header class="sticky top-0 z-50 w-full backdrop-blur-xl bg-surface/80 border-b border-outline-variant/30 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-primary via-secondary to-coral p-0.5 shadow-[0_4px_16px_rgba(224,64,160,0.35)] transition-transform group-hover:scale-105">
+          <div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
+            <img src="assets/images/treat_logo.png" alt="Treat Logo" class="w-6 h-6 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="material-symbols-outlined text-primary text-[20px] hidden">cake</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-headline font-black text-2xl tracking-tight text-gradient-candy">treat</span>
+            <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          </div>
+          <span class="text-[10px] font-bold text-on-surface-variant/80 tracking-wide uppercase -mt-1 hidden sm:block">Funky Foodie Feasts</span>
+        </div>
+      </a>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Admin Studio Button -->
+        <button id="admin-open-btn" class="px-3.5 py-2 rounded-full bg-surface-container hover:bg-secondary-fixed text-on-surface text-xs font-bold transition-all flex items-center gap-1.5 border border-outline-variant/50 shadow-sm active:scale-95" title="Open Mockup Admin Studio (Ctrl+Shift+A)">
+          <span class="material-symbols-outlined text-secondary text-[18px]">settings</span>
+          <span class="hidden sm:inline">Admin Studio</span>
+        </button>
+
+        <!-- Download CTA -->
+        <a href="#download-cta" class="btn-flow-download px-5 py-2.5 rounded-full text-xs font-extrabold tracking-wide uppercase flex items-center gap-2 shadow-lg active:scale-95">
+          <span class="material-symbols-outlined text-[18px]">download</span>
+          <span>Download App</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION: IMPACTFUL HEADLINE & SHORT-FORM CAPTION -->
+  <section class="relative pt-10 pb-6 md:pt-14 md:pb-8 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      
+      <!-- Main Headline -->
+      <h1 id="hero-headline-text" class="font-headline font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.12] max-w-4xl mx-auto">
+        Feast Together. <span class="text-gradient-candy">Save Bigger.</span> Crave Louder.
+      </h1>
+
+      <!-- Short-Form Vision Caption -->
+      <p id="hero-caption-text" class="mt-4 text-base sm:text-lg lg:text-xl text-on-surface-variant font-medium max-w-2xl mx-auto leading-relaxed">
+        Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4-PHONE UNDULATING 3D MOBILE FLOW (APPETITE PALETTE & SENSORY STAGING)
+       ========================================================================== -->
+  <section id="workflow-flow" class="relative py-8 md:py-14 overflow-visible">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- 1. TOP STEP HEADER CARDS (4 Columns Aligned with Phones) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto text-left relative z-20">
+        
+        <!-- Step 01 (Candy Berry Pink) -->
+        <div class="flow-step-column flex flex-col items-start group cursor-pointer active-step" data-step-idx="0">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="flow-step-badge">01</span>
+          </div>
+          <div class="flow-step-icon-circle mb-3">
+            <span class="material-symbols-outlined text-[20px]" id="step-icon-0">local_fire_department</span>
+          </div>
+          <h3 class="font-headline font-bold text-sm md:text-base text-on-surface group-hover:text-primary transition-colors" id="step-title-0">
+            Crave-Worthy Feast Drops
+          </h3>
+          <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed" id="step-desc-0">
+            Snag limited 2-for-1 platter drops, secret perks, and trending foodie spot deals before slots sell out.
+          </p>
+          <div class="flow-step-tick"></div>
+        </div>
+
+        <!-- Step 02 (Funky Violet) -->
+        <div class="flow-step-column flex flex-col items-start group cursor-pointer" data-step-idx="1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="flow-step-badge">02</span>
+          </div>
+          <div class="flow-step-icon-circle mb-3">
+            <span class="material-symbols-outlined text-[20px]" id="step-icon-1">calculate</span>
+          </div>
+          <h3 class="font-headline font-bold text-sm md:text-base text-on-surface group-hover:text-secondary transition-colors" id="step-title-1">
+            Zero-Math Squad Budget
+          </h3>
+          <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed" id="step-desc-1">
+            Slide your budget per sweetie. Treat auto-matches massive feast boards with tax and tip included.
+          </p>
+          <div class="flow-step-tick"></div>
+        </div>
+
+        <!-- Step 03 (Sizzling Coral) -->
+        <div class="flow-step-column flex flex-col items-start group cursor-pointer" data-step-idx="2">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="flow-step-badge">03</span>
+          </div>
+          <div class="flow-step-icon-circle mb-3">
+            <span class="material-symbols-outlined text-[20px]" id="step-icon-2">timer</span>
+          </div>
+          <h3 class="font-headline font-bold text-sm md:text-base text-on-surface group-hover:text-coral transition-colors" id="step-title-2">
+            2-Min Flash Table Lock
+          </h3>
+          <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed" id="step-desc-2">
+            Lock your prime table live with a 120s countdown clock. Zero deposit, direct kitchen sync.
+          </p>
+          <div class="flow-step-tick"></div>
+        </div>
+
+        <!-- Step 04 (Fresh Cyan Mint) -->
+        <div class="flow-step-column flex flex-col items-start group cursor-pointer" data-step-idx="3">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="flow-step-badge">04</span>
+          </div>
+          <div class="flow-step-icon-circle mb-3">
+            <span class="material-symbols-outlined text-[20px]" id="step-icon-3">forum</span>
+          </div>
+          <h3 class="font-headline font-bold text-sm md:text-base text-on-surface group-hover:text-tertiary transition-colors" id="step-title-3">
+            Bite Talk & Squad Perks
+          </h3>
+          <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed" id="step-desc-3">
+            Post honest bite reviews, earn foodie street cred, and climb the squad savings milestones.
+          </p>
+          <div class="flow-step-tick"></div>
+        </div>
+
+      </div>
+
+      <!-- 2. CENTER: UNDULATING 4-PHONE 3D WAVE WITH CONNECTING GRADIENT LINE -->
+      <div class="flow-showcase-container max-w-6xl mx-auto my-4 relative">
+        
+        <!-- Connecting SVG Curved Wave Line with Appetite Gradient & Pulsing Nodes -->
+        <svg class="flow-wave-svg" viewBox="0 0 1100 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="waveAppetiteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#E040A0" />
+              <stop offset="35%" stop-color="#7C52AA" />
+              <stop offset="70%" stop-color="#FF6B4A" />
+              <stop offset="100%" stop-color="#0096CC" />
+            </linearGradient>
+          </defs>
+
+          <!-- Glowing Ambient Flow Path -->
+          <path d="M 20 85 C 160 85, 230 40, 310 100 C 390 160, 480 60, 580 90 C 680 120, 770 40, 860 115 C 950 180, 1030 95, 1080 95" 
+                stroke="url(#waveAppetiteGrad)" stroke-width="4" stroke-linecap="round" opacity="0.3" filter="blur(3px)" />
+
+          <!-- Stream Line with Animated Dash -->
+          <path d="M 20 85 C 160 85, 230 40, 310 100 C 390 160, 480 60, 580 90 C 680 120, 770 40, 860 115 C 950 180, 1030 95, 1080 95" 
+                stroke="url(#waveAppetiteGrad)" stroke-width="2.6" stroke-linecap="round" class="flow-stream-line" opacity="0.9" />
+          
+          <!-- Node 1 (Berry) -->
+          <circle cx="170" cy="65" r="9" fill="#FFF0F8" stroke="#E040A0" stroke-width="2.5" />
+          <circle cx="170" cy="65" r="4" fill="#E040A0" class="pulse-node" />
+          
+          <!-- Node 2 (Violet) -->
+          <circle cx="430" cy="118" r="9" fill="#F8F0FF" stroke="#7C52AA" stroke-width="2.5" />
+          <circle cx="430" cy="118" r="4" fill="#7C52AA" class="pulse-node" />
+          
+          <!-- Node 3 (Coral) -->
+          <circle cx="690" cy="78" r="9" fill="#FFF5F2" stroke="#FF6B4A" stroke-width="2.5" />
+          <circle cx="690" cy="78" r="4" fill="#FF6B4A" class="pulse-node" />
+          
+          <!-- Node 4 (Cyan) -->
+          <circle cx="950" cy="130" r="9" fill="#F0FAFF" stroke="#0096CC" stroke-width="2.5" />
+          <circle cx="950" cy="130" r="4" fill="#0096CC" class="pulse-node" />
+        </svg>
+
+        <!-- The 4 Phones Row with Anisotropic Titanium Edge & Fresnel Glare -->
+        <div class="phone-wave-row">
+          
+          <!-- PHONE 1 (Stagger 1: Elevated & Tilted Left) -->
+          <div class="phone-mockup-3d stagger-1 active-flow" id="phone-card-0" data-phone-idx="0">
+            <div class="phone-screen-frame">
+              <!-- Dynamic Island -->
+              <div class="phone-dynamic-island">
+                <div class="phone-camera-lens"></div>
+              </div>
+              <!-- Simulated Status Bar -->
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px]">5G</span>
+                  <span class="material-symbols-outlined text-[14px]">wifi</span>
+                  <span class="material-symbols-outlined text-[14px]">battery_full</span>
+                </div>
+              </div>
+              <!-- Mockup Image -->
+              <img src="assets/screens/01_explore.png" alt="Crave-Worthy Feast Drops" class="phone-screen-img" id="phone-img-0">
+              <!-- Fresnel Glass Glare Sheen -->
+              <div class="phone-glare-overlay"></div>
+              <!-- Bottom Gesture Bar -->
+              <div class="phone-gesture-bar"></div>
+            </div>
+          </div>
+
+          <!-- PHONE 2 (Stagger 2: Lower & Tilted Right) -->
+          <div class="phone-mockup-3d stagger-2" id="phone-card-1" data-phone-idx="1">
+            <div class="phone-screen-frame">
+              <div class="phone-dynamic-island">
+                <div class="phone-camera-lens"></div>
+              </div>
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px]">5G</span>
+                  <span class="material-symbols-outlined text-[14px]">wifi</span>
+                  <span class="material-symbols-outlined text-[14px]">battery_full</span>
+                </div>
+              </div>
+              <img src="assets/screens/02_budget.png" alt="Zero-Math Squad Budget" class="phone-screen-img" id="phone-img-1">
+              <div class="phone-glare-overlay"></div>
+              <div class="phone-gesture-bar"></div>
+            </div>
+          </div>
+
+          <!-- PHONE 3 (Stagger 3: Elevated & Subtle Tilt) -->
+          <div class="phone-mockup-3d stagger-3" id="phone-card-2" data-phone-idx="2">
+            <div class="phone-screen-frame">
+              <div class="phone-dynamic-island">
+                <div class="phone-camera-lens"></div>
+              </div>
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px]">5G</span>
+                  <span class="material-symbols-outlined text-[14px]">wifi</span>
+                  <span class="material-symbols-outlined text-[14px]">battery_full</span>
+                </div>
+              </div>
+              <img src="assets/screens/04_hold.png" alt="2-Min Flash Table Lock" class="phone-screen-img" id="phone-img-2">
+              <div class="phone-glare-overlay"></div>
+              <div class="phone-gesture-bar"></div>
+            </div>
+          </div>
+
+          <!-- PHONE 4 (Stagger 4: Lower & Perspective Tilt) -->
+          <div class="phone-mockup-3d stagger-4" id="phone-card-3" data-phone-idx="3">
+            <div class="phone-screen-frame">
+              <div class="phone-dynamic-island">
+                <div class="phone-camera-lens"></div>
+              </div>
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px]">5G</span>
+                  <span class="material-symbols-outlined text-[14px]">wifi</span>
+                  <span class="material-symbols-outlined text-[14px]">battery_full</span>
+                </div>
+              </div>
+              <img src="assets/screens/06_social.png" alt="Bite Talk & Squad Perks" class="phone-screen-img" id="phone-img-3">
+              <div class="phone-glare-overlay"></div>
+              <div class="phone-gesture-bar"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 3. BOTTOM: LIVE SOCIAL PROOF & CONVERSION CTA -->
+      <div id="download-cta" class="flex flex-col items-center justify-center text-center mt-4 relative z-20">
+        
+        <!-- Vertical Connector Tick Line -->
+        <div class="flow-bottom-tick"></div>
+
+        <!-- Social Proof FOMO Pill -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border border-primary/25 shadow-sm text-xs font-bold text-on-surface mb-3">
+          <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+          <span id="live-proof-text">🔥 348 Platters Claimed This Weekend • 94 Verified Kitchens</span>
+        </div>
+
+        <!-- Button Row with Spark Accents -->
+        <div class="flex items-center gap-3">
+          <!-- Left Spark Accent -->
+          <span class="flow-spark">⸝</span>
+
+          <!-- Glowing Download CTA Button -->
+          <a id="flow-download-btn" href="#download-apk" class="btn-flow-download px-9 py-4 rounded-full font-headline font-extrabold text-sm sm:text-base flex items-center gap-3 shadow-xl active:scale-95 group">
+            <span class="material-symbols-outlined text-[24px] group-hover:animate-bounce">download</span>
+            <span id="flow-cta-text">Download Treat for Android</span>
+          </a>
+
+          <!-- Right Spark Accent -->
+          <span class="flow-spark">⸜</span>
+        </div>
+
+        <!-- Subtext below button -->
+        <p id="flow-cta-subtext" class="text-xs sm:text-sm text-on-surface-variant/80 font-medium mt-3 max-w-md">
+          Join 10,000+ sweeties & foodies. Feast together with unbeatable deals.
+        </p>
+
+        <!-- Security & Trust Badges -->
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-3 text-[11px] font-bold text-on-surface-variant">
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-green-600 text-[15px]">verified_user</span> 100% Virus-Free APK
+          </span>
+          <span>•</span>
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-[15px]">android</span> 24.8 MB • Android 9.0+
+          </span>
+          <span>•</span>
+          <a href="http://localhost:8080" target="_blank" class="hover:text-secondary transition-colors flex items-center gap-1">
+            <span class="material-symbols-outlined text-[15px]">open_in_browser</span> Web Demo
+          </a>
+          <span>•</span>
+          <button id="open-qr-modal-btn" class="hover:text-primary transition-colors flex items-center gap-1">
+            <span class="material-symbols-outlined text-[15px]">qr_code_2</span> Scan QR
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES DEEP-DIVE GRID -->
+  <section id="features" class="relative py-14 md:py-20 border-t border-outline-variant/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-headline font-black text-secondary uppercase tracking-widest">Built for Foodies & Kitchens</span>
+        <h2 class="font-headline font-black text-3xl sm:text-4xl text-on-surface tracking-tight mt-2">
+          Everything You Need to <span class="text-gradient-candy">Feast Together</span>
+        </h2>
+        <p class="mt-3 text-sm sm:text-base text-on-surface-variant font-medium">
+          Eliminate dining friction, split bills effortlessly, and sync live with restaurant kitchens.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02]">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center mb-4 shadow-sm">
+              <span class="material-symbols-outlined text-[26px] text-primary">calculate</span>
+            </div>
+            <h3 class="font-headline font-bold text-lg text-on-surface">Smart Budget Matcher</h3>
+            <p class="mt-2 text-xs text-on-surface-variant font-medium leading-relaxed">
+              Dynamically calculate dining budgets per person, party sizes, and tax inclusion to auto-match the best platter feast boards.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-primary">
+            <span>Zero Split Math</span>
+            <span class="material-symbols-outlined text-[16px]">trending_flat</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02]">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center mb-4 shadow-sm">
+              <span class="material-symbols-outlined text-[26px] text-secondary">local_fire_department</span>
+            </div>
+            <h3 class="font-headline font-bold text-lg text-on-surface">2-for-1 Platter Drops</h3>
+            <p class="mt-2 text-xs text-on-surface-variant font-medium leading-relaxed">
+              Curated trending treats, 2-for-1 platter flash deals, and exclusive squad feast discounts available in limited time slots.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-secondary">
+            <span>Up to 50% Savings</span>
+            <span class="material-symbols-outlined text-[16px]">trending_flat</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02]">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-orange-100 text-coral flex items-center justify-center mb-4 shadow-sm">
+              <span class="material-symbols-outlined text-[26px]">timer</span>
+            </div>
+            <h3 class="font-headline font-bold text-lg text-on-surface">2-Minute Instant Hold</h3>
+            <p class="mt-2 text-xs text-on-surface-variant font-medium leading-relaxed">
+              Inquire and hold tables live with real-time 120s countdown timers, interactive digital confirmation slips, and QR vouchers.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-coral">
+            <span>Real-time Floor Lock</span>
+            <span class="material-symbols-outlined text-[16px]">trending_flat</span>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02]">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-surface-container text-on-surface flex items-center justify-center mb-4 shadow-sm">
+              <span class="material-symbols-outlined text-[26px] text-secondary">table_restaurant</span>
+            </div>
+            <h3 class="font-headline font-bold text-lg text-on-surface">Live Kitchen Floor Sync</h3>
+            <p class="mt-2 text-xs text-on-surface-variant font-medium leading-relaxed">
+              Reactive backend coordinating diner holds directly with restaurant kitchen floor terminals and host table assignments.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-on-surface">
+            <span>Host & Kitchen Mode</span>
+            <span class="material-symbols-outlined text-[16px]">trending_flat</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOTTEST PLATTER DROPS & FOODIE PHOTOS -->
+  <section id="platters" class="relative py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-headline font-black text-primary uppercase tracking-widest">Trending Drops</span>
+          <h2 class="font-headline font-black text-3xl sm:text-4xl text-on-surface tracking-tight mt-1">
+            Featured Feast Platters
+          </h2>
+          <p class="text-xs sm:text-sm text-on-surface-variant font-medium mt-1">
+            Exclusive squad boards available through the Treat mobile app.
+          </p>
+        </div>
+        <a href="#workflow-flow" class="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
+          <span>Explore in App Flow</span>
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Foodie Deals Container -->
+      <div id="foodie-deals-container" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 pt-1 -mx-4 px-4 scrollbar-none">
+        <!-- Injected dynamically from TREAT_DEFAULT_DATA -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMMUNITY REVIEWS & FOOD BAR CHATTER -->
+  <section id="reviews" class="relative py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-headline font-black text-secondary uppercase tracking-widest">Food Bar Voices</span>
+        <h2 class="font-headline font-black text-3xl sm:text-4xl text-on-surface tracking-tight mt-2">
+          Loved by Foodies & Kitchens
+        </h2>
+        <p class="mt-2 text-xs sm:text-sm text-on-surface-variant font-medium">
+          See what squads and restaurant owners are saying about Treat.
+        </p>
+      </div>
+
+      <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Injected dynamically from TREAT_DEFAULT_DATA -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-surface-low border-t border-outline-variant/30 py-12 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <img src="assets/images/treat_logo.png" alt="Treat" class="w-8 h-8 object-contain" onerror="this.style.display='none'">
+        <span class="font-headline font-black text-xl text-gradient-candy">treat</span>
+        <span class="text-xs text-on-surface-variant font-semibold">© 2026 Treat Inc. Funky Foodie Life.</span>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs text-on-surface-variant font-medium">
+        <a href="#workflow-flow" class="hover:text-primary transition-colors">Workflow Flow</a>
+        <a href="#download-cta" class="hover:text-primary transition-colors">Download</a>
+        <button onclick="window.treatApp.admin.open()" class="hover:text-secondary transition-colors font-bold flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">settings</span> Admin Studio
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- QR CODE MODAL -->
+  <div id="qr-code-modal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 hidden">
+    <div id="qr-modal-backdrop" class="fixed inset-0 bg-on-surface/60 backdrop-blur-sm"></div>
+    <div class="relative bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl z-10 text-center flex flex-col items-center">
+      <button id="close-qr-modal-btn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-low flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-90">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <div class="w-12 h-12 rounded-2xl bg-secondary-fixed text-secondary flex items-center justify-center mb-3">
+        <span class="material-symbols-outlined text-[28px]">qr_code_scanner</span>
+      </div>
+
+      <h3 class="font-headline font-bold text-lg text-on-surface">Scan to Download</h3>
+      <p class="text-xs text-on-surface-variant font-medium mt-1">
+        Point your Android camera or scanner at the code below to download Treat APK directly:
+      </p>
+
+      <div class="my-4 p-3 rounded-2xl bg-surface-low border border-outline-variant/30 shadow-inner">
+        <canvas id="qr-canvas" width="220" height="220" class="rounded-xl"></canvas>
+      </div>
+
+      <span class="text-[11px] font-bold text-primary flex items-center gap-1">
+        <span class="material-symbols-outlined text-[14px]">bolt</span> Instant Wi-Fi Transfer Ready
+      </span>
+    </div>
+  </div>
+
+  <!-- ADMIN STUDIO DRAWER -->
+  <div id="admin-studio-backdrop" class="fixed inset-0 bg-on-surface/50 backdrop-blur-sm z-[90] hidden transition-opacity"></div>
+  <aside id="admin-studio-drawer" class="pt-4 pb-6 px-6 overflow-y-auto">
+    <div class="flex items-center justify-between pb-4 border-b border-outline-variant/30">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white shadow-sm">
+          <span class="material-symbols-outlined text-[18px]">tune</span>
+        </div>
+        <div>
+          <h3 class="font-headline font-extrabold text-base text-on-surface leading-tight">Admin Studio</h3>
+          <span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">4-Mockup Flow & Content Manager</span>
+        </div>
+      </div>
+      <button id="admin-close-btn" class="w-8 h-8 rounded-full bg-surface-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-transform">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div id="admin-tabs-nav" class="flex items-center gap-1.5 py-3 border-b border-outline-variant/20 overflow-x-auto scrollbar-none">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- Tab Dynamic Content -->
+    <div id="admin-tab-content" class="py-4">
+      <!-- Injected dynamically based on activeTab -->
+    </div>
+  </aside>
+
+  <!-- Scripts -->
+  <script src="js/defaultData.js"></script>
+  <script src="js/screenFlow.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

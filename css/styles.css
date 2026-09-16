@@ -1,0 +1,678 @@
+/**
+ * Treat Landing Page - Custom Stylesheet & Design Tokens
+ * Appetite-Focused Color Theory, Photorealistic 3D Mobile Mockups, Spring Physics
+ */
+
+:root {
+  --primary: #E040A0;
+  --primary-glow: rgba(224, 64, 160, 0.35);
+  --primary-fixed: #FFD6EE;
+  --on-primary-fixed: #3D0028;
+
+  --secondary: #7C52AA;
+  --secondary-glow: rgba(124, 82, 170, 0.35);
+  --secondary-fixed: #EEDCFF;
+  --on-secondary-fixed: #1A1030;
+
+  --coral: #FF6B4A;
+  --coral-glow: rgba(255, 107, 74, 0.35);
+
+  --tertiary: #0096CC;
+  --tertiary-glow: rgba(0, 150, 204, 0.35);
+  --tertiary-fixed: #C8EAFF;
+
+  --bg: #FEF7FF;
+  --surface: #FEF7FF;
+  --surface-low: #FBF2FB;
+  --surface-card: #FFFFFF;
+  --on-surface: #2E1A28;
+  --on-surface-variant: #604868;
+  --outline: #907898;
+  --outline-variant: #DCC8E0;
+}
+
+/* Global Reset & Base */
+html {
+  scroll-behavior: smooth;
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--on-surface);
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-color: var(--bg);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-low);
+}
+::-webkit-scrollbar-thumb {
+  background: #DCC8E0;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Candy Glassmorphic Cards */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(224, 64, 160, 0.16);
+  box-shadow: 0 10px 30px rgba(124, 82, 170, 0.08), 0 1px 3px rgba(224, 64, 160, 0.05);
+}
+
+.glass-panel-deep {
+  background: rgba(254, 247, 255, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(124, 82, 170, 0.2);
+  box-shadow: 0 16px 40px rgba(46, 26, 40, 0.12);
+}
+
+/* Brand Text Gradient */
+.text-gradient-candy {
+  background: linear-gradient(135deg, #E040A0 0%, #7C52AA 50%, #FF6B4A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-coral {
+  background: linear-gradient(135deg, #FF6B4A 0%, #E040A0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Floating Ambient Orbs */
+.orb-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.65;
+  animation: orbFloat 14s ease-in-out infinite alternate;
+}
+
+.orb-pink {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(224, 64, 160, 0.3) 0%, rgba(224, 64, 160, 0) 70%);
+}
+
+.orb-purple {
+  width: 540px;
+  height: 540px;
+  background: radial-gradient(circle, rgba(124, 82, 170, 0.26) 0%, rgba(124, 82, 170, 0) 70%);
+}
+
+.orb-coral {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255, 107, 74, 0.24) 0%, rgba(255, 107, 74, 0) 70%);
+}
+
+@keyframes orbFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, 40px) scale(1.08); }
+  100% { transform: translate(-25px, 20px) scale(0.95); }
+}
+
+/* ==========================================================================
+   4-PHONE UNDULATING 3D WORKFLOW SHOWCASE
+   ========================================================================== */
+
+.flow-showcase-container {
+  position: relative;
+  width: 100%;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+
+/* Appetite-Driven Step Header Cards */
+.flow-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+/* Step-specific appetite color badges */
+.flow-step-column[data-step-idx="0"] .flow-step-badge {
+  background: #FFF0F8;
+  border: 1px solid rgba(224, 64, 160, 0.35);
+  color: #D82691;
+}
+.flow-step-column[data-step-idx="1"] .flow-step-badge {
+  background: #F8F0FF;
+  border: 1px solid rgba(124, 82, 170, 0.35);
+  color: #6C3FA0;
+}
+.flow-step-column[data-step-idx="2"] .flow-step-badge {
+  background: #FFF5F2;
+  border: 1px solid rgba(255, 107, 74, 0.35);
+  color: #EA580C;
+}
+.flow-step-column[data-step-idx="3"] .flow-step-badge {
+  background: #F0FAFF;
+  border: 1px solid rgba(0, 150, 204, 0.35);
+  color: #0284C7;
+}
+
+.flow-step-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(46, 26, 40, 0.06);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.flow-step-column[data-step-idx="0"] .flow-step-icon-circle {
+  border: 1.5px solid rgba(224, 64, 160, 0.3);
+  color: #E040A0;
+}
+.flow-step-column[data-step-idx="1"] .flow-step-icon-circle {
+  border: 1.5px solid rgba(124, 82, 170, 0.3);
+  color: #7C52AA;
+}
+.flow-step-column[data-step-idx="2"] .flow-step-icon-circle {
+  border: 1.5px solid rgba(255, 107, 74, 0.3);
+  color: #FF6B4A;
+}
+.flow-step-column[data-step-idx="3"] .flow-step-icon-circle {
+  border: 1.5px solid rgba(0, 150, 204, 0.3);
+  color: #0096CC;
+}
+
+/* Active Step Spotlight States */
+.flow-step-column.active-step[data-step-idx="0"] .flow-step-badge,
+.flow-step-column:hover[data-step-idx="0"] .flow-step-badge {
+  background: #E040A0 !important;
+  color: #FFFFFF !important;
+  border-color: #E040A0 !important;
+  box-shadow: 0 4px 14px rgba(224, 64, 160, 0.4);
+}
+.flow-step-column.active-step[data-step-idx="0"] .flow-step-icon-circle,
+.flow-step-column:hover[data-step-idx="0"] .flow-step-icon-circle {
+  background: #E040A0 !important;
+  color: #FFFFFF !important;
+  border-color: #E040A0 !important;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(224, 64, 160, 0.45);
+}
+
+.flow-step-column.active-step[data-step-idx="1"] .flow-step-badge,
+.flow-step-column:hover[data-step-idx="1"] .flow-step-badge {
+  background: #7C52AA !important;
+  color: #FFFFFF !important;
+  border-color: #7C52AA !important;
+  box-shadow: 0 4px 14px rgba(124, 82, 170, 0.4);
+}
+.flow-step-column.active-step[data-step-idx="1"] .flow-step-icon-circle,
+.flow-step-column:hover[data-step-idx="1"] .flow-step-icon-circle {
+  background: #7C52AA !important;
+  color: #FFFFFF !important;
+  border-color: #7C52AA !important;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(124, 82, 170, 0.45);
+}
+
+.flow-step-column.active-step[data-step-idx="2"] .flow-step-badge,
+.flow-step-column:hover[data-step-idx="2"] .flow-step-badge {
+  background: #FF6B4A !important;
+  color: #FFFFFF !important;
+  border-color: #FF6B4A !important;
+  box-shadow: 0 4px 14px rgba(255, 107, 74, 0.4);
+}
+.flow-step-column.active-step[data-step-idx="2"] .flow-step-icon-circle,
+.flow-step-column:hover[data-step-idx="2"] .flow-step-icon-circle {
+  background: #FF6B4A !important;
+  color: #FFFFFF !important;
+  border-color: #FF6B4A !important;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(255, 107, 74, 0.45);
+}
+
+.flow-step-column.active-step[data-step-idx="3"] .flow-step-badge,
+.flow-step-column:hover[data-step-idx="3"] .flow-step-badge {
+  background: #0096CC !important;
+  color: #FFFFFF !important;
+  border-color: #0096CC !important;
+  box-shadow: 0 4px 14px rgba(0, 150, 204, 0.4);
+}
+.flow-step-column.active-step[data-step-idx="3"] .flow-step-icon-circle,
+.flow-step-column:hover[data-step-idx="3"] .flow-step-icon-circle {
+  background: #0096CC !important;
+  color: #FFFFFF !important;
+  border-color: #0096CC !important;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 150, 204, 0.45);
+}
+
+.flow-step-tick {
+  width: 1.5px;
+  height: 24px;
+  background: linear-gradient(180deg, #DCC8E0 0%, rgba(220, 200, 224, 0) 100%);
+  margin: 8px auto 0 auto;
+  transition: all 0.3s ease;
+}
+
+.flow-step-column.active-step .flow-step-tick {
+  background: linear-gradient(180deg, #E040A0 0%, rgba(224, 64, 160, 0.1) 100%) !important;
+  height: 32px !important;
+  width: 2px !important;
+  filter: drop-shadow(0 0 5px rgba(224, 64, 160, 0.6));
+}
+
+/* 4-Phone Undulating Wave Row */
+.phone-wave-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  position: relative;
+  z-index: 10;
+  padding: 40px 0 60px 0;
+}
+
+@media (max-width: 1024px) {
+  .phone-wave-row {
+    gap: 16px;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 30px 20px 50px 20px;
+    scroll-snap-type: x mandatory;
+  }
+}
+
+/* Photorealistic 3D Phone Chassis with Anisotropic Titanium Rim */
+.phone-mockup-3d {
+  position: relative;
+  width: 252px;
+  height: 524px;
+  border-radius: 44px;
+  background: #0E0C14;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 
+    0 0 0 3px #262132,
+    0 0 0 5px rgba(255, 255, 255, 0.14),
+    0 26px 70px -12px rgba(46, 26, 40, 0.42),
+    0 38px 90px -18px rgba(124, 82, 170, 0.22);
+  padding: 8.5px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease;
+  user-select: none;
+}
+
+@media (max-width: 1024px) {
+  .phone-mockup-3d {
+    width: 232px;
+    height: 484px;
+    scroll-snap-align: center;
+  }
+}
+
+/* Continuous 3D Floating Wave Animations */
+@keyframes waveFloat1 {
+  0%, 100% {
+    transform: translateY(-24px) rotate(-2.6deg) scale(1.04);
+  }
+  50% {
+    transform: translateY(-38px) rotate(-1.4deg) scale(1.045);
+  }
+}
+
+@keyframes waveFloat2 {
+  0%, 100% {
+    transform: translateY(42px) rotate(1.2deg) scale(0.99);
+  }
+  50% {
+    transform: translateY(28px) rotate(2.2deg) scale(0.995);
+  }
+}
+
+@keyframes waveFloat3 {
+  0%, 100% {
+    transform: translateY(-16px) rotate(-1.0deg) scale(1.02);
+  }
+  50% {
+    transform: translateY(-32px) rotate(-0.2deg) scale(1.025);
+  }
+}
+
+@keyframes waveFloat4 {
+  0%, 100% {
+    transform: translateY(54px) rotate(2.8deg) scale(0.96);
+  }
+  50% {
+    transform: translateY(40px) rotate(3.6deg) scale(0.965);
+  }
+}
+
+.phone-mockup-3d.stagger-1 {
+  animation: waveFloat1 6s ease-in-out infinite;
+  z-index: 25;
+}
+
+.phone-mockup-3d.stagger-2 {
+  animation: waveFloat2 6.6s ease-in-out infinite 0.8s;
+  z-index: 23;
+}
+
+.phone-mockup-3d.stagger-3 {
+  animation: waveFloat3 5.8s ease-in-out infinite 1.5s;
+  z-index: 24;
+}
+
+.phone-mockup-3d.stagger-4 {
+  animation: waveFloat4 6.2s ease-in-out infinite 2.2s;
+  z-index: 22;
+}
+
+/* Active in Tour or Hovered: Elevates with Specular Glow & Pauses Ambient Float */
+.phone-mockup-3d.active-flow,
+.phone-mockup-3d:hover {
+  animation-play-state: paused !important;
+  transform: translateY(-42px) scale(1.08) rotate(0deg) !important;
+  z-index: 35 !important;
+  box-shadow: 
+    0 0 0 3.5px #E040A0,
+    0 0 0 7.5px rgba(224, 64, 160, 0.42),
+    0 35px 95px -10px rgba(224, 64, 160, 0.48),
+    0 45px 120px -15px rgba(124, 82, 170, 0.38) !important;
+}
+
+/* Phone Screen Display Frame */
+.phone-screen-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #FEF7FF;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Dynamic Island with Camera Glint */
+.phone-dynamic-island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82px;
+  height: 22px;
+  background: #000000;
+  border-radius: 9999px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.phone-camera-lens {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0F172A;
+  box-shadow: 0 0 2px #38BDF8;
+  position: relative;
+}
+
+.phone-camera-lens::after {
+  content: '';
+  position: absolute;
+  top: 1.5px;
+  left: 1.5px;
+  width: 2.5px;
+  height: 2.5px;
+  border-radius: 50%;
+  background: #40C0EE;
+}
+
+/* Simulated Status Bar */
+.phone-status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px 0 18px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1E293B;
+  z-index: 45;
+  pointer-events: none;
+}
+
+/* Screen Image with Workflow Auto-Scroll Animation */
+.phone-screen-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+/* Smooth automated scrolling through the app UI when phone is active in tour or hovered */
+.phone-mockup-3d.active-flow .phone-screen-img,
+.phone-mockup-3d:hover .phone-screen-img {
+  animation: screenAutoPan 10s ease-in-out infinite alternate;
+  transform: scale(1.015);
+}
+
+@keyframes screenAutoPan {
+  0%, 25% {
+    object-position: top center;
+  }
+  75%, 100% {
+    object-position: center 75%;
+  }
+}
+
+/* Bottom Gesture Bar */
+.phone-gesture-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 9999px;
+  z-index: 45;
+}
+
+/* Realistic Fresnel Glass Glare Sheen */
+.phone-glare-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 36px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 35%, transparent 60%);
+  pointer-events: none;
+  z-index: 46;
+}
+
+/* Connecting Wavy SVG Path Background with Appetite Gradient & Electrical Stream */
+.flow-wave-svg {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 5;
+  overflow: visible;
+}
+
+.flow-stream-line {
+  stroke-dasharray: 10 10;
+  animation: waveStreamFlow 14s linear infinite;
+}
+
+@keyframes waveStreamFlow {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.pulse-node {
+  animation: pulseNodeGlow 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes pulseNodeGlow {
+  0%, 100% {
+    r: 4;
+    opacity: 0.9;
+  }
+  50% {
+    r: 6.5;
+    opacity: 0.4;
+  }
+}
+
+/* Bottom Download CTA & Sparks */
+.flow-bottom-tick {
+  width: 2px;
+  height: 36px;
+  background: linear-gradient(180deg, #E040A0 0%, rgba(224, 64, 160, 0.15) 100%);
+  margin: 0 auto 16px auto;
+}
+
+.btn-flow-download {
+  background: linear-gradient(135deg, #E040A0 0%, #7C52AA 50%, #FF6B4A 100%);
+  color: #FFFFFF;
+  box-shadow: 0 10px 32px rgba(224, 64, 160, 0.42);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-flow-download:hover {
+  transform: translateY(-2px) scale(1.025);
+  box-shadow: 0 16px 44px rgba(224, 64, 160, 0.55);
+}
+
+.btn-flow-download:active {
+  transform: scale(0.98);
+}
+
+.flow-spark {
+  font-size: 22px;
+  color: #E040A0;
+  font-weight: 900;
+  opacity: 0.9;
+}
+
+/* Admin Studio Drawer */
+#admin-studio-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 440px;
+  background: #FFFFFF;
+  box-shadow: -10px 0 40px rgba(46, 26, 40, 0.25);
+  transform: translateX(105%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+}
+
+#admin-studio-drawer.open {
+  transform: translateX(0);
+}
+
+.admin-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+  transition: all 0.2s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-tab-btn:hover {
+  background: var(--surface-low);
+  color: var(--on-surface);
+}
+
+.admin-tab-btn.active {
+  background: var(--primary-fixed);
+  color: var(--on-primary-fixed);
+}
+
+.admin-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--surface-low);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface);
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+  background: #FFFFFF;
+}
+
+.admin-screen-card {
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--surface-low);
+  border: 1px solid rgba(124, 82, 170, 0.12);
+  transition: border-color 0.2s;
+}
+
+.admin-screen-card:hover {
+  border-color: var(--primary);
+}
