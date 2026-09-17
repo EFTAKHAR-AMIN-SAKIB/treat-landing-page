@@ -7,10 +7,10 @@ const TREAT_DEFAULT_DATA = {
   brand: {
     appName: "Treat",
     tagline: "Funky Foodie Feasts & Squad Deals",
-    heroHeadline: "Feast Together. Save Bigger. Crave Louder.",
+    heroHeadline: "Find Your Craving\nShare the Good Stuff\nMake It a Treat",
     heroCaption: "Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.",
     liveSocialProof: "🔥 348 Platters Claimed This Weekend • 94 Verified Kitchens",
-    logoPath: "assets/images/treat_logo.png"
+    logoPath: "assets/images/treat_bubble_logo.png"
   },
   download: {
     ctaText: "Download Treat for Android",

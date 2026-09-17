@@ -8,16 +8,32 @@ class TreatAdminPanel {
   constructor(screenFlowInstance) {
     this.flow = screenFlowInstance;
 
-    this.storageKey = 'treat_landing_config_v2';
+    this.storageKey = 'treat_landing_config_v4';
+    this.authSessionKey = 'treat_admin_session_auth_v1';
+    this.masterPasskey = '133162029';
+
     this.config = this.loadConfig();
 
     this.activeTab = 'flow'; // 'flow', 'hero', 'downloads', 'backup'
 
-    // DOM Elements
+    // DOM Elements - Studio Drawer
     this.drawer = document.getElementById('admin-studio-drawer');
     this.backdrop = document.getElementById('admin-studio-backdrop');
     this.openBtn = document.getElementById('admin-open-btn');
     this.closeBtn = document.getElementById('admin-close-btn');
+    this.lockBtn = document.getElementById('admin-lock-btn');
+
+    // DOM Elements - Login Modal
+    this.loginModal = document.getElementById('admin-login-modal');
+    this.loginCard = document.getElementById('admin-login-card');
+    this.loginBackdrop = document.getElementById('admin-login-backdrop');
+    this.closeLoginBtn = document.getElementById('close-admin-login-btn');
+    this.loginForm = document.getElementById('admin-login-form');
+    this.passInput = document.getElementById('admin-pass-input');
+    this.togglePassBtn = document.getElementById('toggle-pass-visibility');
+    this.passIcon = document.getElementById('pass-visibility-icon');
+    this.loginError = document.getElementById('admin-login-error');
+    this.loginErrorText = document.getElementById('admin-login-error-text');
 
     this.init();
   }
@@ -53,6 +69,99 @@ class TreatAdminPanel {
     this.applyLiveChanges();
   }
 
+  // --- AUTHENTICATION & SECURITY ---
+
+  isAuthenticated() {
+    try {
+      return sessionStorage.getItem(this.authSessionKey) === 'true';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  openLoginModal() {
+    if (!this.loginModal) return;
+    this.loginModal.classList.remove('hidden');
+    if (this.loginError) this.loginError.classList.add('hidden');
+    if (this.passInput) {
+      this.passInput.value = '';
+      this.passInput.type = 'password';
+      if (this.passIcon) this.passIcon.textContent = 'visibility';
+      setTimeout(() => this.passInput.focus(), 80);
+    }
+  }
+
+  closeLoginModal() {
+    if (!this.loginModal) return;
+    this.loginModal.classList.add('hidden');
+    if (this.passInput) this.passInput.value = '';
+    if (this.loginError) this.loginError.classList.add('hidden');
+  }
+
+  submitLogin() {
+    if (!this.passInput) return;
+    const entered = this.passInput.value.trim();
+    if (entered === this.masterPasskey) {
+      try {
+        sessionStorage.setItem(this.authSessionKey, 'true');
+      } catch (e) {}
+      this.closeLoginModal();
+      this.openDrawer();
+      this.showToast('✨ Admin Studio Unlocked');
+    } else {
+      if (this.loginError) {
+        this.loginError.classList.remove('hidden');
+        if (this.loginErrorText) {
+          this.loginErrorText.textContent = entered === '' ? 'Please enter the passkey.' : 'Incorrect passkey. Access denied.';
+        }
+      }
+      if (this.loginCard) {
+        this.loginCard.classList.remove('shake-error');
+        void this.loginCard.offsetWidth; // trigger reflow
+        this.loginCard.classList.add('shake-error');
+      }
+      this.passInput.select();
+      this.passInput.focus();
+    }
+  }
+
+  togglePasswordVisibility() {
+    if (!this.passInput) return;
+    if (this.passInput.type === 'password') {
+      this.passInput.type = 'text';
+      if (this.passIcon) this.passIcon.textContent = 'visibility_off';
+    } else {
+      this.passInput.type = 'password';
+      if (this.passIcon) this.passIcon.textContent = 'visibility';
+    }
+  }
+
+  lock() {
+    try {
+      sessionStorage.removeItem(this.authSessionKey);
+    } catch (e) {}
+    this.close();
+    this.showToast('🔒 Admin Studio Locked');
+  }
+
+  showToast(message) {
+    let toast = document.getElementById('admin-studio-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'admin-studio-toast';
+      toast.className = 'fixed bottom-6 right-6 z-[150] px-4 py-2.5 rounded-full bg-[#181024] text-white text-xs font-bold shadow-2xl flex items-center gap-2 border border-white/15 transition-all duration-300 pointer-events-none opacity-0 translate-y-4';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.remove('opacity-0', 'translate-y-4');
+    toast.classList.add('opacity-100', 'translate-y-0');
+    clearTimeout(this._toastTimeout);
+    this._toastTimeout = setTimeout(() => {
+      toast.classList.remove('opacity-100', 'translate-y-0');
+      toast.classList.add('opacity-0', 'translate-y-4');
+    }, 2800);
+  }
+
   bindDrawerEvents() {
     if (this.openBtn) {
       this.openBtn.addEventListener('click', () => this.open());
@@ -62,8 +171,32 @@ class TreatAdminPanel {
       this.closeBtn.addEventListener('click', () => this.close());
     }
 
+    if (this.lockBtn) {
+      this.lockBtn.addEventListener('click', () => this.lock());
+    }
+
     if (this.backdrop) {
       this.backdrop.addEventListener('click', () => this.close());
+    }
+
+    // Login modal events
+    if (this.closeLoginBtn) {
+      this.closeLoginBtn.addEventListener('click', () => this.closeLoginModal());
+    }
+
+    if (this.loginBackdrop) {
+      this.loginBackdrop.addEventListener('click', () => this.closeLoginModal());
+    }
+
+    if (this.loginForm) {
+      this.loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.submitLogin();
+      });
+    }
+
+    if (this.togglePassBtn) {
+      this.togglePassBtn.addEventListener('click', () => this.togglePasswordVisibility());
     }
 
     // Keyboard shortcut Ctrl+Shift+A / Cmd+Shift+A
@@ -72,8 +205,12 @@ class TreatAdminPanel {
         e.preventDefault();
         this.toggle();
       }
-      if (e.key === 'Escape' && this.isOpen()) {
-        this.close();
+      if (e.key === 'Escape') {
+        if (this.loginModal && !this.loginModal.classList.contains('hidden')) {
+          this.closeLoginModal();
+        } else if (this.isOpen()) {
+          this.close();
+        }
       }
     });
   }
@@ -83,6 +220,14 @@ class TreatAdminPanel {
   }
 
   open() {
+    if (!this.isAuthenticated()) {
+      this.openLoginModal();
+      return;
+    }
+    this.openDrawer();
+  }
+
+  openDrawer() {
     if (!this.drawer) return;
     this.drawer.classList.add('open');
     if (this.backdrop) this.backdrop.classList.remove('hidden');
@@ -96,8 +241,11 @@ class TreatAdminPanel {
   }
 
   toggle() {
-    if (this.isOpen()) this.close();
-    else this.open();
+    if (this.isOpen()) {
+      this.close();
+    } else {
+      this.open();
+    }
   }
 
   renderTabs() {
@@ -295,8 +443,9 @@ class TreatAdminPanel {
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-on-surface mb-1">Catchy Headline</label>
-          <input type="text" id="admin-hero-headline" value="${brand.heroHeadline || ''}" class="admin-input font-bold">
+          <label class="block text-xs font-bold text-on-surface mb-1">Catchy Headline (Lines stacked one under another)</label>
+          <textarea id="admin-hero-headline" rows="3" class="admin-input font-bold">${brand.heroHeadline || ''}</textarea>
+          <span class="text-[11px] text-on-surface-variant">Default: Find Treat, Give Treat, Get Treat (each on its own line).</span>
         </div>
 
         <div>
@@ -319,7 +468,7 @@ class TreatAdminPanel {
       this.config.brand.heroHeadline = container.querySelector('#admin-hero-headline').value.trim();
       this.config.brand.heroCaption = container.querySelector('#admin-hero-caption').value.trim();
       this.saveConfig();
-      alert('Hero captions updated successfully!');
+      this.showToast('✅ Hero copy updated successfully!');
     });
   }
 
@@ -388,7 +537,7 @@ class TreatAdminPanel {
       this.config.download.playStoreUrl = container.querySelector('#admin-dl-playstore').value.trim();
       this.config.download.webDemoUrl = container.querySelector('#admin-dl-webdemo').value.trim();
       this.saveConfig();
-      alert('Download CTA updated successfully!');
+      this.showToast('✅ Download CTA updated successfully!');
     });
   }
 
@@ -466,13 +615,13 @@ class TreatAdminPanel {
             if (imported && Array.isArray(imported.flowSteps) && imported.flowSteps.length >= 4) {
               this.config = imported;
               this.saveConfig();
-              alert('Configuration imported successfully!');
+              this.showToast('✅ Configuration imported successfully!');
               this.renderCurrentTab();
             } else {
-              alert('Invalid configuration format.');
+              this.showToast('⚠️ Invalid configuration format.');
             }
           } catch (err) {
-            alert('Error parsing JSON file: ' + err.message);
+            this.showToast('❌ Error parsing JSON: ' + err.message);
           }
         };
         reader.readAsText(file);
@@ -485,7 +634,7 @@ class TreatAdminPanel {
         localStorage.removeItem(this.storageKey);
         this.config = JSON.parse(JSON.stringify(window.TREAT_DEFAULT_DATA));
         this.saveConfig();
-        alert('Restored Treat defaults!');
+        this.showToast('🔄 Restored Treat defaults!');
         this.renderCurrentTab();
       }
     });
@@ -502,7 +651,55 @@ class TreatAdminPanel {
 
     const heroHeadline = document.getElementById('hero-headline-text');
     if (heroHeadline && this.config.brand.heroHeadline) {
-      heroHeadline.textContent = this.config.brand.heroHeadline;
+      if (this.config.brand.heroHeadline.includes('Feast Together') || this.config.brand.heroHeadline.includes('Find Treat')) {
+        this.config.brand.heroHeadline = "Find Your Craving\nShare the Good Stuff\nMake It a Treat";
+        try { localStorage.setItem(this.storageKey, JSON.stringify(this.config)); } catch(e) {}
+      }
+
+      if (this.config.brand.heroHeadline.includes('Find Your Craving')) {
+        heroHeadline.innerHTML = `
+          <span class="hero-title-line flex items-center justify-center gap-2 sm:gap-3 text-[#181024]">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] -rotate-12 shrink-0 select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M6 15 C5 12 5.5 8 8 6" />
+              <path d="M12 18 C11 16 11.5 13.5 13 11" />
+            </svg>
+            <span>Find Your Craving</span>
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] rotate-12 shrink-0 select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M18 15 C19 12 18.5 8 16 6" />
+              <path d="M12 18 C13 16 12.5 13.5 11 11" />
+            </svg>
+          </span>
+          <span class="hero-title-line inline-block text-center text-[#E040A0]">
+            <span class="hero-title-primary text-[#E040A0]">
+              <span>Share </span>
+              <span class="relative inline-block">
+                <span>the Good Stuff</span>
+                <svg class="absolute -bottom-2 sm:-bottom-3.5 left-0 w-full h-3 sm:h-4 overflow-visible pointer-events-none" viewBox="0 0 240 16" fill="none" preserveAspectRatio="none">
+                  <path d="M 3 8 C 65 14, 155 15, 237 6" stroke="#E040A0" stroke-width="4.5" stroke-linecap="round" />
+                </svg>
+              </span>
+            </span>
+          </span>
+          <span class="hero-title-line inline-flex items-center justify-center gap-2 sm:gap-3 text-[#181024]">
+            <span>Make It a Treat</span>
+            <svg class="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 text-[#9357E8] -rotate-12 translate-y-0.5 shrink-0 select-none" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 27 C16 27, 4.5 19, 4.5 11.5 C4.5 6.5, 8.5 3.5, 12.5 4.5 C14.8 5.1, 15.6 6.8, 16 8 C16.4 6.8, 17.2 5.1, 19.5 4.5 C23.5 3.5, 27.5 6.5, 27.5 11.5 C27.5 19, 16 27, 16 27 Z" />
+            </svg>
+          </span>
+        `;
+      } else if (this.config.brand.heroHeadline.includes('\n')) {
+        const lines = this.config.brand.heroHeadline.split('\n').map(s => s.trim()).filter(Boolean);
+        heroHeadline.innerHTML = lines.map((line, idx) => {
+          if (idx === 1) {
+            return `<span class="hero-title-line block text-gradient-give">${line}</span>`;
+          }
+          return `<span class="hero-title-line block">${line}</span>`;
+        }).join('');
+      } else if (this.config.brand.heroHeadline.includes('<')) {
+        heroHeadline.innerHTML = this.config.brand.heroHeadline;
+      } else {
+        heroHeadline.textContent = this.config.brand.heroHeadline;
+      }
     }
 
     const heroCaption = document.getElementById('hero-caption-text');

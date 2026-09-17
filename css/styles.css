@@ -131,6 +131,131 @@ body {
 }
 
 /* ==========================================================================
+   HERO HEADLINE & DOWNWARD FLOW CONNECTOR
+   ========================================================================== */
+
+.hero-title-line {
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+  letter-spacing: -0.03em;
+}
+
+.hero-title-line:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Vertical Downward Flow Line */
+.hero-flow-connector {
+  animation: fadeInFlow 1.2s ease-out;
+}
+
+@keyframes fadeInFlow {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.flow-dot-pulse {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-dot-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #E040A0;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 14px #E040A0, 0 0 24px rgba(224, 64, 160, 0.6);
+  position: relative;
+  z-index: 3;
+}
+
+.flow-dot-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(224, 64, 160, 0.35);
+  animation: pingPulse 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pingPulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+.hero-flow-stem {
+  position: relative;
+  width: 3.5px;
+  height: 96px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #E040A0 0%, #7C52AA 45%, #FF6B4A 80%, #0096CC 100%);
+  box-shadow: 0 0 16px rgba(224, 64, 160, 0.5), 0 0 24px rgba(124, 82, 170, 0.3);
+  overflow: hidden;
+  margin: 3px 0;
+}
+
+@media (min-width: 640px) {
+  .hero-flow-stem {
+    height: 120px;
+    width: 4px;
+  }
+}
+
+.hero-flow-glow-drop {
+  position: absolute;
+  top: -30%;
+  left: 0;
+  width: 100%;
+  height: 42px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 60%, #FFF0F8 100%);
+  border-radius: 9999px;
+  box-shadow: 0 0 16px #FFFFFF, 0 0 24px #E040A0;
+  animation: flowDropTravel 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes flowDropTravel {
+  0% {
+    top: -40%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 105%;
+    opacity: 0;
+  }
+}
+
+.flow-direction-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid rgba(124, 82, 170, 0.3);
+  box-shadow: 0 4px 16px rgba(124, 82, 170, 0.25), 0 0 12px rgba(224, 64, 160, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7C52AA;
+  transition: transform 0.3s ease;
+  animation: nodeBounce 2s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes nodeBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* ==========================================================================
    4-PHONE UNDULATING 3D WORKFLOW SHOWCASE
    ========================================================================== */
 
@@ -411,65 +536,91 @@ body {
 .phone-screen-frame {
   width: 100%;
   height: 100%;
-  border-radius: 36px;
+  border-radius: 38px;
   overflow: hidden;
-  background: #FEF7FF;
+  background: #FAF8FD;
   position: relative;
   display: flex;
   flex-direction: column;
+  border: 1.5px solid #08060C;
 }
 
-/* Top Dynamic Island with Camera Glint */
-.phone-dynamic-island {
+/* Top Speaker Ear Slit */
+.phone-top-speaker {
   position: absolute;
-  top: 10px;
+  top: 3px;
   left: 50%;
   transform: translateX(-50%);
-  width: 82px;
-  height: 22px;
+  width: 32px;
+  height: 2px;
+  background: #110E18;
+  border-radius: 9999px;
+  z-index: 55;
+  opacity: 0.75;
+}
+
+/* Top Dynamic Island with Camera & TrueDepth Sensors (Sleek & Authentic) */
+.phone-dynamic-island {
+  position: absolute;
+  top: 5.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 12px;
   background: #000000;
   border-radius: 9999px;
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  gap: 3.5px;
+  padding-right: 5.5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.phone-truedepth-sensor {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: #0A0F1D;
 }
 
 .phone-camera-lens {
-  width: 8px;
-  height: 8px;
+  width: 4.5px;
+  height: 4.5px;
   border-radius: 50%;
   background: #0F172A;
-  box-shadow: 0 0 2px #38BDF8;
+  box-shadow: 0 0 1px #38BDF8;
   position: relative;
 }
 
 .phone-camera-lens::after {
   content: '';
   position: absolute;
-  top: 1.5px;
-  left: 1.5px;
-  width: 2.5px;
-  height: 2.5px;
+  top: 1px;
+  left: 1px;
+  width: 1.5px;
+  height: 1.5px;
   border-radius: 50%;
-  background: #40C0EE;
+  background: #38BDF8;
+  opacity: 0.85;
 }
 
-/* Simulated Status Bar */
+/* Simulated Authentic Status Bar (Compact & Sleek) */
 .phone-status-bar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 38px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 18px 0 18px;
-  font-size: 11px;
-  font-weight: 700;
+  padding: 3.5px 14px 0 14px;
+  font-size: 9.5px;
+  font-weight: 800;
   color: #1E293B;
   z-index: 45;
   pointer-events: none;
@@ -501,25 +652,64 @@ body {
   }
 }
 
+/* In-Phone Bottom App Navigation Bar */
+.phone-app-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(220, 200, 224, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px 6px 8px;
+  z-index: 44;
+}
+
+.phone-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  color: #94A3B8;
+  font-size: 7.5px;
+  font-weight: 800;
+  transition: color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+.phone-nav-item:hover {
+  transform: translateY(-1px);
+}
+.phone-nav-item span.material-symbols-outlined {
+  font-size: 15px;
+}
+.phone-nav-item.active {
+  color: #7C52AA;
+}
+
 /* Bottom Gesture Bar */
 .phone-gesture-bar {
   position: absolute;
-  bottom: 8px;
+  bottom: 4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: rgba(30, 41, 59, 0.6);
+  width: 70px;
+  height: 3px;
+  background: rgba(15, 23, 42, 0.65);
   border-radius: 9999px;
-  z-index: 45;
+  z-index: 48;
+  pointer-events: none;
 }
 
 /* Realistic Fresnel Glass Glare Sheen */
 .phone-glare-overlay {
   position: absolute;
   inset: 0;
-  border-radius: 36px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 35%, transparent 60%);
+  border-radius: 38px;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.06) 28%, transparent 55%);
   pointer-events: none;
   z-index: 46;
 }
@@ -576,17 +766,18 @@ body {
 }
 
 .btn-flow-download {
-  background: linear-gradient(135deg, #E040A0 0%, #7C52AA 50%, #FF6B4A 100%);
+  background: #181024;
   color: #FFFFFF;
-  box-shadow: 0 10px 32px rgba(224, 64, 160, 0.42);
+  box-shadow: 0 10px 28px rgba(24, 16, 36, 0.28);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
 }
 
 .btn-flow-download:hover {
+  background: #2A1D3D;
   transform: translateY(-2px) scale(1.025);
-  box-shadow: 0 16px 44px rgba(224, 64, 160, 0.55);
+  box-shadow: 0 16px 36px rgba(24, 16, 36, 0.38);
 }
 
 .btn-flow-download:active {
@@ -676,3 +867,565 @@ body {
 .admin-screen-card:hover {
   border-color: var(--primary);
 }
+
+/* ==========================================================================
+   REFERENCE DESIGN: 5-PHONE FAN STAGING, 3D PODIUM & FLOATING PROPS
+   ========================================================================== */
+
+/* Multi-Tone Candy Gradient for "Give Treat" */
+.text-gradient-give {
+  background: linear-gradient(90deg, #E040A0 0%, #A040E0 32%, #FF5A43 68%, #FFA040 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Calligraphic font */
+.font-caveat {
+  font-family: 'Caveat', cursive;
+}
+
+/* Floating Ambient Props */
+.floating-prop {
+  user-select: none;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.prop-tomato {
+  animation: floatTomato 8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 20px 24px rgba(90, 10, 20, 0.35));
+}
+@keyframes floatTomato {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(6px, -14px) rotate(4deg) scale(1.02); }
+  100% { transform: translate(-8px, 8px) rotate(-3deg) scale(0.98); }
+}
+
+.prop-leaf-1 {
+  animation: floatLeaf1 9s ease-in-out infinite alternate;
+  filter: blur(0.5px) drop-shadow(0 14px 18px rgba(25, 60, 10, 0.28));
+}
+@keyframes floatLeaf1 {
+  0% { transform: translate(0, 0) rotate(15deg); }
+  100% { transform: translate(-10px, -18px) rotate(28deg); }
+}
+
+.prop-leaf-2 {
+  animation: floatLeaf2 7.5s ease-in-out infinite alternate;
+  filter: drop-shadow(0 12px 16px rgba(25, 60, 10, 0.25));
+}
+@keyframes floatLeaf2 {
+  0% { transform: translate(0, 0) rotate(-20deg); }
+  100% { transform: translate(8px, -12px) rotate(-10deg); }
+}
+
+.prop-leaf-3 {
+  animation: floatLeaf1 8.5s ease-in-out infinite alternate;
+  filter: blur(1px) drop-shadow(0 12px 16px rgba(25, 60, 10, 0.22));
+}
+
+.prop-leaf-4 {
+  animation: floatLeaf2 8s ease-in-out infinite alternate;
+  filter: blur(0.8px) drop-shadow(0 10px 14px rgba(25, 60, 10, 0.2));
+}
+
+.prop-heart {
+  animation: floatHeart 6.5s ease-in-out infinite alternate;
+  filter: drop-shadow(0 16px 22px rgba(60, 15, 110, 0.35));
+}
+@keyframes floatHeart {
+  0% { transform: translate(0, 0) rotate(8deg) scale(1); }
+  50% { transform: translate(-6px, -16px) rotate(-6deg) scale(1.04); }
+  100% { transform: translate(8px, 10px) rotate(12deg) scale(0.96); }
+}
+
+/* ==========================================================================
+   VERTICAL FLOW STORYTELLING SHOWCASE: SPLINE, 3D CHASSIS & TILTS
+   ========================================================================== */
+
+/* Motion Spline Core Animated Path */
+.spline-core-path {
+  stroke-dasharray: 14 10;
+  animation: splineDashTravel 35s linear infinite;
+}
+
+@keyframes splineDashTravel {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Floating Gourmet Food Dish */
+.hero-food-bowl-wrapper {
+  animation: floatFoodBowl 7.5s ease-in-out infinite alternate;
+}
+
+@keyframes floatFoodBowl {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-12px) rotate(2.5deg) scale(1.02); }
+  100% { transform: translateY(8px) rotate(-1.5deg) scale(0.98); }
+}
+
+/* 3D Flow Phone Chassis & Wrappers */
+.flow-phone-wrapper {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.flow-phone-chassis {
+  position: relative;
+  border-radius: 42px;
+  background: linear-gradient(155deg, #241D30 0%, #0D0A14 45%, #191422 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 0 0 1px #0A0812,
+    0 0 0 2.5px #1F1929,
+    0 1px 3px rgba(0, 0, 0, 0.5),
+    0 18px 45px -8px rgba(24, 16, 36, 0.32),
+    0 35px 80px -15px rgba(32, 18, 48, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  cursor: pointer;
+  transform-origin: center center;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+/* Hardware Side Buttons (Titanium Precision) */
+.phone-hw-btn {
+  position: absolute;
+  background: linear-gradient(to right, #1F1929, #2C2438);
+  border-radius: 2px;
+  z-index: -1;
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+}
+.phone-hw-action {
+  left: -3px;
+  top: 56px;
+  width: 3px;
+  height: 14px;
+  border-radius: 2px 0 0 2px;
+}
+.phone-hw-vol-up {
+  left: -3px;
+  top: 78px;
+  width: 3px;
+  height: 24px;
+  border-radius: 2px 0 0 2px;
+}
+.phone-hw-vol-down {
+  left: -3px;
+  top: 110px;
+  width: 3px;
+  height: 24px;
+  border-radius: 2px 0 0 2px;
+}
+.phone-hw-power {
+  right: -3px;
+  top: 86px;
+  width: 3px;
+  height: 34px;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Specific 3D Tilt Angles matching Reference Art */
+.phone-hero-tilt {
+  transform: perspective(1400px) rotateY(-8deg) rotateZ(3deg) translateY(0);
+}
+.phone-hero-tilt:hover {
+  transform: perspective(1400px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.03) !important;
+}
+.phone-hero-tilt:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3.5px #E040A0,
+    0 0 0 7px rgba(224, 64, 160, 0.3),
+    0 40px 95px rgba(124, 82, 170, 0.45) !important;
+}
+
+.phone-step-tilt-1 {
+  transform: perspective(1400px) rotateY(-6deg) rotateZ(2.5deg) translateY(0);
+}
+.phone-step-tilt-1:hover {
+  transform: perspective(1400px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.03) !important;
+}
+.phone-step-tilt-1:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3.5px #7C52AA,
+    0 0 0 7px rgba(124, 82, 170, 0.3),
+    0 40px 95px rgba(124, 82, 170, 0.45) !important;
+}
+
+.phone-step-tilt-2 {
+  transform: perspective(1400px) rotateY(7deg) rotateZ(-2.5deg) translateY(0);
+}
+.phone-step-tilt-2:hover {
+  transform: perspective(1400px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.03) !important;
+}
+.phone-step-tilt-2:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3.5px #2563EB,
+    0 0 0 7px rgba(37, 99, 235, 0.3),
+    0 40px 95px rgba(37, 99, 235, 0.45) !important;
+}
+
+.phone-step-tilt-3 {
+  transform: perspective(1400px) rotateY(-4deg) rotateZ(1.5deg) translateY(0);
+}
+.phone-step-tilt-3:hover {
+  transform: perspective(1400px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.03) !important;
+}
+.phone-step-tilt-3:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3.5px #FF6B4A,
+    0 0 0 7px rgba(255, 107, 74, 0.3),
+    0 40px 95px rgba(255, 107, 74, 0.45) !important;
+}
+
+.phone-step-tilt-4 {
+  transform: perspective(1400px) rotateY(-5deg) rotateZ(2.5deg) translateY(0);
+}
+.phone-step-tilt-4:hover {
+  transform: perspective(1400px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.03) !important;
+}
+.phone-step-tilt-4:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3.5px #0096CC,
+    0 0 0 7px rgba(0, 150, 204, 0.3),
+    0 40px 95px rgba(0, 150, 204, 0.45) !important;
+}
+
+@media (max-width: 1024px) {
+  .phone-hero-tilt,
+  .phone-step-tilt-1,
+  .phone-step-tilt-2,
+  .phone-step-tilt-3,
+  .phone-step-tilt-4,
+  .phone-line-tilt-1,
+  .phone-line-tilt-2,
+  .phone-line-tilt-3,
+  .phone-line-tilt-4 {
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Centered 3-Line Headline & Gradient Text (Matching Reference Design)
+   ========================================================================== */
+.hero-title-line {
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  position: relative;
+}
+
+.hero-title-primary,
+.hero-gradient-share-stuff {
+  color: #E040A0;
+  display: inline-block;
+}
+
+.text-gradient-give {
+  color: #E040A0;
+  display: inline-block;
+  filter: drop-shadow(0 2px 14px rgba(224, 64, 160, 0.25));
+}
+
+/* ==========================================================================
+   Horizontal 4-Phone Short Line Showcase & 3D Tilt Flow
+   ========================================================================== */
+.phone-line-tilt-1 {
+  transform: perspective(1200px) rotateY(5.5deg) rotateZ(-1.2deg) translateY(0);
+  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.phone-line-tilt-1:hover {
+  transform: perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.035) !important;
+  z-index: 30;
+}
+.phone-line-tilt-1:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3px #E040A0,
+    0 0 0 7px rgba(224, 64, 160, 0.3),
+    0 35px 85px -10px rgba(224, 64, 160, 0.42) !important;
+}
+
+.phone-line-tilt-2 {
+  transform: perspective(1200px) rotateY(2.5deg) rotateZ(-0.6deg) translateY(-6px);
+  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.phone-line-tilt-2:hover {
+  transform: perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(-18px) scale(1.035) !important;
+  z-index: 30;
+}
+.phone-line-tilt-2:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3px #2563EB,
+    0 0 0 7px rgba(37, 99, 235, 0.3),
+    0 35px 85px -10px rgba(37, 99, 235, 0.42) !important;
+}
+
+.phone-line-tilt-3 {
+  transform: perspective(1200px) rotateY(-2.5deg) rotateZ(0.6deg) translateY(-6px);
+  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.phone-line-tilt-3:hover {
+  transform: perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(-18px) scale(1.035) !important;
+  z-index: 30;
+}
+.phone-line-tilt-3:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3px #FF6B4A,
+    0 0 0 7px rgba(255, 107, 74, 0.3),
+    0 35px 85px -10px rgba(255, 107, 74, 0.42) !important;
+}
+
+.phone-line-tilt-4 {
+  transform: perspective(1200px) rotateY(-5.5deg) rotateZ(1.2deg) translateY(0);
+  transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.phone-line-tilt-4:hover {
+  transform: perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.035) !important;
+  z-index: 30;
+}
+.phone-line-tilt-4:hover .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3px #0096CC,
+    0 0 0 7px rgba(0, 150, 204, 0.3),
+    0 35px 85px -10px rgba(0, 150, 204, 0.42) !important;
+}
+
+/* Also support hover state on entire .flow-card-item */
+.flow-card-item:hover .phone-line-tilt-1 {
+  transform: perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.035);
+  z-index: 30;
+}
+.flow-card-item:hover .phone-line-tilt-1 .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3px #E040A0,
+    0 0 0 7px rgba(224, 64, 160, 0.3),
+    0 35px 85px -10px rgba(224, 64, 160, 0.42);
+}
+
+.flow-card-item:hover .phone-line-tilt-2 {
+  transform: perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(-18px) scale(1.035);
+  z-index: 30;
+}
+.flow-card-item:hover .phone-line-tilt-2 .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3px #2563EB,
+    0 0 0 7px rgba(37, 99, 235, 0.3),
+    0 35px 85px -10px rgba(37, 99, 235, 0.42);
+}
+
+.flow-card-item:hover .phone-line-tilt-3 {
+  transform: perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(-18px) scale(1.035);
+  z-index: 30;
+}
+.flow-card-item:hover .phone-line-tilt-3 .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3px #FF6B4A,
+    0 0 0 7px rgba(255, 107, 74, 0.3),
+    0 35px 85px -10px rgba(255, 107, 74, 0.42);
+}
+
+.flow-card-item:hover .phone-line-tilt-4 {
+  transform: perspective(1200px) rotateY(0deg) rotateZ(0deg) translateY(-14px) scale(1.035);
+  z-index: 30;
+}
+.flow-card-item:hover .phone-line-tilt-4 .flow-phone-chassis {
+  box-shadow: 
+    0 0 0 3px #0096CC,
+    0 0 0 7px rgba(0, 150, 204, 0.3),
+    0 35px 85px -10px rgba(0, 150, 204, 0.42);
+}
+
+/* ==========================================================================
+   Horizontal Motion Spline Animation
+   ========================================================================== */
+@keyframes splineFlow {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.spline-core-path {
+  stroke-dasharray: 14 10;
+  animation: splineFlow 20s linear infinite;
+}
+
+/* ==========================================================================
+   Floating Prop Elements & Food Bowl Animation
+   ========================================================================== */
+.hero-food-bowl-wrapper {
+  animation: gentleFoodBowlFloat 7s ease-in-out infinite;
+  transition: transform 0.4s ease;
+}
+.hero-food-bowl-wrapper:hover {
+  transform: scale(1.08) rotate(3deg);
+}
+
+@keyframes gentleFoodBowlFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.5deg);
+  }
+}
+
+.prop-heart {
+  animation: propHeartFloat 5s ease-in-out infinite;
+}
+@keyframes propHeartFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}
+
+.prop-tomato {
+  animation: propTomatoFloat 6.5s ease-in-out infinite 0.7s;
+}
+@keyframes propTomatoFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-3deg);
+  }
+}
+
+.prop-leaf-1 {
+  animation: propLeafFloat 5.5s ease-in-out infinite 1.2s;
+}
+@keyframes propLeafFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-12deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(8deg);
+  }
+}
+
+/* In-Phone Screen View Styling */
+.screen-scroll-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #FAF8FD;
+  border-radius: 38px;
+  position: relative;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.screen-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scrollbar Utility */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile Step Segmented Tabs */
+.mobile-step-tab {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #604868;
+}
+.mobile-step-tab.active {
+  background: #181024 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(24, 16, 36, 0.22);
+}
+.mobile-flow-dot {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Mobile Touch & Layout Optimizations */
+@media (max-width: 1024px) {
+  .phone-line-tilt-1,
+  .phone-line-tilt-2,
+  .phone-line-tilt-3,
+  .phone-line-tilt-4,
+  .phone-line-tilt-1:hover,
+  .phone-line-tilt-2:hover,
+  .phone-line-tilt-3:hover,
+  .phone-line-tilt-4:hover,
+  .flow-card-item:hover .phone-line-tilt-1,
+  .flow-card-item:hover .phone-line-tilt-2,
+  .flow-card-item:hover .phone-line-tilt-3,
+  .flow-card-item:hover .phone-line-tilt-4 {
+    transform: none !important;
+  }
+
+  .flow-card-item:hover .flow-phone-chassis {
+    box-shadow: 
+      0 0 0 1px #0A0812,
+      0 0 0 2.5px #1F1929,
+      0 1px 3px rgba(0, 0, 0, 0.5),
+      0 18px 45px -8px rgba(24, 16, 36, 0.32) !important;
+  }
+
+  #flow-cards-track {
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-left: 1.5rem;
+    scroll-padding-right: 1.5rem;
+  }
+}
+
+/* Mobile Navigation Dropdown Animation */
+@keyframes mobileNavFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#mobile-nav-dropdown:not(.hidden) {
+  animation: mobileNavFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Admin Login Modal Animations */
+@keyframes adminShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+.shake-error {
+  animation: adminShake 0.45s ease-in-out;
+}
+
+#admin-login-modal:not(.hidden) #admin-login-card {
+  animation: adminModalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes adminModalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+

@@ -8,7 +8,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
@@ -68,302 +68,842 @@
 
   <!-- NAVIGATION BAR (Clean & Minimal: Logo + Admin + Download) -->
   <header class="sticky top-0 z-50 w-full backdrop-blur-xl bg-surface/80 border-b border-outline-variant/30 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="#" class="flex items-center gap-2.5 group">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-primary via-secondary to-coral p-0.5 shadow-[0_4px_16px_rgba(224,64,160,0.35)] transition-transform group-hover:scale-105">
-          <div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-            <img src="assets/images/treat_logo.png" alt="Treat Logo" class="w-6 h-6 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="material-symbols-outlined text-primary text-[20px] hidden">cake</span>
-          </div>
-        </div>
-        <div class="flex flex-col">
-          <div class="flex items-center gap-1.5">
-            <span class="font-headline font-black text-2xl tracking-tight text-gradient-candy">treat</span>
-            <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-          </div>
-          <span class="text-[10px] font-bold text-on-surface-variant/80 tracking-wide uppercase -mt-1 hidden sm:block">Funky Foodie Feasts</span>
-        </div>
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 md:h-20 flex items-center justify-between">
+      <!-- Logo (Shaped 3D Treat Sticker) -->
+      <a href="#" class="flex items-center group py-1" title="Treat - Funky Foodie Feasts">
+        <img src="assets/images/treat_bubble_logo.png" alt="Treat" class="h-9 sm:h-11 md:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_8px_24px_rgba(124,82,170,0.35)] drop-shadow-[0_4px_14px_rgba(124,82,170,0.22)]">
       </a>
 
+      <!-- Center Navigation Links (Pill Style) - Hidden on mobile -->
+      <nav class="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-white/80 border border-outline-variant/30 shadow-xs backdrop-blur-md">
+        <a href="#home" class="px-4 py-1.5 rounded-full bg-secondary-container text-secondary-dark text-xs font-extrabold shadow-2xs">Home</a>
+        <a href="#workflow-flow" class="px-4 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-bold transition-colors">How It Works</a>
+        <a href="#reviews" class="px-4 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-bold transition-colors">Reviews</a>
+      </nav>
+
       <!-- Action Buttons -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden w-9 h-9 rounded-full bg-surface-container hover:bg-secondary-fixed text-on-surface flex items-center justify-center border border-outline-variant/40 active:scale-95 transition-all" aria-label="Toggle navigation menu">
+          <span id="mobile-menu-icon" class="material-symbols-outlined text-[20px]">menu</span>
+        </button>
+
         <!-- Admin Studio Button -->
-        <button id="admin-open-btn" class="px-3.5 py-2 rounded-full bg-surface-container hover:bg-secondary-fixed text-on-surface text-xs font-bold transition-all flex items-center gap-1.5 border border-outline-variant/50 shadow-sm active:scale-95" title="Open Mockup Admin Studio (Ctrl+Shift+A)">
+        <button id="admin-open-btn" class="px-2.5 sm:px-3.5 py-2 rounded-full bg-surface-container hover:bg-secondary-fixed text-on-surface text-xs font-bold transition-all flex items-center gap-1 sm:gap-1.5 border border-outline-variant/50 shadow-sm active:scale-95" title="Open Mockup Admin Studio (Ctrl+Shift+A)">
           <span class="material-symbols-outlined text-secondary text-[18px]">settings</span>
           <span class="hidden sm:inline">Admin Studio</span>
         </button>
 
         <!-- Download CTA -->
-        <a href="#download-cta" class="btn-flow-download px-5 py-2.5 rounded-full text-xs font-extrabold tracking-wide uppercase flex items-center gap-2 shadow-lg active:scale-95">
-          <span class="material-symbols-outlined text-[18px]">download</span>
-          <span>Download App</span>
+        <a href="#download-cta" class="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-extrabold tracking-wide uppercase flex items-center gap-1.5 sm:gap-2 bg-[#181024] hover:bg-[#2A1D3D] text-white shadow-md hover:shadow-lg transition-all active:scale-95">
+          <span class="material-symbols-outlined text-[16px] sm:text-[18px]">download</span>
+          <span>Download</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION: IMPACTFUL HEADLINE & SHORT-FORM CAPTION -->
-  <section class="relative pt-10 pb-6 md:pt-14 md:pb-8 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      
-      <!-- Main Headline -->
-      <h1 id="hero-headline-text" class="font-headline font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.12] max-w-4xl mx-auto">
-        Feast Together. <span class="text-gradient-candy">Save Bigger.</span> Crave Louder.
-      </h1>
-
-      <!-- Short-Form Vision Caption -->
-      <p id="hero-caption-text" class="mt-4 text-base sm:text-lg lg:text-xl text-on-surface-variant font-medium max-w-2xl mx-auto leading-relaxed">
-        Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.
-      </p>
-
+  <!-- Mobile Navigation Dropdown Menu -->
+  <div id="mobile-nav-dropdown" class="md:hidden hidden fixed top-14 left-0 right-0 z-40 bg-white/95 backdrop-blur-2xl border-b border-outline-variant/30 shadow-xl transition-all">
+    <div class="px-4 py-3 flex flex-col gap-1 max-w-md mx-auto">
+      <a href="#home" class="mobile-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-on-surface hover:bg-purple-50 transition-colors">
+        <span class="material-symbols-outlined text-primary text-[18px]">home</span>
+        <span>Home</span>
+      </a>
+      <a href="#workflow-flow" class="mobile-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-on-surface hover:bg-purple-50 transition-colors">
+        <span class="material-symbols-outlined text-secondary text-[18px]">smartphone</span>
+        <span>How It Works (4-Phone Flow)</span>
+      </a>
+      <a href="#reviews" class="mobile-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-on-surface hover:bg-purple-50 transition-colors">
+        <span class="material-symbols-outlined text-amber-500 text-[18px]">star</span>
+        <span>Food Bar Voices & Reviews</span>
+      </a>
+      <div class="pt-2 mt-1 border-t border-outline-variant/30 flex items-center gap-2">
+        <a href="#download-cta" class="mobile-nav-item flex-1 py-2.5 px-4 rounded-xl text-center text-xs font-extrabold bg-[#181024] text-white flex items-center justify-center gap-2 active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-[16px]">download</span>
+          <span>Download Treat App</span>
+        </a>
+        <button onclick="window.treatApp.admin.open(); document.getElementById('mobile-nav-dropdown').classList.add('hidden');" class="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-surface-container text-on-surface flex items-center gap-1.5 border border-outline-variant/40 active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-secondary text-[16px]">tune</span>
+          <span>Studio</span>
+        </button>
+      </div>
     </div>
-  </section>
+  </div>
 
   <!-- ==========================================================================
-       4-PHONE UNDULATING 3D MOBILE FLOW (APPETITE PALETTE & SENSORY STAGING)
+       ARTFUL VERTICAL FLOW STORYTELLING SHOWCASE (MATCHING REFERENCE DESIGN)
        ========================================================================== -->
-  <section id="workflow-flow" class="relative py-8 md:py-14 overflow-visible">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- 1. TOP STEP HEADER CARDS (4 Columns Aligned with Phones) -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto text-left relative z-20">
+  <!-- ==========================================================================
+       HERO (CENTERED 3 CAPTIONS) & SHORT HORIZONTAL FLOW LINE
+       ========================================================================== -->
+  <section id="home" class="relative overflow-hidden bg-gradient-to-b from-[#FAF8FD] via-[#F8F2FC] to-[#FAF8FD] pt-2 sm:pt-4 pb-8 sm:pb-14">
+
+    <!-- Ambient background soft glow orbs -->
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-gradient-to-br from-[#EDE0FA]/50 to-[#FFF0F8]/50 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 left-4 w-[400px] h-[400px] bg-[#EFF6FF]/40 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 right-4 w-[400px] h-[400px] bg-[#F3EBF9]/40 rounded-full filter blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+      <!-- ======================================================================
+           PART 1: HERO (CENTERED 3-LINE HEADLINE & DUAL ACTION CTAS)
+           ====================================================================== -->
+      <div id="hero" class="text-center pt-6 pb-4 relative z-10 max-w-4xl mx-auto">
         
-        <!-- Step 01 (Candy Berry Pink) -->
-        <div class="flow-step-column flex flex-col items-start group cursor-pointer active-step" data-step-idx="0">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="flow-step-badge">01</span>
+        <!-- Ambient Floating Lilac Petals (Left side matching reference art) -->
+        <div class="hidden lg:block absolute -left-12 xl:-left-24 top-1/2 -translate-y-4 pointer-events-none select-none z-10">
+          <div class="relative w-12 h-12">
+            <!-- Upper Petal -->
+            <div class="w-4 h-2.5 rounded-full bg-[#9357E8]/60 -rotate-25 transform mb-1.5 shadow-2xs"></div>
+            <!-- Lower Petal -->
+            <div class="w-3 h-2 rounded-full bg-[#9357E8]/40 rotate-15 transform ml-2.5"></div>
           </div>
-          <div class="flow-step-icon-circle mb-3">
-            <span class="material-symbols-outlined text-[20px]" id="step-icon-0">local_fire_department</span>
-          </div>
-          <h3 class="font-headline font-bold text-sm md:text-base text-on-surface group-hover:text-primary transition-colors" id="step-title-0">
-            Crave-Worthy Feast Drops
-          </h3>
-          <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed" id="step-desc-0">
-            Snag limited 2-for-1 platter drops, secret perks, and trending foodie spot deals before slots sell out.
-          </p>
-          <div class="flow-step-tick"></div>
         </div>
 
-        <!-- Step 02 (Funky Violet) -->
-        <div class="flow-step-column flex flex-col items-start group cursor-pointer" data-step-idx="1">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="flow-step-badge">02</span>
+        <!-- Ambient floating side props -->
+        <!-- Right: Gourmet Food Bowl & Flourish -->
+        <div class="hidden xl:block absolute -right-44 top-4 pointer-events-none select-none z-20">
+          <!-- Top-Right Accent Rays on Food Bowl -->
+          <svg class="absolute -top-2 -right-1 w-6 h-6 text-[#9357E8] select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M14 4 C16 6 17 9 17 9" />
+            <path d="M19 7 C20 8.5 21 10.5 21 10.5" />
+          </svg>
+          <div class="w-40 h-40 rounded-full p-1.5 bg-white/80 backdrop-blur-md shadow-[0_20px_45px_rgba(46,26,40,0.18)] ring-4 ring-white hero-food-bowl-wrapper relative">
+            <img src="assets/images/hero_food_bowl.jpg" alt="Food Bowl" class="w-full h-full rounded-full object-cover">
           </div>
-          <div class="flow-step-icon-circle mb-3">
-            <span class="material-symbols-outlined text-[20px]" id="step-icon-1">calculate</span>
-          </div>
-          <h3 class="font-headline font-bold text-sm md:text-base text-on-surface group-hover:text-secondary transition-colors" id="step-title-1">
-            Zero-Math Squad Budget
-          </h3>
-          <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed" id="step-desc-1">
-            Slide your budget per sweetie. Treat auto-matches massive feast boards with tax and tip included.
-          </p>
-          <div class="flow-step-tick"></div>
+          <img src="assets/images/prop_leaf.svg" alt="Basil Leaf" class="w-12 h-12 floating-prop prop-leaf-1 -mt-4 ml-6">
+          <span class="font-caveat font-bold text-xl text-[#7C52AA] tracking-wide rotate-3 block mt-2 text-center">
+            Good Food<br>Great Vibes ♡
+          </span>
         </div>
 
-        <!-- Step 03 (Sizzling Coral) -->
-        <div class="flow-step-column flex flex-col items-start group cursor-pointer" data-step-idx="2">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="flow-step-badge">03</span>
-          </div>
-          <div class="flow-step-icon-circle mb-3">
-            <span class="material-symbols-outlined text-[20px]" id="step-icon-2">timer</span>
-          </div>
-          <h3 class="font-headline font-bold text-sm md:text-base text-on-surface group-hover:text-coral transition-colors" id="step-title-2">
-            2-Min Flash Table Lock
-          </h3>
-          <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed" id="step-desc-2">
-            Lock your prime table live with a 120s countdown clock. Zero deposit, direct kitchen sync.
-          </p>
-          <div class="flow-step-tick"></div>
+        <!-- Top Category Pill Badge -->
+        <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-[#F3EBF9] border border-purple-200/60 text-[#7C52AA] text-[11px] sm:text-xs font-black tracking-wide mb-3 sm:mb-5 shadow-2xs">
+          <span>Food</span>
+          <span class="text-[9px] opacity-60">•</span>
+          <span>Convenience</span>
+          <span class="text-[9px] opacity-60">•</span>
+          <span>Happiness</span>
         </div>
 
-        <!-- Step 04 (Fresh Cyan Mint) -->
-        <div class="flow-step-column flex flex-col items-start group cursor-pointer" data-step-idx="3">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="flow-step-badge">04</span>
+        <!-- 3 Captions Stacked in the Middle (Matching Reference Design Art) -->
+        <h1 id="hero-headline-text" class="font-headline font-black text-[32px] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[76px] tracking-tight leading-[1.12] text-[#181024] flex flex-col items-center justify-center gap-1 sm:gap-1.5 md:gap-2 text-center select-none px-2 sm:px-0">
+          
+          <!-- Line 1: Find Your Craving (with Radiating Accent Sparkles) -->
+          <span class="hero-title-line flex items-center justify-center gap-2 sm:gap-3 text-[#181024]">
+            <!-- Left Spark Rays -->
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] -rotate-12 shrink-0 select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M6 15 C5 12 5.5 8 8 6" />
+              <path d="M12 18 C11 16 11.5 13.5 13 11" />
+            </svg>
+            
+            <span>Find Your Craving</span>
+            
+            <!-- Right Spark Rays -->
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] rotate-12 shrink-0 select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M18 15 C19 12 18.5 8 16 6" />
+              <path d="M12 18 C13 16 12.5 13.5 11 11" />
+            </svg>
+          </span>
+
+          <!-- Line 2: Share the Good Stuff (in Treat Primary Color #E040A0) -->
+          <span class="hero-title-line inline-block text-center text-[#E040A0]">
+            <span class="hero-title-primary text-[#E040A0]">
+              <span>Share </span>
+              <span class="relative inline-block">
+                <span>the Good Stuff</span>
+                <!-- Hand-Drawn Underline Swoosh in Treat Primary Color -->
+                <svg class="absolute -bottom-2 sm:-bottom-3.5 left-0 w-full h-3 sm:h-4 overflow-visible pointer-events-none" viewBox="0 0 240 16" fill="none" preserveAspectRatio="none">
+                  <path d="M 3 8 C 65 14, 155 15, 237 6" stroke="#E040A0" stroke-width="4.5" stroke-linecap="round" />
+                </svg>
+              </span>
+            </span>
+          </span>
+
+          <!-- Line 3: Make It a Treat (with Outline Heart Doodle) -->
+          <span class="hero-title-line inline-flex items-center justify-center gap-2.5 sm:gap-3 text-[#181024]">
+            <span>Make It a Treat</span>
+            <svg class="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 text-[#9357E8] -rotate-12 translate-y-0.5 shrink-0 select-none" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 27 C16 27, 4.5 19, 4.5 11.5 C4.5 6.5, 8.5 3.5, 12.5 4.5 C14.8 5.1, 15.6 6.8, 16 8 C16.4 6.8, 17.2 5.1, 19.5 4.5 C23.5 3.5, 27.5 6.5, 27.5 11.5 C27.5 19, 16 27, 16 27 Z" />
+            </svg>
+          </span>
+
+        </h1>
+
+        <!-- Short-form Caption -->
+        <p id="hero-caption-text" class="mt-3 sm:mt-5 text-sm sm:text-base md:text-lg text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed text-center px-2 sm:px-0">
+          Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.
+        </p>
+
+        <!-- Centered Dual Action CTAs -->
+        <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-7 px-4 sm:px-0">
+          <a href="#download-cta" class="w-full sm:w-auto px-7 py-3.5 rounded-full text-sm font-extrabold text-white bg-[#181024] hover:bg-[#2A1D3D] shadow-[0_10px_28px_rgba(24,16,36,0.25)] hover:shadow-[0_14px_34px_rgba(24,16,36,0.35)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[20px]">download</span>
+            <span>Download App</span>
+          </a>
+          
+          <button id="hero-watch-btn" class="w-full sm:w-auto px-6 py-3.5 rounded-full text-sm font-bold text-[#181024] bg-white border border-gray-200/90 shadow-xs hover:bg-gray-50 hover:border-purple-200 active:scale-95 transition-all flex items-center justify-center gap-2.5">
+            <span class="w-6 h-6 rounded-full bg-[#EDE0FA] text-[#7C52AA] flex items-center justify-center">
+              <span class="material-symbols-outlined text-[16px] ml-0.5">play_arrow</span>
+            </span>
+            <span>Watch How It Works</span>
+          </button>
+        </div>
+
+        <!-- Sleek High-End Platform Badges -->
+        <div class="flex items-center justify-center gap-3 sm:gap-4 mt-5 select-none">
+          <!-- iOS Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-gray-200/80 shadow-2xs hover:border-purple-300 hover:shadow-sm transition-all group cursor-default">
+            <svg class="w-3.5 h-3.5 fill-current text-gray-900 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.85.94-2.92-.92.04-2.02.62-2.67 1.38-.57.65-1.07 1.73-.93 2.78 1.02.08 2.03-.53 2.66-1.24z"/>
+            </svg>
+            <span class="font-headline font-bold text-xs text-gray-800 tracking-tight">iOS</span>
+            <span class="text-[10px] text-gray-400 font-semibold">• Apple Store</span>
           </div>
-          <div class="flow-step-icon-circle mb-3">
-            <span class="material-symbols-outlined text-[20px]" id="step-icon-3">forum</span>
+
+          <!-- Android Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-gray-200/80 shadow-2xs hover:border-emerald-300 hover:shadow-sm transition-all group cursor-default">
+            <svg class="w-3.5 h-3.5 fill-[#3DDC84] group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+              <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.411 13.8559 8.1 12 8.1s-3.5902.311-5.1368.8497L4.8409 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
+            </svg>
+            <span class="font-headline font-bold text-xs text-gray-800 tracking-tight">Android</span>
+            <span class="text-[10px] text-emerald-600 font-extrabold bg-emerald-50 px-1.5 py-0.5 rounded-full">v1.0.4 APK</span>
           </div>
-          <h3 class="font-headline font-bold text-sm md:text-base text-on-surface group-hover:text-tertiary transition-colors" id="step-title-3">
-            Bite Talk & Squad Perks
-          </h3>
-          <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed" id="step-desc-3">
-            Post honest bite reviews, earn foodie street cred, and climb the squad savings milestones.
-          </p>
-          <div class="flow-step-tick"></div>
+        </div>
+
+        <!-- Vertical Flow Line Connector & Scroll to Explore -->
+        <div class="hero-flow-connector flex flex-col items-center justify-center pt-6 pb-2 relative z-20">
+          <!-- Slender Connecting Line -->
+          <div class="w-[1.5px] h-8 bg-gradient-to-b from-[#DCC8E0] via-[#A880D0] to-[#7C52AA]"></div>
+          
+          <!-- Round Chevron Down Button -->
+          <a href="#feature-01" class="w-7 h-7 rounded-full bg-white shadow-sm border border-purple-200/80 flex items-center justify-center text-[#7C52AA] hover:border-purple-300 hover:shadow hover:scale-105 active:scale-95 transition-all group my-1 z-10" aria-label="Scroll to explore">
+            <span class="material-symbols-outlined text-[17px] group-hover:translate-y-0.5 transition-transform text-[#7C52AA]">keyboard_arrow_down</span>
+          </a>
+          
+          <!-- "Scroll to explore" Label -->
+          <span class="text-[11.5px] font-medium text-[#8A7D9B] tracking-normal select-none mt-1">Scroll to explore</span>
         </div>
 
       </div>
 
-      <!-- 2. CENTER: UNDULATING 4-PHONE 3D WAVE WITH CONNECTING GRADIENT LINE -->
-      <div class="flow-showcase-container max-w-6xl mx-auto my-4 relative">
+      <!-- ======================================================================
+           PART 2: COMPACT 4-FEATURE HORIZONTAL FLOW LINE ("FLOW SHORT IN A LINE")
+           ====================================================================== -->
+      <div id="feature-01" class="relative mt-2 mb-10">
+        <span id="workflow-flow" class="absolute -top-24 pointer-events-none"></span>
         
-        <!-- Connecting SVG Curved Wave Line with Appetite Gradient & Pulsing Nodes -->
-        <svg class="flow-wave-svg" viewBox="0 0 1100 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Horizontal Continuous 3D Motion Spline (SVG) -->
+        <svg class="absolute top-1/2 left-0 w-full h-44 -translate-y-1/2 pointer-events-none z-0 hidden lg:block" preserveAspectRatio="none" viewBox="0 0 1200 180" fill="none">
           <defs>
-            <linearGradient id="waveAppetiteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#E040A0" />
-              <stop offset="35%" stop-color="#7C52AA" />
-              <stop offset="70%" stop-color="#FF6B4A" />
-              <stop offset="100%" stop-color="#0096CC" />
+            <linearGradient id="horizontalSplineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#E040A0" stop-opacity="0.9" />
+              <stop offset="28%" stop-color="#9357E8" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#FF6B4A" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#0096CC" stop-opacity="0.95" />
             </linearGradient>
+            <filter id="hSplineGlow" x="-20%" y="-50%" width="140%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="blur1" />
+              <feGaussianBlur stdDeviation="14" result="blur2" />
+              <feMerge>
+                <feMergeNode in="blur2" />
+                <feMergeNode in="blur1" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
           </defs>
 
-          <!-- Glowing Ambient Flow Path -->
-          <path d="M 20 85 C 160 85, 230 40, 310 100 C 390 160, 480 60, 580 90 C 680 120, 770 40, 860 115 C 950 180, 1030 95, 1080 95" 
-                stroke="url(#waveAppetiteGrad)" stroke-width="4" stroke-linecap="round" opacity="0.3" filter="blur(3px)" />
+          <!-- Outer glowing diffuse beam -->
+          <path d="M 60 90 C 220 40, 380 140, 560 70 C 740 10, 920 130, 1140 85"
+                stroke="url(#horizontalSplineGradient)" 
+                stroke-width="14" 
+                stroke-linecap="round"
+                stroke-opacity="0.26"
+                filter="url(#hSplineGlow)" />
 
-          <!-- Stream Line with Animated Dash -->
-          <path d="M 20 85 C 160 85, 230 40, 310 100 C 390 160, 480 60, 580 90 C 680 120, 770 40, 860 115 C 950 180, 1030 95, 1080 95" 
-                stroke="url(#waveAppetiteGrad)" stroke-width="2.6" stroke-linecap="round" class="flow-stream-line" opacity="0.9" />
-          
-          <!-- Node 1 (Berry) -->
-          <circle cx="170" cy="65" r="9" fill="#FFF0F8" stroke="#E040A0" stroke-width="2.5" />
-          <circle cx="170" cy="65" r="4" fill="#E040A0" class="pulse-node" />
-          
-          <!-- Node 2 (Violet) -->
-          <circle cx="430" cy="118" r="9" fill="#F8F0FF" stroke="#7C52AA" stroke-width="2.5" />
-          <circle cx="430" cy="118" r="4" fill="#7C52AA" class="pulse-node" />
-          
-          <!-- Node 3 (Coral) -->
-          <circle cx="690" cy="78" r="9" fill="#FFF5F2" stroke="#FF6B4A" stroke-width="2.5" />
-          <circle cx="690" cy="78" r="4" fill="#FF6B4A" class="pulse-node" />
-          
-          <!-- Node 4 (Cyan) -->
-          <circle cx="950" cy="130" r="9" fill="#F0FAFF" stroke="#0096CC" stroke-width="2.5" />
-          <circle cx="950" cy="130" r="4" fill="#0096CC" class="pulse-node" />
+          <!-- Crisp core motion line with dash animation -->
+          <path class="spline-core-path"
+                d="M 60 90 C 220 40, 380 140, 560 70 C 740 10, 920 130, 1140 85"
+                stroke="url(#horizontalSplineGradient)" 
+                stroke-width="4" 
+                stroke-linecap="round" />
+
+          <!-- Luminous Junction Node Beads -->
+          <circle cx="160" cy="72" r="8.5" fill="#FFFFFF" stroke="#E040A0" stroke-width="3" filter="drop-shadow(0 0 10px #E040A0)" />
+          <circle cx="450" cy="105" r="8.5" fill="#FFFFFF" stroke="#9357E8" stroke-width="3" filter="drop-shadow(0 0 10px #9357E8)" />
+          <circle cx="740" cy="45" r="8.5" fill="#FFFFFF" stroke="#FF6B4A" stroke-width="3" filter="drop-shadow(0 0 10px #FF6B4A)" />
+          <circle cx="1020" cy="98" r="8.5" fill="#FFFFFF" stroke="#0096CC" stroke-width="3" filter="drop-shadow(0 0 10px #0096CC)" />
         </svg>
 
-        <!-- The 4 Phones Row with Anisotropic Titanium Edge & Fresnel Glare -->
-        <div class="phone-wave-row">
+        <!-- Mobile Step Segmented Pill Tabs (Instant Jump on Mobile) -->
+        <div id="mobile-step-tabs" class="flex sm:hidden items-center justify-center gap-1.5 p-1 mx-auto mb-4 bg-white/90 border border-purple-200/70 rounded-full shadow-2xs max-w-fit select-none z-20 relative">
+          <button type="button" class="mobile-step-tab active px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5" data-step="0">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#E040A0]"></span>
+            <span>01 Drops</span>
+          </button>
+          <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="1">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#2563EB]"></span>
+            <span>02 Budget</span>
+          </button>
+          <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#FF6B4A]"></span>
+            <span>03 Hold</span>
+          </button>
+          <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="3">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#0096CC]"></span>
+            <span>04 Squad</span>
+          </button>
+        </div>
+
+        <!-- 4-Phone Horizontal Flow Grid / Track (horizontal snap-scroll on mobile) -->
+        <div id="flow-cards-track" class="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-5 pb-4 pt-1 -mx-4 px-4 sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none lg:grid-cols-4 lg:gap-6 relative z-10 max-w-7xl sm:mx-auto scrollbar-none">
           
-          <!-- PHONE 1 (Stagger 1: Elevated & Tilted Left) -->
-          <div class="phone-mockup-3d stagger-1 active-flow" id="phone-card-0" data-phone-idx="0">
-            <div class="phone-screen-frame">
-              <!-- Dynamic Island -->
-              <div class="phone-dynamic-island">
-                <div class="phone-camera-lens"></div>
+          <!-- ================= ITEM 01: CRAVE-WORTHY FEAST DROPS ================= -->
+          <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="0">
+            
+            <!-- Step Badge & Title Above -->
+            <div class="mb-3 flex flex-col items-center">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EBF9] text-[#7C52AA] font-headline font-black text-[11px] mb-1.5 shadow-2xs">
+                <span class="w-5 h-5 rounded-full bg-[#7C52AA] text-white flex items-center justify-center text-[10px]">01</span>
+                <span>Feast Drops</span>
               </div>
-              <!-- Simulated Status Bar -->
-              <div class="phone-status-bar">
-                <span>9:41</span>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[10px]">5G</span>
-                  <span class="material-symbols-outlined text-[14px]">wifi</span>
-                  <span class="material-symbols-outlined text-[14px]">battery_full</span>
+              <h3 class="font-headline font-black text-sm sm:text-base text-[#181024]">Crave-Worthy Drops</h3>
+            </div>
+
+            <!-- 3D Phone Chassis -->
+            <div class="flow-phone-wrapper phone-line-tilt-1 relative my-2">
+              <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
+                <!-- Hardware Side Buttons -->
+                <div class="phone-hw-btn phone-hw-action"></div>
+                <div class="phone-hw-btn phone-hw-vol-up"></div>
+                <div class="phone-hw-btn phone-hw-vol-down"></div>
+                <div class="phone-hw-btn phone-hw-power"></div>
+
+                <div class="phone-screen-frame">
+                  <!-- Top Speaker & Dynamic Island -->
+                  <div class="phone-top-speaker"></div>
+                  <div class="phone-dynamic-island">
+                    <div class="phone-truedepth-sensor"></div>
+                    <div class="phone-camera-lens"></div>
+                  </div>
+
+                  <!-- Realistic Status Bar -->
+                  <div class="phone-status-bar">
+                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                    <div class="flex items-center gap-1 text-[#1E293B]">
+                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                    </div>
+                  </div>
+                  
+                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                    <!-- In-App Top Search Bar -->
+                    <div class="px-3 pt-[30px] pb-1">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-1.5">
+                          <img src="assets/images/treat_bubble_logo.png" class="h-5 w-auto object-contain">
+                          <span class="font-headline font-black text-[12px] text-[#181024]">Treat Drops</span>
+                        </div>
+                        <span class="w-6 h-6 rounded-full bg-white border border-gray-100 flex items-center justify-center shadow-2xs">
+                          <span class="material-symbols-outlined text-[13px] text-gray-600">tune</span>
+                        </span>
+                      </div>
+                      
+                      <!-- Mini Search Input -->
+                      <div class="mt-2 px-2.5 py-1 rounded-xl bg-white border border-gray-100 shadow-2xs flex items-center gap-1.5 text-gray-400">
+                        <span class="material-symbols-outlined text-[13px]">search</span>
+                        <span class="text-[9px] font-medium">Search platters, spots...</span>
+                      </div>
+                    </div>
+
+                    <!-- Category Pills -->
+                    <div class="flex items-center gap-1.5 px-3 py-1.5 overflow-x-auto scrollbar-none">
+                      <span class="px-2.5 py-0.5 rounded-full bg-[#7C52AA] text-white text-[8.5px] font-extrabold shadow-2xs shrink-0">🔥 Drops</span>
+                      <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold shrink-0">Trending</span>
+                      <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold shrink-0">2-for-1</span>
+                    </div>
+
+                    <!-- Platter Deal Card -->
+                    <div class="px-3 pt-1 pb-16">
+                      <div class="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden transition-all">
+                        <div class="h-28 w-full relative">
+                          <img src="assets/images/fiesta_platter.jpg" class="w-full h-full object-cover">
+                          <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-[#E040A0] text-white text-[7.5px] font-black uppercase tracking-wide shadow-sm">2-for-1 Drop</span>
+                          <span class="absolute top-2 right-2 w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-pink-500 shadow-sm">
+                            <span class="material-symbols-outlined text-[12px]">favorite</span>
+                          </span>
+                        </div>
+                        <div class="p-2.5 text-left">
+                          <div class="flex items-center justify-between">
+                            <h4 class="font-headline font-black text-[11px] text-[#181024] truncate">Mediterranean Feast</h4>
+                            <span class="text-[8.5px] font-extrabold text-amber-500 flex items-center gap-0.5">★ 4.9</span>
+                          </div>
+                          <p class="text-[8.5px] text-gray-500 font-medium">The Food Yard • 1.2 km away</p>
+                          <div class="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
+                            <div class="flex items-baseline gap-1">
+                              <span class="text-[12px] font-black text-[#7C52AA]">$ 320</span>
+                              <span class="text-[8.5px] text-gray-400 line-through">$ 640</span>
+                            </div>
+                            <span class="px-1.5 py-0.5 rounded-md bg-pink-100 text-primary text-[7.5px] font-black uppercase">50% OFF</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- In-Phone App Navigation Bar -->
+                  <div class="phone-app-nav">
+                    <div class="phone-nav-item active">
+                      <span class="material-symbols-outlined">restaurant</span>
+                      <span>Drops</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">payments</span>
+                      <span>Budget</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">table_restaurant</span>
+                      <span>Hold</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">group</span>
+                      <span>Squad</span>
+                    </div>
+                  </div>
+
+                  <div class="phone-glare-overlay"></div>
+                  <div class="phone-gesture-bar"></div>
                 </div>
               </div>
-              <!-- Mockup Image -->
-              <img src="assets/screens/01_explore.png" alt="Crave-Worthy Feast Drops" class="phone-screen-img" id="phone-img-0">
-              <!-- Fresnel Glass Glare Sheen -->
-              <div class="phone-glare-overlay"></div>
-              <!-- Bottom Gesture Bar -->
-              <div class="phone-gesture-bar"></div>
+            </div>
+
+            <!-- Description & Handwritten Note Below -->
+            <p class="text-xs text-gray-600 font-medium max-w-[210px] mt-2 leading-relaxed">
+              Snag limited 2-for-1 platter drops and secret perks before slots sell out.
+            </p>
+            <div class="font-caveat font-bold text-base text-[#7C52AA] mt-1 select-none">
+              Limited time. Big vibes. ↗
+            </div>
+
+          </div>
+
+          <!-- ================= ITEM 02: ZERO-MATH SQUAD BUDGET ================= -->
+          <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="1">
+            
+            <!-- Step Badge & Title Above -->
+            <div class="mb-3 flex flex-col items-center">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFF6FF] text-[#2563EB] font-headline font-black text-[11px] mb-1.5 shadow-2xs">
+                <span class="w-5 h-5 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-[10px]">02</span>
+                <span>Squad Budget</span>
+              </div>
+              <h3 class="font-headline font-black text-sm sm:text-base text-[#181024]">Zero-Math Budget</h3>
+            </div>
+
+            <!-- 3D Phone Chassis -->
+            <div class="flow-phone-wrapper phone-line-tilt-2 relative my-2">
+              <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
+                <!-- Hardware Side Buttons -->
+                <div class="phone-hw-btn phone-hw-action"></div>
+                <div class="phone-hw-btn phone-hw-vol-up"></div>
+                <div class="phone-hw-btn phone-hw-vol-down"></div>
+                <div class="phone-hw-btn phone-hw-power"></div>
+
+                <div class="phone-screen-frame">
+                  <!-- Top Speaker & Dynamic Island -->
+                  <div class="phone-top-speaker"></div>
+                  <div class="phone-dynamic-island">
+                    <div class="phone-truedepth-sensor"></div>
+                    <div class="phone-camera-lens"></div>
+                  </div>
+
+                  <!-- Realistic Status Bar -->
+                  <div class="phone-status-bar">
+                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                    <div class="flex items-center gap-1 text-[#1E293B]">
+                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                    </div>
+                  </div>
+                  
+                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                    <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
+                      <span class="material-symbols-outlined text-[14px] text-gray-500">arrow_back</span>
+                      <span class="font-headline font-black text-[11.5px] text-[#181024]">Squad Budget Match</span>
+                      <span class="material-symbols-outlined text-[14px] text-gray-400">info</span>
+                    </div>
+
+                    <div class="px-3 pt-2 text-center">
+                      <span class="text-[8px] font-black text-gray-400 uppercase tracking-widest">BUDGET PER PERSON</span>
+                      <div class="text-3xl font-headline font-black text-[#181024] my-0.5 tracking-tight" id="budget-amount-val">$ 25</div>
+                      
+                      <div class="px-2 py-2">
+                        <input type="range" id="interactive-budget-slider" min="10" max="60" value="25" class="w-full accent-[#7C52AA] cursor-pointer h-1.5 rounded-lg bg-gray-200">
+                        <div class="flex justify-between text-[8px] font-bold text-gray-400 mt-1">
+                          <span>$10</span>
+                          <span class="text-[#7C52AA] font-black">$25</span>
+                          <span>$50+</span>
+                        </div>
+                      </div>
+
+                      <button class="w-full py-2 rounded-xl bg-gradient-to-r from-[#7C52AA] via-[#9357E8] to-[#E040A0] text-white text-[9.5px] font-black shadow-sm flex items-center justify-center gap-1">
+                        <span class="material-symbols-outlined text-[13px]">auto_awesome</span>
+                        <span>Find Squad Matches</span>
+                      </button>
+                    </div>
+
+                    <div class="px-3 pt-2.5 pb-16 text-left">
+                      <span class="text-[8px] font-black text-gray-400 uppercase tracking-wider block mb-1.5">Auto-Matched Feast</span>
+                      <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs flex items-center gap-2.5">
+                        <img src="assets/images/bistro_bella.jpg" class="w-12 h-12 rounded-xl object-cover shrink-0">
+                        <div class="flex-1 min-w-0">
+                          <div class="flex items-center justify-between">
+                            <span class="text-[7.5px] font-black text-[#7C52AA] uppercase tracking-wide">✓ Tax & Tip Included</span>
+                            <span class="text-[11px] font-black text-[#181024]">$ 22</span>
+                          </div>
+                          <h5 class="font-headline font-bold text-[10px] text-[#181024] truncate">Bistro Feast Board</h5>
+                          <p class="text-[8px] text-gray-400 font-medium">Exact match • 4 pers squad</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- In-Phone App Navigation Bar -->
+                  <div class="phone-app-nav">
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">restaurant</span>
+                      <span>Drops</span>
+                    </div>
+                    <div class="phone-nav-item active">
+                      <span class="material-symbols-outlined">payments</span>
+                      <span>Budget</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">table_restaurant</span>
+                      <span>Hold</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">group</span>
+                      <span>Squad</span>
+                    </div>
+                  </div>
+
+                  <div class="phone-glare-overlay"></div>
+                  <div class="phone-gesture-bar"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description & Handwritten Note Below -->
+            <p class="text-xs text-gray-600 font-medium max-w-[210px] mt-2 leading-relaxed">
+              Slide your budget. Treat auto-matches feast boards with tax and tip.
+            </p>
+            <div class="font-caveat font-bold text-base text-[#2563EB] mt-1 select-none">
+              No math. Just treats. ↗
+            </div>
+
+          </div>
+
+          <!-- ================= ITEM 03: 2-MIN FLASH TABLE LOCK ================= -->
+          <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="2">
+            
+            <!-- Step Badge & Title Above -->
+            <div class="mb-3 flex flex-col items-center">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF5F2] text-[#FF6B4A] font-headline font-black text-[11px] mb-1.5 shadow-2xs">
+                <span class="w-5 h-5 rounded-full bg-[#FF6B4A] text-white flex items-center justify-center text-[10px]">03</span>
+                <span>Flash Lock</span>
+              </div>
+              <h3 class="font-headline font-black text-sm sm:text-base text-[#181024]">2-Min Table Lock</h3>
+            </div>
+
+            <!-- 3D Phone Chassis -->
+            <div class="flow-phone-wrapper phone-line-tilt-3 relative my-2">
+              <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
+                <!-- Hardware Side Buttons -->
+                <div class="phone-hw-btn phone-hw-action"></div>
+                <div class="phone-hw-btn phone-hw-vol-up"></div>
+                <div class="phone-hw-btn phone-hw-vol-down"></div>
+                <div class="phone-hw-btn phone-hw-power"></div>
+
+                <div class="phone-screen-frame">
+                  <!-- Top Speaker & Dynamic Island -->
+                  <div class="phone-top-speaker"></div>
+                  <div class="phone-dynamic-island">
+                    <div class="phone-truedepth-sensor"></div>
+                    <div class="phone-camera-lens"></div>
+                  </div>
+
+                  <!-- Realistic Status Bar -->
+                  <div class="phone-status-bar">
+                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                    <div class="flex items-center gap-1 text-[#1E293B]">
+                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                    </div>
+                  </div>
+                  
+                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                    <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
+                      <span class="material-symbols-outlined text-[14px] text-gray-500">arrow_back</span>
+                      <span class="font-headline font-black text-[11.5px] text-[#181024]">Live Floor Lock</span>
+                      <span class="material-symbols-outlined text-[14px] text-gray-400">notifications</span>
+                    </div>
+
+                    <div class="px-3 pt-1">
+                      <div class="p-3 rounded-2xl bg-gradient-to-b from-[#693BB8] via-[#5425A8] to-[#3E1685] text-white text-center shadow-lg flex flex-col items-center">
+                        <span class="inline-block px-2 py-0.5 rounded-full bg-white/20 text-[7.5px] font-black uppercase tracking-wider mb-1">Zero Deposit</span>
+                        <h4 class="font-headline font-black text-[11px] text-white">Table 12 Reserved!</h4>
+                        <p class="text-[7.5px] text-white/80 font-medium">Prime window booth • 4 persons</p>
+
+                        <!-- Circular Countdown Ring -->
+                        <div class="relative w-20 h-20 my-2 flex items-center justify-center">
+                          <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.18)" stroke-width="7" fill="none" />
+                            <circle id="flow-countdown-circle" cx="50" cy="50" r="40" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="31" fill="none" />
+                          </svg>
+                          <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="font-headline font-black text-base text-white tracking-wider" id="flow-countdown-timer">01:45</span>
+                            <span class="text-[6.5px] uppercase font-bold tracking-widest text-white/70">Remaining</span>
+                          </div>
+                        </div>
+
+                        <button class="w-full py-1.5 rounded-xl bg-white text-[#45188E] font-headline font-black text-[9.5px] shadow-sm flex items-center justify-center gap-1">
+                          <span class="material-symbols-outlined text-[13px]">qr_code_2</span>
+                          <span>Show QR Voucher</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="px-3 pt-2 pb-16 text-left">
+                      <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                          <span class="material-symbols-outlined text-[16px]">soup_kitchen</span>
+                        </span>
+                        <div class="flex-1 min-w-0">
+                          <div class="flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                            <span class="text-[7.5px] font-black text-emerald-600 uppercase">Kitchen Synced ✓</span>
+                          </div>
+                          <p class="text-[8.5px] font-bold text-gray-800 truncate">Preparing Mediterranean Feast</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- In-Phone App Navigation Bar -->
+                  <div class="phone-app-nav">
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">restaurant</span>
+                      <span>Drops</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">payments</span>
+                      <span>Budget</span>
+                    </div>
+                    <div class="phone-nav-item active">
+                      <span class="material-symbols-outlined">table_restaurant</span>
+                      <span>Hold</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">group</span>
+                      <span>Squad</span>
+                    </div>
+                  </div>
+
+                  <div class="phone-glare-overlay"></div>
+                  <div class="phone-gesture-bar"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description & Handwritten Note Below -->
+            <p class="text-xs text-gray-600 font-medium max-w-[210px] mt-2 leading-relaxed">
+              Lock your prime table live with 120s countdown clock. Zero deposit.
+            </p>
+            <div class="font-caveat font-bold text-base text-[#FF6B4A] mt-1 select-none">
+              + Fast. Fair. Done. ↗
+            </div>
+
+          </div>
+
+          <!-- ================= ITEM 04: BITE TALK & SQUAD PERKS ================= -->
+          <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="3">
+            
+            <!-- Step Badge & Title Above -->
+            <div class="mb-3 flex flex-col items-center">
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFEFF] text-[#0096CC] font-headline font-black text-[11px] mb-1.5 shadow-2xs">
+                <span class="w-5 h-5 rounded-full bg-[#0096CC] text-white flex items-center justify-center text-[10px]">04</span>
+                <span>Bite Talk</span>
+              </div>
+              <h3 class="font-headline font-black text-sm sm:text-base text-[#181024]">Squad Perks</h3>
+            </div>
+
+            <!-- 3D Phone Chassis -->
+            <div class="flow-phone-wrapper phone-line-tilt-4 relative my-2">
+              <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
+                <!-- Hardware Side Buttons -->
+                <div class="phone-hw-btn phone-hw-action"></div>
+                <div class="phone-hw-btn phone-hw-vol-up"></div>
+                <div class="phone-hw-btn phone-hw-vol-down"></div>
+                <div class="phone-hw-btn phone-hw-power"></div>
+
+                <div class="phone-screen-frame">
+                  <!-- Top Speaker & Dynamic Island -->
+                  <div class="phone-top-speaker"></div>
+                  <div class="phone-dynamic-island">
+                    <div class="phone-truedepth-sensor"></div>
+                    <div class="phone-camera-lens"></div>
+                  </div>
+
+                  <!-- Realistic Status Bar -->
+                  <div class="phone-status-bar">
+                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                    <div class="flex items-center gap-1 text-[#1E293B]">
+                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                    </div>
+                  </div>
+                  
+                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                    <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
+                      <div class="flex items-center gap-1.5">
+                        <span class="px-2.5 py-0.5 rounded-full bg-[#0096CC] text-white text-[8.5px] font-extrabold shadow-2xs">Community</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold">My Squad</span>
+                      </div>
+                      <span class="material-symbols-outlined text-[14px] text-gray-400">share</span>
+                    </div>
+
+                    <!-- User Profile & Level -->
+                    <div class="px-3 pt-1.5 text-center">
+                      <div class="relative inline-block">
+                        <img class="w-11 h-11 rounded-full mx-auto object-cover ring-2 ring-[#0096CC] shadow-sm" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80">
+                        <span class="absolute -bottom-1 -right-1 px-1 py-0.2 rounded-full bg-[#0096CC] text-white text-[6.5px] font-black">LVL 12</span>
+                      </div>
+                      <h5 class="font-headline font-black text-[10.5px] text-[#181024] mt-1">Foodie_Queen</h5>
+                      <span class="inline-block px-2 py-0.2 rounded-full bg-cyan-50 text-[#0096CC] text-[7.5px] font-extrabold">Squad Captain • 2,450 XP</span>
+
+                      <!-- Milestone Progress Bar -->
+                      <div class="mt-2 p-2 rounded-xl bg-white border border-gray-100 text-left shadow-2xs">
+                        <div class="flex items-center justify-between text-[7.5px] font-black text-gray-600 mb-1">
+                          <span>Next Reward: Free Dessert Platter</span>
+                          <span class="text-[#0096CC]">4/5 Feasts</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                          <div class="h-full bg-gradient-to-r from-[#0096CC] to-[#22D3EE] rounded-full w-4/5"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Review Card -->
+                    <div class="px-3 pt-2 pb-16 text-left">
+                      <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs">
+                        <div class="flex items-center gap-2">
+                          <img src="assets/images/taco_bodega.jpg" class="w-9 h-9 rounded-xl object-cover">
+                          <div>
+                            <h6 class="font-headline font-black text-[9.5px] text-[#181024]">Amazing platter!</h6>
+                            <div class="flex text-amber-400 text-[9px] gap-0.5">★★★★★</div>
+                          </div>
+                        </div>
+                        <p class="text-[7.5px] text-gray-500 font-medium mt-1.5 leading-relaxed">
+                          So fresh and flavorful! Table was locked right when we arrived, zero wait time.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- In-Phone App Navigation Bar -->
+                  <div class="phone-app-nav">
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">restaurant</span>
+                      <span>Drops</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">payments</span>
+                      <span>Budget</span>
+                    </div>
+                    <div class="phone-nav-item">
+                      <span class="material-symbols-outlined">table_restaurant</span>
+                      <span>Hold</span>
+                    </div>
+                    <div class="phone-nav-item active">
+                      <span class="material-symbols-outlined">group</span>
+                      <span>Squad</span>
+                    </div>
+                  </div>
+
+                  <div class="phone-glare-overlay"></div>
+                  <div class="phone-gesture-bar"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description & Handwritten Note Below -->
+            <p class="text-xs text-gray-600 font-medium max-w-[210px] mt-2 leading-relaxed">
+              Post honest reviews, earn street cred, and climb squad milestones.
+            </p>
+            <div class="font-caveat font-bold text-base text-[#0096CC] mt-1 select-none">
+              Eat. Share. Earn. ↗
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Mobile Swipe Indicator Dots -->
+        <div id="mobile-step-dots" class="flex sm:hidden items-center justify-center gap-2 mt-3 mb-2 select-none">
+          <button type="button" class="mobile-flow-dot w-6 h-2 rounded-full bg-[#181024] transition-all" data-step="0" aria-label="Go to Step 1"></button>
+          <button type="button" class="mobile-flow-dot w-2 h-2 rounded-full bg-purple-200 hover:bg-purple-300 transition-all" data-step="1" aria-label="Go to Step 2"></button>
+          <button type="button" class="mobile-flow-dot w-2 h-2 rounded-full bg-purple-200 hover:bg-purple-300 transition-all" data-step="2" aria-label="Go to Step 3"></button>
+          <button type="button" class="mobile-flow-dot w-2 h-2 rounded-full bg-purple-200 hover:bg-purple-300 transition-all" data-step="3" aria-label="Go to Step 4"></button>
+        </div>
+
+        <!-- Bottom Flourish Row -->
+        <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center sm:justify-between max-w-5xl mx-auto mt-6 sm:mt-8 pt-4 sm:pt-5 border-t border-purple-100/70 px-4 gap-3 sm:gap-0">
+          <!-- Social Proof Avatar Stack -->
+          <div class="flex items-center gap-3">
+            <div class="flex -space-x-2 overflow-hidden">
+              <img class="inline-block h-7 sm:h-8 w-7 sm:w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+              <img class="inline-block h-7 sm:h-8 w-7 sm:w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+              <img class="inline-block h-7 sm:h-8 w-7 sm:w-8 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+            </div>
+            <div class="text-left">
+              <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#F3EBF9] text-[#7C52AA] font-black text-[10px] sm:text-[11px]">
+                100K+ Happy Foodies
+              </span>
+              <p class="text-[10px] sm:text-[11px] text-gray-500 font-medium">Join thousands of foodies on Treat</p>
             </div>
           </div>
 
-          <!-- PHONE 2 (Stagger 2: Lower & Tilted Right) -->
-          <div class="phone-mockup-3d stagger-2" id="phone-card-1" data-phone-idx="1">
-            <div class="phone-screen-frame">
-              <div class="phone-dynamic-island">
-                <div class="phone-camera-lens"></div>
-              </div>
-              <div class="phone-status-bar">
-                <span>9:41</span>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[10px]">5G</span>
-                  <span class="material-symbols-outlined text-[14px]">wifi</span>
-                  <span class="material-symbols-outlined text-[14px]">battery_full</span>
-                </div>
-              </div>
-              <img src="assets/screens/02_budget.png" alt="Zero-Math Squad Budget" class="phone-screen-img" id="phone-img-1">
-              <div class="phone-glare-overlay"></div>
-              <div class="phone-gesture-bar"></div>
-            </div>
+          <!-- Script Tagline Flourish -->
+          <div class="select-none text-center sm:text-right">
+            <span class="font-caveat font-bold text-lg sm:text-xl md:text-2xl text-[#7C52AA] tracking-wide block">
+              Good food brings people together ♡
+            </span>
           </div>
-
-          <!-- PHONE 3 (Stagger 3: Elevated & Subtle Tilt) -->
-          <div class="phone-mockup-3d stagger-3" id="phone-card-2" data-phone-idx="2">
-            <div class="phone-screen-frame">
-              <div class="phone-dynamic-island">
-                <div class="phone-camera-lens"></div>
-              </div>
-              <div class="phone-status-bar">
-                <span>9:41</span>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[10px]">5G</span>
-                  <span class="material-symbols-outlined text-[14px]">wifi</span>
-                  <span class="material-symbols-outlined text-[14px]">battery_full</span>
-                </div>
-              </div>
-              <img src="assets/screens/04_hold.png" alt="2-Min Flash Table Lock" class="phone-screen-img" id="phone-img-2">
-              <div class="phone-glare-overlay"></div>
-              <div class="phone-gesture-bar"></div>
-            </div>
-          </div>
-
-          <!-- PHONE 4 (Stagger 4: Lower & Perspective Tilt) -->
-          <div class="phone-mockup-3d stagger-4" id="phone-card-3" data-phone-idx="3">
-            <div class="phone-screen-frame">
-              <div class="phone-dynamic-island">
-                <div class="phone-camera-lens"></div>
-              </div>
-              <div class="phone-status-bar">
-                <span>9:41</span>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[10px]">5G</span>
-                  <span class="material-symbols-outlined text-[14px]">wifi</span>
-                  <span class="material-symbols-outlined text-[14px]">battery_full</span>
-                </div>
-              </div>
-              <img src="assets/screens/06_social.png" alt="Bite Talk & Squad Perks" class="phone-screen-img" id="phone-img-3">
-              <div class="phone-glare-overlay"></div>
-              <div class="phone-gesture-bar"></div>
-            </div>
-          </div>
-
         </div>
 
       </div>
 
-      <!-- 3. BOTTOM: LIVE SOCIAL PROOF & CONVERSION CTA -->
-      <div id="download-cta" class="flex flex-col items-center justify-center text-center mt-4 relative z-20">
-        
-        <!-- Vertical Connector Tick Line -->
-        <div class="flow-bottom-tick"></div>
+      <!-- 3. BOTTOM: CONVERSION CTA -->
+      <div id="download-cta" class="flex flex-col items-center justify-center text-center mt-6 sm:mt-8 pt-3 pb-6 sm:pb-8 relative z-20 px-4 sm:px-0">
 
-        <!-- Social Proof FOMO Pill -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border border-primary/25 shadow-sm text-xs font-bold text-on-surface mb-3">
-          <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
-          <span id="live-proof-text">🔥 348 Platters Claimed This Weekend • 94 Verified Kitchens</span>
-        </div>
-
-        <!-- Button Row with Spark Accents -->
-        <div class="flex items-center gap-3">
-          <!-- Left Spark Accent -->
-          <span class="flow-spark">⸝</span>
-
-          <!-- Glowing Download CTA Button -->
-          <a id="flow-download-btn" href="#download-apk" class="btn-flow-download px-9 py-4 rounded-full font-headline font-extrabold text-sm sm:text-base flex items-center gap-3 shadow-xl active:scale-95 group">
-            <span class="material-symbols-outlined text-[24px] group-hover:animate-bounce">download</span>
-            <span id="flow-cta-text">Download Treat for Android</span>
-          </a>
-
-          <!-- Right Spark Accent -->
-          <span class="flow-spark">⸜</span>
-        </div>
+        <!-- Glowing Download CTA Button -->
+        <a id="flow-download-btn" href="#download-apk" class="btn-flow-download w-full sm:w-auto px-8 sm:px-10 py-4 rounded-full font-headline font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 shadow-[0_10px_28px_rgba(24,16,36,0.25)] hover:shadow-[0_14px_34px_rgba(24,16,36,0.35)] active:scale-95 group">
+          <span class="material-symbols-outlined text-[22px] sm:text-[24px] group-hover:animate-bounce">download</span>
+          <span id="flow-cta-text">Download Treat for Android</span>
+        </a>
 
         <!-- Subtext below button -->
-        <p id="flow-cta-subtext" class="text-xs sm:text-sm text-on-surface-variant/80 font-medium mt-3 max-w-md">
+        <p id="flow-cta-subtext" class="text-xs sm:text-sm text-on-surface-variant/80 font-medium mt-3.5 max-w-md px-2 sm:px-0">
           Join 10,000+ sweeties & foodies. Feast together with unbeatable deals.
         </p>
 
         <!-- Security & Trust Badges -->
-        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-3 text-[11px] font-bold text-on-surface-variant">
+        <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 mt-3.5 text-[10px] sm:text-[11px] font-bold text-on-surface-variant">
           <span class="flex items-center gap-1">
             <span class="material-symbols-outlined text-green-600 text-[15px]">verified_user</span> 100% Virus-Free APK
           </span>
@@ -386,138 +926,22 @@
     </div>
   </section>
 
-  <!-- FEATURES DEEP-DIVE GRID -->
-  <section id="features" class="relative py-14 md:py-20 border-t border-outline-variant/30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-headline font-black text-secondary uppercase tracking-widest">Built for Foodies & Kitchens</span>
-        <h2 class="font-headline font-black text-3xl sm:text-4xl text-on-surface tracking-tight mt-2">
-          Everything You Need to <span class="text-gradient-candy">Feast Together</span>
-        </h2>
-        <p class="mt-3 text-sm sm:text-base text-on-surface-variant font-medium">
-          Eliminate dining friction, split bills effortlessly, and sync live with restaurant kitchens.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Card 1 -->
-        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02]">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center mb-4 shadow-sm">
-              <span class="material-symbols-outlined text-[26px] text-primary">calculate</span>
-            </div>
-            <h3 class="font-headline font-bold text-lg text-on-surface">Smart Budget Matcher</h3>
-            <p class="mt-2 text-xs text-on-surface-variant font-medium leading-relaxed">
-              Dynamically calculate dining budgets per person, party sizes, and tax inclusion to auto-match the best platter feast boards.
-            </p>
-          </div>
-          <div class="mt-6 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-primary">
-            <span>Zero Split Math</span>
-            <span class="material-symbols-outlined text-[16px]">trending_flat</span>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02]">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center mb-4 shadow-sm">
-              <span class="material-symbols-outlined text-[26px] text-secondary">local_fire_department</span>
-            </div>
-            <h3 class="font-headline font-bold text-lg text-on-surface">2-for-1 Platter Drops</h3>
-            <p class="mt-2 text-xs text-on-surface-variant font-medium leading-relaxed">
-              Curated trending treats, 2-for-1 platter flash deals, and exclusive squad feast discounts available in limited time slots.
-            </p>
-          </div>
-          <div class="mt-6 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-secondary">
-            <span>Up to 50% Savings</span>
-            <span class="material-symbols-outlined text-[16px]">trending_flat</span>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02]">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-orange-100 text-coral flex items-center justify-center mb-4 shadow-sm">
-              <span class="material-symbols-outlined text-[26px]">timer</span>
-            </div>
-            <h3 class="font-headline font-bold text-lg text-on-surface">2-Minute Instant Hold</h3>
-            <p class="mt-2 text-xs text-on-surface-variant font-medium leading-relaxed">
-              Inquire and hold tables live with real-time 120s countdown timers, interactive digital confirmation slips, and QR vouchers.
-            </p>
-          </div>
-          <div class="mt-6 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-coral">
-            <span>Real-time Floor Lock</span>
-            <span class="material-symbols-outlined text-[16px]">trending_flat</span>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between group transition-all duration-300 hover:scale-[1.02]">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-surface-container text-on-surface flex items-center justify-center mb-4 shadow-sm">
-              <span class="material-symbols-outlined text-[26px] text-secondary">table_restaurant</span>
-            </div>
-            <h3 class="font-headline font-bold text-lg text-on-surface">Live Kitchen Floor Sync</h3>
-            <p class="mt-2 text-xs text-on-surface-variant font-medium leading-relaxed">
-              Reactive backend coordinating diner holds directly with restaurant kitchen floor terminals and host table assignments.
-            </p>
-          </div>
-          <div class="mt-6 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-xs font-bold text-on-surface">
-            <span>Host & Kitchen Mode</span>
-            <span class="material-symbols-outlined text-[16px]">trending_flat</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- HOTTEST PLATTER DROPS & FOODIE PHOTOS -->
-  <section id="platters" class="relative py-12 md:py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-        <div>
-          <span class="text-xs font-headline font-black text-primary uppercase tracking-widest">Trending Drops</span>
-          <h2 class="font-headline font-black text-3xl sm:text-4xl text-on-surface tracking-tight mt-1">
-            Featured Feast Platters
-          </h2>
-          <p class="text-xs sm:text-sm text-on-surface-variant font-medium mt-1">
-            Exclusive squad boards available through the Treat mobile app.
-          </p>
-        </div>
-        <a href="#workflow-flow" class="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
-          <span>Explore in App Flow</span>
-          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-        </a>
-      </div>
-
-      <!-- Foodie Deals Container -->
-      <div id="foodie-deals-container" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 pt-1 -mx-4 px-4 scrollbar-none">
-        <!-- Injected dynamically from TREAT_DEFAULT_DATA -->
-      </div>
-
-    </div>
-  </section>
-
   <!-- COMMUNITY REVIEWS & FOOD BAR CHATTER -->
-  <section id="reviews" class="relative py-12 md:py-16">
+  <section id="reviews" class="relative py-10 sm:py-16 md:py-24 border-t border-purple-100/60 bg-gradient-to-b from-[#FAF8FD] to-white">
+    <span id="about" class="absolute -top-20 pointer-events-none"></span>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-headline font-black text-secondary uppercase tracking-widest">Food Bar Voices</span>
-        <h2 class="font-headline font-black text-3xl sm:text-4xl text-on-surface tracking-tight mt-2">
+      <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+        <span class="text-[10px] sm:text-xs font-headline font-black text-secondary uppercase tracking-widest">Food Bar Voices</span>
+        <h2 class="font-headline font-black text-2xl sm:text-3xl md:text-4xl text-on-surface tracking-tight mt-2">
           Loved by Foodies & Kitchens
         </h2>
-        <p class="mt-2 text-xs sm:text-sm text-on-surface-variant font-medium">
+        <p class="mt-2 text-[11px] sm:text-xs md:text-sm text-on-surface-variant font-medium px-2 sm:px-0">
           See what squads and restaurant owners are saying about Treat.
         </p>
       </div>
 
-      <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         <!-- Injected dynamically from TREAT_DEFAULT_DATA -->
       </div>
 
@@ -529,8 +953,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center gap-3">
-        <img src="assets/images/treat_logo.png" alt="Treat" class="w-8 h-8 object-contain" onerror="this.style.display='none'">
-        <span class="font-headline font-black text-xl text-gradient-candy">treat</span>
+        <img src="assets/images/treat_bubble_logo.png" alt="Treat" class="h-9 w-auto object-contain drop-shadow-sm">
         <span class="text-xs text-on-surface-variant font-semibold">© 2026 Treat Inc. Funky Foodie Life.</span>
       </div>
 
@@ -572,6 +995,70 @@
     </div>
   </div>
 
+  <!-- ADMIN STUDIO LOGIN MODAL -->
+  <div id="admin-login-modal" class="fixed inset-0 z-[130] flex items-center justify-center p-4 hidden">
+    <div id="admin-login-backdrop" class="fixed inset-0 bg-on-surface/60 backdrop-blur-md transition-opacity"></div>
+    <div id="admin-login-card" class="relative bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl z-10 text-center flex flex-col items-center border border-outline-variant/30 transition-all">
+      <!-- Close Button -->
+      <button id="close-admin-login-btn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-all" aria-label="Close login dialog">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+
+      <!-- Lock Brand Icon -->
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-primary to-secondary text-white flex items-center justify-center mb-3 shadow-[0_8px_20px_rgba(224,64,160,0.28)]">
+        <span class="material-symbols-outlined text-[30px]">lock</span>
+      </div>
+
+      <h3 class="font-headline font-black text-xl text-on-surface tracking-tight">Admin Studio</h3>
+      <p class="text-xs text-on-surface-variant font-medium mt-1 mb-5">
+        Enter the master security passkey to access mockup controls, brand vision & live editor.
+      </p>
+
+      <!-- Passkey Form -->
+      <form id="admin-login-form" class="w-full flex flex-col gap-3" onsubmit="return false;">
+        <div class="relative w-full">
+          <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant/70 material-symbols-outlined text-[20px]">key</span>
+          <input 
+            type="password" 
+            id="admin-pass-input" 
+            placeholder="Enter passkey (133162029)" 
+            class="w-full pl-11 pr-11 py-3 bg-surface-low border border-outline-variant/50 rounded-xl text-sm font-semibold text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50"
+            autocomplete="current-password"
+            required
+          >
+          <button 
+            type="button" 
+            id="toggle-pass-visibility" 
+            class="absolute right-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface flex items-center justify-center"
+            title="Toggle visibility"
+          >
+            <span id="pass-visibility-icon" class="material-symbols-outlined text-[20px]">visibility</span>
+          </button>
+        </div>
+
+        <!-- Error Feedback Message -->
+        <div id="admin-login-error" class="hidden text-xs font-bold text-error flex items-center justify-center gap-1 py-1.5 px-3 bg-error-container/60 rounded-lg">
+          <span class="material-symbols-outlined text-[15px]">error</span>
+          <span id="admin-login-error-text">Incorrect passkey. Access denied.</span>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          id="admin-login-submit-btn" 
+          class="w-full mt-2 py-3 rounded-full bg-[#181024] hover:bg-[#2A1D3D] text-white text-xs font-extrabold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-95 transition-all"
+        >
+          <span class="material-symbols-outlined text-[18px]">lock_open</span>
+          <span>Unlock Studio</span>
+        </button>
+      </form>
+
+      <span class="text-[10.5px] font-semibold text-on-surface-variant/60 mt-4 flex items-center gap-1">
+        <span class="material-symbols-outlined text-[13px]">shield</span> Protected Studio • Session Authenticated
+      </span>
+    </div>
+  </div>
+
   <!-- ADMIN STUDIO DRAWER -->
   <div id="admin-studio-backdrop" class="fixed inset-0 bg-on-surface/50 backdrop-blur-sm z-[90] hidden transition-opacity"></div>
   <aside id="admin-studio-drawer" class="pt-4 pb-6 px-6 overflow-y-auto">
@@ -581,13 +1068,26 @@
           <span class="material-symbols-outlined text-[18px]">tune</span>
         </div>
         <div>
-          <h3 class="font-headline font-extrabold text-base text-on-surface leading-tight">Admin Studio</h3>
+          <div class="flex items-center gap-1.5">
+            <h3 class="font-headline font-extrabold text-base text-on-surface leading-tight">Admin Studio</h3>
+            <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span> Unlocked
+            </span>
+          </div>
           <span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">4-Mockup Flow & Content Manager</span>
         </div>
       </div>
-      <button id="admin-close-btn" class="w-8 h-8 rounded-full bg-surface-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-transform">
-        <span class="material-symbols-outlined text-[20px]">close</span>
-      </button>
+      <div class="flex items-center gap-2">
+        <!-- Lock Button -->
+        <button id="admin-lock-btn" class="px-2.5 py-1 rounded-full bg-surface-container hover:bg-error/10 text-on-surface-variant hover:text-error text-xs font-bold transition-all flex items-center gap-1 border border-outline-variant/30" title="Lock Admin Studio (Logout)">
+          <span class="material-symbols-outlined text-[15px]">lock</span>
+          <span class="hidden sm:inline">Lock</span>
+        </button>
+        <!-- Close Button -->
+        <button id="admin-close-btn" class="w-8 h-8 rounded-full bg-surface-low hover:bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-transform" title="Close Studio">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
     </div>
 
     <!-- Navigation Tabs -->
@@ -602,6 +1102,8 @@
   </aside>
 
   <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/phone3d.js"></script>
   <script src="js/defaultData.js"></script>
   <script src="js/screenFlow.js"></script>
   <script src="js/admin.js"></script>

@@ -8,7 +8,7 @@ class TreatScreenFlow {
   constructor(options = {}) {
     this.options = Object.assign({
       steps: [],
-      autoTour: true,
+      autoTour: false,
       tourIntervalMs: 4200
     }, options);
 
@@ -30,8 +30,10 @@ class TreatScreenFlow {
     this.renderFlowContent();
     this.bindParallaxAndHover();
 
-    // Start on step 0 and start auto-motion tour
-    this.focusStep(0);
+    // Start on step 0 if elements exist
+    if (this.phoneCards.length > 0) {
+      this.focusStep(0);
+    }
 
     if (this.options.autoTour) {
       this.startMotionTour();
@@ -40,14 +42,24 @@ class TreatScreenFlow {
 
   cacheDomElements() {
     this.phoneCards = [
-      document.getElementById('phone-card-0'),
-      document.getElementById('phone-card-1'),
-      document.getElementById('phone-card-2'),
-      document.getElementById('phone-card-3')
+      document.getElementById('fan-phone-0'),
+      document.getElementById('fan-phone-1'),
+      document.getElementById('fan-phone-2'),
+      document.getElementById('fan-phone-3'),
+      document.getElementById('fan-phone-4')
     ].filter(Boolean);
 
+    if (this.phoneCards.length === 0) {
+      this.phoneCards = [
+        document.getElementById('phone-card-0'),
+        document.getElementById('phone-card-1'),
+        document.getElementById('phone-card-2'),
+        document.getElementById('phone-card-3')
+      ].filter(Boolean);
+    }
+
     this.stepColumns = Array.from(document.querySelectorAll('.flow-step-column'));
-    this.flowContainer = document.querySelector('.flow-showcase-container');
+    this.flowContainer = document.querySelector('.podium-stage-container, .flow-showcase-container');
   }
 
   setSteps(newSteps) {
@@ -130,35 +142,36 @@ class TreatScreenFlow {
         this.focusStep(idx);
       });
 
-      // Mouse move 3D tilt tracking
-      phone.addEventListener('mousemove', (e) => {
-        const rect = phone.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+      // Mouse move 3D tilt tracking (for classic wave cards only, preserving fan CSS angles)
+      if (!phone.classList.contains('phone-fan-card')) {
+        phone.addEventListener('mousemove', (e) => {
+          const rect = phone.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
 
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
 
-        const deltaX = (x - centerX) / centerX;
-        const deltaY = (y - centerY) / centerY;
+          const deltaX = (x - centerX) / centerX;
+          const deltaY = (y - centerY) / centerY;
 
-        const baseStagger = this.getBaseStaggerTransform(idx);
+          const baseStagger = this.getBaseStaggerTransform(idx);
 
-        const rotateX = -deltaY * 11; // tilt up/down
-        const rotateY = deltaX * 13;  // tilt left/right
+          const rotateX = -deltaY * 11; // tilt up/down
+          const rotateY = deltaX * 13;  // tilt left/right
 
-        phone.style.transform = `${baseStagger} perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(26px) scale(1.07)`;
-      });
+          phone.style.transform = `${baseStagger} perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(26px) scale(1.07)`;
+        });
 
-      phone.addEventListener('mouseleave', () => {
-        this.isPaused = false;
-        // Restore active or natural state
-        if (this.activeStepIdx === idx) {
+        phone.addEventListener('mouseleave', () => {
+          this.isPaused = false;
           phone.style.transform = '';
-        } else {
-          phone.style.transform = '';
-        }
-      });
+        });
+      } else {
+        phone.addEventListener('mouseleave', () => {
+          this.isPaused = false;
+        });
+      }
     });
   }
 

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" fill="none">
+  <defs>
+    <!-- Tomato Body Gradient -->
+    <radialGradient id="tomatoGrad" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#FF5A43" />
+      <stop offset="35%" stop-color="#E81C17" />
+      <stop offset="75%" stop-color="#C20E15" />
+      <stop offset="100%" stop-color="#80040A" />
+    </radialGradient>
+    <!-- Main Specular Highlight -->
+    <radialGradient id="specularGlow" cx="45%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#FFA89A" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#FF4D3B" stop-opacity="0" />
+    </radialGradient>
+    <!-- Rim Light -->
+    <linearGradient id="rimLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#80040A" stop-opacity="0" />
+    </linearGradient>
+    <!-- Leaves Gradient -->
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#72B833" />
+      <stop offset="50%" stop-color="#3D8216" />
+      <stop offset="100%" stop-color="#24540C" />
+    </linearGradient>
+    <!-- Soft Ambient Drop Shadow -->
+    <filter id="tomatoShadow" x="-30%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#550A10" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <g filter="url(#tomatoShadow)">
+    <!-- Tomato Main Body -->
+    <path d="M 80 28 C 114 28, 142 50, 142 86 C 142 120, 115 142, 80 142 C 45 142, 18 120, 18 86 C 18 50, 46 28, 80 28 Z" fill="url(#tomatoGrad)" />
+    
+    <!-- Secondary organic lobes for natural fruit curve -->
+    <path d="M 80 30 C 50 30, 24 55, 24 88 C 24 116, 48 138, 80 138 C 72 110, 68 62, 80 30 Z" fill="#D31418" opacity="0.4" />
+    <path d="M 80 30 C 110 30, 136 55, 136 88 C 136 116, 112 138, 80 138 C 88 110, 92 62, 80 30 Z" fill="#99090E" opacity="0.3" />
+
+    <!-- Specular Glossy Shine -->
+    <ellipse cx="58" cy="56" rx="22" ry="14" transform="rotate(-25 58 56)" fill="url(#specularGlow)" />
+    <ellipse cx="50" cy="50" rx="9" ry="5" transform="rotate(-25 50 50)" fill="#FFFFFF" opacity="0.8" />
+    <ellipse cx="68" cy="58" rx="4" ry="2.5" transform="rotate(-15 68 58)" fill="#FFFFFF" opacity="0.6" />
+    <path d="M 40 95 C 34 85, 34 70, 40 60" stroke="url(#rimLight)" stroke-width="3.5" stroke-linecap="round" opacity="0.4" />
+
+    <!-- Sepals / Green Calyx -->
+    <!-- Leaf 1 (Left) -->
+    <path d="M 78 30 Q 56 32 46 24 Q 58 38 74 35 Z" fill="url(#leafGrad)" />
+    <!-- Leaf 2 (Back Left) -->
+    <path d="M 78 28 Q 66 12 55 8 Q 68 20 76 28 Z" fill="#2E6310" />
+    <!-- Leaf 3 (Top Stem) -->
+    <path d="M 78 28 C 76 18, 77 12, 82 8 C 85 5, 87 7, 85 10 C 82 14, 82 20, 82 28 Z" fill="#4B8C18" />
+    <!-- Leaf 4 (Right) -->
+    <path d="M 82 30 Q 106 32 116 26 Q 102 38 84 35 Z" fill="url(#leafGrad)" />
+    <!-- Leaf 5 (Back Right) -->
+    <path d="M 82 28 Q 94 14 104 10 Q 92 22 84 28 Z" fill="#2E6310" />
+    <!-- Leaf 6 (Front Droop) -->
+    <path d="M 79 32 Q 77 48 72 52 Q 81 44 83 33 Z" fill="#5AA320" />
+    <path d="M 81 32 Q 85 46 90 50 Q 85 43 82 33 Z" fill="#488716" />
+
+    <!-- Central Calyx Button -->
+    <circle cx="80" cy="30" r="3.5" fill="#29590B" />
+  </g>
+</svg>

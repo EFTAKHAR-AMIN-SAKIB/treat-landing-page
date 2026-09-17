@@ -18,7 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Setup Foodie Deals & Testimonials
   setupPerksAndReviews();
 
-  console.log('🍰 Treat 4-Phone Wave Flow initialized successfully!');
+  // 5. Setup View Switcher & 3D Interactive Phone Model
+  setupShowcaseViewSwitcher();
+
+  // 6. Setup Live Countdown Timer on Table Hold Screen
+  setupCountdownTimer();
+
+  // 7. Setup Interactive Budget Slider & Watch Button
+  setupInteractiveBudgetSlider();
+  setupWatchHowItWorks();
+
+  console.log('🍰 Treat Vertical Flow & Spline Storytelling initialized successfully!');
 
   function setupDownloadActions() {
     const flowBtn = document.getElementById('flow-download-btn');
@@ -202,4 +212,310 @@ document.addEventListener('DOMContentLoaded', () => {
       `).join('');
     }
   }
+
+  function setupShowcaseViewSwitcher() {
+    const tabFlow = document.getElementById('showcase-tab-flow');
+    const tab3d = document.getElementById('showcase-tab-3d');
+    const flowView = document.getElementById('flow-wave-view');
+    const turntableView = document.getElementById('phone-3d-turntable-view');
+    let phone3dInstance = null;
+
+    if (!tabFlow || !tab3d || !flowView || !turntableView) return;
+
+    tabFlow.addEventListener('click', () => {
+      tabFlow.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-gradient-to-r from-primary to-secondary text-white shadow-sm flex items-center gap-1.5 active:scale-95';
+      tab3d.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 active:scale-95';
+      flowView.classList.remove('hidden');
+      turntableView.classList.add('hidden');
+    });
+
+    tab3d.addEventListener('click', () => {
+      tab3d.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-gradient-to-r from-primary to-secondary text-white shadow-sm flex items-center gap-1.5 active:scale-95';
+      tabFlow.className = 'px-4 py-1.5 rounded-full text-xs font-bold transition-all text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 active:scale-95';
+      flowView.classList.add('hidden');
+      turntableView.classList.remove('hidden');
+
+      if (!phone3dInstance && window.TreatPhone3D) {
+        phone3dInstance = new TreatPhone3D('phone-3d-canvas-container', {
+          autoRotate: true,
+          autoRotateSpeed: 0.8,
+          phoneColor: 'pink',
+          enableParallax: true
+        });
+        window.treatApp.phone3d = phone3dInstance;
+
+        // Color buttons
+        document.querySelectorAll('.phone-color-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const color = e.currentTarget.getAttribute('data-color');
+            if (phone3dInstance && typeof phone3dInstance.setPhoneColor === 'function') {
+              phone3dInstance.setPhoneColor(color);
+            }
+            document.querySelectorAll('.phone-color-btn').forEach(b => b.classList.remove('ring-2', 'ring-primary', 'ring-offset-2'));
+            e.currentTarget.classList.add('ring-2', 'ring-primary', 'ring-offset-2');
+          });
+        });
+
+        // Angle buttons
+        document.querySelectorAll('.phone-angle-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const angle = e.currentTarget.getAttribute('data-angle');
+            if (phone3dInstance && typeof phone3dInstance.setCameraAngle === 'function') {
+              phone3dInstance.setCameraAngle(angle);
+            }
+            document.querySelectorAll('.phone-angle-btn').forEach(b => {
+              b.className = 'phone-angle-btn px-2.5 py-1 rounded-xl text-[11px] font-bold text-on-surface hover:bg-surface-container active:scale-95';
+            });
+            e.currentTarget.className = 'phone-angle-btn px-2.5 py-1 rounded-xl text-[11px] font-bold text-primary bg-primary-fixed/40 active:scale-95';
+          });
+        });
+
+        // Screen selector
+        const screenSelect = document.getElementById('turntable-screen-select');
+        if (screenSelect) {
+          screenSelect.addEventListener('change', (e) => {
+            if (phone3dInstance && typeof phone3dInstance.setScreenImage === 'function') {
+              phone3dInstance.setScreenImage(e.target.value);
+            }
+          });
+        }
+      }
+    });
+  }
+
+  function setupCountdownTimer() {
+    const timerEl = document.getElementById('flow-countdown-timer') || document.getElementById('hold-countdown-timer');
+    const circleEl = document.getElementById('flow-countdown-circle') || document.getElementById('hold-progress-circle');
+    if (!timerEl) return;
+
+    let secondsLeft = 105; // 01:45 matching reference design
+    const totalSeconds = 120;
+    const circumference = 251.3;
+
+    const updateTimer = () => {
+      const mins = Math.floor(secondsLeft / 60);
+      const secs = secondsLeft % 60;
+      timerEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+      if (circleEl) {
+        const fraction = secondsLeft / totalSeconds;
+        const offset = circumference * (1 - fraction);
+        circleEl.style.strokeDashoffset = offset.toFixed(1);
+      }
+    };
+
+    updateTimer();
+
+    setInterval(() => {
+      secondsLeft--;
+      if (secondsLeft < 0) {
+        secondsLeft = 120; // loop back to 2 minutes
+      }
+      updateTimer();
+    }, 1000);
+  }
+
+  function setupInteractiveBudgetSlider() {
+    const slider = document.getElementById('interactive-budget-slider');
+    const amountVal = document.getElementById('budget-amount-val');
+    if (!slider || !amountVal) return;
+
+    slider.addEventListener('input', (e) => {
+      amountVal.textContent = `$ ${e.target.value}`;
+    });
+  }
+
+  function setupWatchHowItWorks() {
+    const watchBtn = document.getElementById('hero-watch-btn');
+    if (!watchBtn) return;
+
+    watchBtn.addEventListener('click', () => {
+      const target = document.getElementById('feature-01') || document.getElementById('workflow-flow');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
+
+  // 8. Setup Interactive 3D Cursor Tilt for Phone Chassis
+  setupPhone3DMouseTilt();
+
+  function setupPhone3DMouseTilt() {
+    if (window.matchMedia('(max-width: 1024px)').matches) return;
+
+    const phoneWrappers = document.querySelectorAll('.flow-phone-wrapper');
+    phoneWrappers.forEach((wrapper) => {
+      const chassis = wrapper.querySelector('.flow-phone-chassis');
+      if (!chassis) return;
+
+      wrapper.addEventListener('mousemove', (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const deltaX = (x - centerX) / centerX;
+        const deltaY = (y - centerY) / centerY;
+
+        const rotateX = -deltaY * 8;
+        const rotateY = deltaX * 10;
+
+        chassis.style.transform = `perspective(1200px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(10px)`;
+      });
+
+      wrapper.addEventListener('mouseleave', () => {
+        chassis.style.transform = '';
+      });
+    });
+  }
+
+  // 9. Mobile Navigation Drawer Setup
+  setupMobileNavigation();
+
+  function setupMobileNavigation() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const menuIcon = document.getElementById('mobile-menu-icon');
+    const dropdown = document.getElementById('mobile-nav-dropdown');
+
+    if (!menuBtn || !dropdown) return;
+
+    function toggleMenu() {
+      const isHidden = dropdown.classList.contains('hidden');
+      if (isHidden) {
+        dropdown.classList.remove('hidden');
+        if (menuIcon) menuIcon.textContent = 'close';
+      } else {
+        dropdown.classList.add('hidden');
+        if (menuIcon) menuIcon.textContent = 'menu';
+      }
+    }
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Close when clicking any nav item
+    dropdown.querySelectorAll('.mobile-nav-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        dropdown.classList.add('hidden');
+        if (menuIcon) menuIcon.textContent = 'menu';
+      });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target) && !menuBtn.contains(e.target)) {
+        if (!dropdown.classList.contains('hidden')) {
+          dropdown.classList.add('hidden');
+          if (menuIcon) menuIcon.textContent = 'menu';
+        }
+      }
+    });
+  }
+
+  // 10. Mobile 4-Phone Horizontal Flow Track & Tabs Sync
+  setupMobileFlowTrackSync();
+
+  function setupMobileFlowTrackSync() {
+    const track = document.getElementById('flow-cards-track');
+    const stepTabs = document.querySelectorAll('.mobile-step-tab');
+    const stepDots = document.querySelectorAll('.mobile-flow-dot');
+    const cards = document.querySelectorAll('.flow-card-item');
+
+    if (!track || cards.length === 0) return;
+
+    let activeStep = 0;
+
+    function updateActiveIndicators(index) {
+      if (index === activeStep && stepTabs[index] && stepTabs[index].classList.contains('active')) return;
+      activeStep = index;
+
+      // Update Step Tabs
+      stepTabs.forEach((tab, idx) => {
+        if (idx === index) {
+          tab.classList.add('active');
+          tab.classList.remove('text-gray-500');
+        } else {
+          tab.classList.remove('active');
+          tab.classList.add('text-gray-500');
+        }
+      });
+
+      // Update Dots
+      stepDots.forEach((dot, idx) => {
+        if (idx === index) {
+          dot.className = 'mobile-flow-dot w-6 h-2 rounded-full bg-[#181024] transition-all';
+        } else {
+          dot.className = 'mobile-flow-dot w-2 h-2 rounded-full bg-purple-200 hover:bg-purple-300 transition-all';
+        }
+      });
+    }
+
+    // Tab clicks
+    stepTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const step = parseInt(tab.getAttribute('data-step') || '0', 10);
+        scrollToCard(step);
+      });
+    });
+
+    // Dot clicks
+    stepDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const step = parseInt(dot.getAttribute('data-step') || '0', 10);
+        scrollToCard(step);
+      });
+    });
+
+    function scrollToCard(index) {
+      const card = document.querySelector(`.flow-card-item[data-step-index="${index}"]`) || cards[index];
+      if (!card || !track) return;
+
+      const trackRect = track.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const currentScroll = track.scrollLeft;
+      const targetOffset = currentScroll + (cardRect.left - trackRect.left) - (track.clientWidth - card.clientWidth) / 2;
+
+      track.scrollTo({
+        left: Math.max(0, targetOffset),
+        behavior: 'smooth'
+      });
+
+      updateActiveIndicators(index);
+    }
+
+    // Scroll listener with requestAnimationFrame debounce
+    let scrollTicking = false;
+    track.addEventListener('scroll', () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          findCurrentSnappedCard();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    function findCurrentSnappedCard() {
+      const trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+      let closestDist = Infinity;
+      let closestIdx = 0;
+
+      cards.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(cardCenter - trackCenter);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestIdx = idx;
+        }
+      });
+
+      updateActiveIndicators(closestIdx);
+    }
+  }
 });
+
