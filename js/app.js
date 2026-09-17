@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupInteractiveBudgetSlider();
   setupWatchHowItWorks();
 
-  console.log('🍰 Treat Vertical Flow & Spline Storytelling initialized successfully!');
+  console.log('Treat Vertical Flow and Storytelling initialized successfully.');
 
   function setupDownloadActions() {
     const flowBtn = document.getElementById('flow-download-btn');
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function triggerDemoApkDownload() {
-    showToast('🍰 Preparing Treat for Android (v1.0.4)...');
+    showToast('Preparing Treat for Android (v1.0.4)...');
     setTimeout(() => {
       const dummyContent = 'Treat Android APK Release Package - v1.0.4\nEnjoy Funky Foodie Feasts & Squad Deals!';
       const blob = new Blob([dummyContent], { type: 'application/vnd.android.package-archive' });

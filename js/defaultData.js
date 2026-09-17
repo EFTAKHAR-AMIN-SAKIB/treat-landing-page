@@ -9,7 +9,7 @@ const TREAT_DEFAULT_DATA = {
     tagline: "Funky Foodie Feasts & Squad Deals",
     heroHeadline: "Find Your Craving\nShare the Good Stuff\nMake It a Treat",
     heroCaption: "Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.",
-    liveSocialProof: "🔥 348 Platters Claimed This Weekend • 94 Verified Kitchens",
+    liveSocialProof: "348 Platters Claimed This Weekend • 94 Verified Kitchens",
     logoPath: "assets/images/treat_bubble_logo.png"
   },
   download: {
@@ -22,7 +22,7 @@ const TREAT_DEFAULT_DATA = {
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.treat.app",
     webDemoUrl: "http://localhost:8080",
     releaseDate: "September 2026",
-    trustBadge: "🛡️ 100% Verified Safe APK • 24.8 MB • No Account Required"
+    trustBadge: "100% Verified Safe APK • 24.8 MB • No Account Required"
   },
   // 4 Primary Flow Steps with Appetite-Focused Copy
   flowSteps: [

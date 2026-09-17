@@ -107,7 +107,7 @@ class TreatAdminPanel {
       } catch (e) {}
       this.closeLoginModal();
       this.openDrawer();
-      this.showToast('✨ Admin Studio Unlocked');
+      this.showToast('Admin Studio Unlocked');
     } else {
       if (this.loginError) {
         this.loginError.classList.remove('hidden');
@@ -141,7 +141,7 @@ class TreatAdminPanel {
       sessionStorage.removeItem(this.authSessionKey);
     } catch (e) {}
     this.close();
-    this.showToast('🔒 Admin Studio Locked');
+    this.showToast('Admin Studio Locked');
   }
 
   showToast(message) {
@@ -468,7 +468,7 @@ class TreatAdminPanel {
       this.config.brand.heroHeadline = container.querySelector('#admin-hero-headline').value.trim();
       this.config.brand.heroCaption = container.querySelector('#admin-hero-caption').value.trim();
       this.saveConfig();
-      this.showToast('✅ Hero copy updated successfully!');
+      this.showToast('Hero copy updated successfully');
     });
   }
 
@@ -537,7 +537,7 @@ class TreatAdminPanel {
       this.config.download.playStoreUrl = container.querySelector('#admin-dl-playstore').value.trim();
       this.config.download.webDemoUrl = container.querySelector('#admin-dl-webdemo').value.trim();
       this.saveConfig();
-      this.showToast('✅ Download CTA updated successfully!');
+      this.showToast('Download CTA updated successfully');
     });
   }
 
@@ -615,13 +615,13 @@ class TreatAdminPanel {
             if (imported && Array.isArray(imported.flowSteps) && imported.flowSteps.length >= 4) {
               this.config = imported;
               this.saveConfig();
-              this.showToast('✅ Configuration imported successfully!');
+              this.showToast('Configuration imported successfully');
               this.renderCurrentTab();
             } else {
-              this.showToast('⚠️ Invalid configuration format.');
+              this.showToast('Invalid configuration format');
             }
           } catch (err) {
-            this.showToast('❌ Error parsing JSON: ' + err.message);
+            this.showToast('Error parsing JSON: ' + err.message);
           }
         };
         reader.readAsText(file);
@@ -634,7 +634,7 @@ class TreatAdminPanel {
         localStorage.removeItem(this.storageKey);
         this.config = JSON.parse(JSON.stringify(window.TREAT_DEFAULT_DATA));
         this.saveConfig();
-        this.showToast('🔄 Restored Treat defaults!');
+        this.showToast('Restored Treat defaults');
         this.renderCurrentTab();
       }
     });

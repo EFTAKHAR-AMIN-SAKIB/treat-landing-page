@@ -1,87 +1,112 @@
-# Treat App Landing Page 🍰✨
+﻿# Treat Landing Page
 
-> High-Conversion Landing Page with Interactive 3D Android Mobile Mockup & Live Admin Studio
+A modern, fast landing page for Treat, a food tech platform connecting groups of food lovers with dynamic platter deals, automated budget matching, instant two-minute table reservations, and live restaurant kitchen synchronization.
 
-This is the official landing page for **Treat**, designed to showcase the app vision, demonstrate its dynamic culinary workflow via an interactive 3D Android flagship model, provide direct APK & app store downloads, and offer a built-in Admin Studio to customize mockups, captions, and links.
-
----
-
-## 🌟 Key Features
-
-1. **Eye-Catching Hero & App Vision**:
-   - Punchy headline: *"Feast Together. Save Bigger. Crave Louder."*
-   - Short-form vision caption highlighting group deals, smart budget matching, 2-minute instant table holds, and live kitchen floor sync.
-   - Treat signature candy glassmorphism styling (`#E040A0`, `#7C52AA`, `#0096CC`).
-
-2. **Interactive 3D Android Flagship Mockup**:
-   - **Realistic 3D Geometry**: Three.js WebGL rendering with titanium chassis, beveled frame, centered front camera punch-hole lens, rear triple-camera bump, Treat logo embossing, and soft ground shadow.
-   - **Full 3D Freedom**: 360° orbit rotation, mouse-following parallax tilt, and preset angles (*Front*, *3D Angle*, *Side*, *Back*).
-   - **4 Color Finishes**: *Treat Candy Pink*, *Funky Violet*, *Midnight Obsidian*, and *Titanium Silver*.
-   - **Dynamic 2D/3D Texture Engine**: Renders mobile screenshots at high resolution with smooth crossfades and simulated Android status/gesture bars.
-
-3. **Smooth Workflow Showcase & Auto-Play**:
-   - 8 preloaded high-res screens from the actual Treat mobile wireframes:
-     1. `Welcome & Onboarding`
-     2. `Trending Feasts & 2-for-1 Platters`
-     3. `Smart Budget Matcher`
-     4. `Platter Packages in Budget`
-     5. `2-Minute Instant Table Hold`
-     6. `Digital Voucher & Check-in Slip`
-     7. `Community Food Bar & Social`
-     8. `Kitchen Floor & Table Manager`
-   - Synchronized feature context card updating in lockstep with the 3D screen.
-   - Auto-advance timer with smooth progress bar, pause-on-hover, and keyboard navigation (`←` / `→`).
-
-4. **Prominent Download Section**:
-   - Direct **Download APK** CTA button with version indicator (`v1.0.4`) and file size (`24.8 MB`).
-   - Quick **Scan QR Code** modal for instant Wi-Fi download from any physical phone.
-   - Store links for Google Play Early Access and local web demo (`localhost:8080`).
-
-5. **Built-in Admin Studio**:
-   - **Access**: Click the top bar **"Admin Studio"** button or press `Ctrl + Shift + A` (`Cmd + Shift + A` on Mac).
-   - **Upload Mockups**: Drag and drop new screenshots or paste image paths.
-   - **Reorder & Edit**: Move steps up/down, edit titles, subtitles, badge tags, and durations.
-   - **Hero & Vision Editor**: Modify the headline and short-form caption in real-time.
-   - **Download Link Manager**: Update APK URL, version number, size, and store URLs.
-   - **Backup & Restore**: Export configuration as JSON, import saved presets, or reset to factory defaults with one click.
-   - **Zero Backend Required**: Changes persist instantly in `localStorage` and sync live to the 3D phone model!
+The landing page features an interactive four-phone showcase, smooth mobile touch navigation, and a built-in Admin Studio protected by a master security passkey.
 
 ---
 
-## 🚀 How to Run
+## Project Overview and Core Features
+
+### 1. Hero Section and Brand Storytelling
+The top hero area immediately explains the product vision through a clean three-line stacked headline:
+* Line 1: "Find Your Craving"
+* Line 2: "Share the Good Stuff" (highlighted in Treat's signature berry magenta with a responsive curved underline)
+* Line 3: "Make It a Treat" (accompanied by a hand-drawn heart doodle)
+
+Key conversion buttons use a high-contrast black and white palette to make the primary download action stand out clearly against the soft lilac backdrop.
+
+### 2. Four-Phone Flow Showcase
+Instead of static screenshots, the landing page walks visitors through four key stages of the user experience using realistic iPhone 16 Pro models:
+1. Feast Drops (01): Shows limited-time two-for-one feast platters, category tags, and search filters.
+2. Squad Budget (02): Lets visitors interact with a live budget slider that calculates per-person costs with tax and tip included.
+3. Flash Lock (03): Displays a live table hold screen with an animated countdown ring, zero deposit requirement, and instant kitchen floor sync.
+4. Squad Perks (04): Shows community foodie reviews, leveling progression, and shared XP reward milestones.
+
+### 3. Mobile-First Responsive Design
+On mobile screens and touch devices:
+* The sticky navigation bar scales down to fifty-six pixels to save vertical space.
+* A hamburger menu button opens a slide-down navigation drawer with direct links across the page.
+* The four phones convert from a desktop grid into a horizontal touch-swipe snap carousel. Mobile users can swipe through cards naturally rather than scrolling through thousands of vertical pixels.
+* A segmented pill bar (01 Drops, 02 Budget, 03 Hold, 04 Squad) and animated indicator dots let users jump directly to any step with a single tap.
+* Perspective tilts are flattened on touchscreens so text remains upright, crisp, and legible.
+
+### 4. Protected Admin Studio
+The landing page includes an integrated management drawer allowing the site owner to update copy and phone mockups without touching the source code:
+* Security Passkey: Access is protected behind master passkey 133162029.
+* Login Dialog: Unauthenticated visitors see a centered login dialog with password masking, an eye toggle to reveal or hide the passkey, and error shake feedback on invalid attempts.
+* Session Authentication: Logging in stores an authorization flag in browser session storage so you do not need to re-enter the passkey every time you open the drawer.
+* Lock Button: An explicit Lock button in the drawer header allows instant logout and session clearing.
+* Customization Options:
+  * Upload custom mockup images for all four phones.
+  * Edit step numbers, titles, badge icons, and descriptions.
+  * Update hero headlines, category pills, and vision captions with live on-page preview.
+  * Change APK download URLs, file sizes, and store links.
+  * Export and import the complete configuration as a JSON file, or restore factory defaults.
+
+---
+
+## Technologies and Libraries Used
+
+* Vanilla JavaScript (ES6+): Built using modular JavaScript classes (TreatAdminPanel, ScreenFlowController) without heavy external framework runtime overhead, ensuring fast load speeds and responsive interactions.
+* Tailwind CSS: Used for utility layout construction alongside custom design tokens defined in css/styles.css for brand colors, surfaces, and shadows.
+* Three.js: Integrated via CDN (r128) for hardware-accelerated 3D turntable model rendering.
+* CSS 3D Engine: Custom perspective and matrix transform rules render realistic metallic chassis bevels, Dynamic Island sensor cutouts, titanium buttons, and glass sheen glares.
+* Web Storage APIs:
+  * localStorage stores custom landing page configurations under key treat_landing_config_v4.
+  * sessionStorage manages authenticated access for the Admin Studio.
+
+---
+
+## How to Run the Project Locally
 
 ### Option 1: Direct File Open
-Simply double-click `index.html` in your browser (Chrome, Edge, Firefox, Safari).
+You can open index.html directly in any modern web browser (Google Chrome, Microsoft Edge, Mozilla Firefox, or Apple Safari).
 
-### Option 2: Local HTTP Server (Recommended for texture loading)
-Run any local server in this directory:
-
+### Option 2: Using the Included Node.js Server (Recommended)
+This repository includes a lightweight server script (server.js):
 ```bash
-# Using Node.js (npx serve)
-npx serve .
+node server.js
+```
+Then visit:
+```
+http://localhost:3001
+```
 
-# Or using Python
+### Option 3: Using Python
+If you prefer Python:
+```bash
 python -m http.server 3000
 ```
-Then open [http://localhost:3000](http://localhost:3000) in your browser.
+Then visit:
+```
+http://localhost:3000
+```
 
 ---
 
-## 📁 File Structure
+## Repository File Structure
 
 ```
-treat landing page/
-├── index.html              # Main landing page HTML
-├── css/
-│   └── styles.css          # Candy glassmorphism, 3D viewport & custom tokens
-├── js/
-│   ├── defaultData.js      # Default workflow steps, captions & food photos
-│   ├── phone3d.js          # Three.js 3D Android model, PBR materials & orbit
-│   ├── screenFlow.js       # Workflow stepper, auto-advance & context card sync
-│   ├── admin.js            # Admin Studio: mockup uploads, reordering & config
-│   └── app.js              # Application coordinator & event bindings
+treat-landing-page/
 ├── assets/
-│   ├── images/             # App logo, food photography
-│   └── screens/            # High-resolution wireframe screens
-└── README.md
+│   ├── images/          # Brand logos, photography, and vector doodles
+│   └── screens/         # High-resolution wireframe mockups
+├── css/
+│   └── styles.css       # Custom brand tokens, 3D phone chassis, and responsive rules
+├── js/
+│   ├── admin.js         # Protected Admin Studio controller with passkey authentication
+│   ├── app.js           # Main coordinator, mobile carousel sync, and navigation logic
+│   ├── defaultData.js   # Initial brand copy, workflow data, and reviews
+│   ├── phone3d.js       # Three.js 3D model, lighting, and orbit controls
+│   └── screenFlow.js    # Four-phone DOM renderer and data binder
+├── index.html           # Main single-page landing layout
+├── server.js            # Local HTTP development server
+└── README.md            # Project documentation and guide
 ```
+
+---
+
+## License
+
+Copyright 2026 Treat Inc. All rights reserved.
