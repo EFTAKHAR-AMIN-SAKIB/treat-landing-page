@@ -1,6 +1,6 @@
 /**
  * Treat Landing Page - Default Configuration & Workflow Data
- * Aligned with Appetite-Focused Color Theory, Sensory Copywriting & Conversion Architecture
+ * Aligned with media_1789639982971.jpg & treat-website-design.md
  */
 
 const TREAT_DEFAULT_DATA = {
@@ -9,12 +9,12 @@ const TREAT_DEFAULT_DATA = {
     tagline: "Funky Foodie Feasts & Squad Deals",
     heroHeadline: "Find Your Craving\nShare the Good Stuff\nMake It a Treat",
     heroCaption: "Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.",
-    liveSocialProof: "348 Platters Claimed This Weekend • 94 Verified Kitchens",
+    liveSocialProof: "10,000+ foodies saving daily • 2-min table holds • Smart budget matching",
     logoPath: "assets/images/treat_bubble_logo.png"
   },
   download: {
-    ctaText: "Download Treat for Android",
-    ctaSubtext: "Join 10,000+ sweeties & foodies. Feast together with unbeatable deals.",
+    ctaText: "Download Treat",
+    ctaSubtext: "Your next great meal is already waiting.",
     apkFileName: "Treat-v1.0.4-release.apk",
     apkVersion: "v1.0.4 (Android 9.0+)",
     apkSize: "24.8 MB",
@@ -22,90 +22,101 @@ const TREAT_DEFAULT_DATA = {
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.treat.app",
     webDemoUrl: "http://localhost:8080",
     releaseDate: "September 2026",
-    trustBadge: "100% Verified Safe APK • 24.8 MB • No Account Required"
+    trustBadge: "100% Virus-Free APK • 24.8 MB • Android 9.0+ • Instant Access"
   },
   // 4 Primary Flow Steps with Appetite-Focused Copy
   flowSteps: [
     {
       id: "step-1",
-      number: "01",
+      number: "1",
       icon: "local_fire_department",
-      title: "Crave-Worthy Feast Drops",
-      description: "Snag limited 2-for-1 platter drops, secret perks, and trending foodie spot deals before slots sell out.",
+      title: "Discover a deal",
+      description: "Browse handpicked dining drops near you with real discounts.",
       image: "assets/screens/01_explore.png",
       tag: "2-FOR-1 DROPS",
-      accentColor: "#E040A0" // Candy Berry Pink
+      accentColor: "#E040A0"
     },
     {
       id: "step-2",
-      number: "02",
-      icon: "calculate",
-      title: "Zero-Math Squad Budget",
-      description: "Slide your budget per sweetie. Treat auto-matches massive feast boards with tax and tip included.",
+      number: "2",
+      icon: "tune",
+      title: "Match your budget",
+      description: "Set what you want to spend per person. No hidden surprises.",
       image: "assets/screens/02_budget.png",
       tag: "SMART SPLIT",
-      accentColor: "#7C52AA" // Funky Violet
+      accentColor: "#E040A0"
     },
     {
       id: "step-3",
-      number: "03",
+      number: "3",
       icon: "timer",
-      title: "2-Min Flash Table Lock",
-      description: "Lock your prime table live with a 120s countdown clock. Zero deposit, direct kitchen sync.",
+      title: "Hold the table",
+      description: "Lock your spot for 2 minutes with zero deposit while the squad gathers.",
       image: "assets/screens/04_hold.png",
       tag: "INSTANT HOLD",
-      accentColor: "#FF6B4A" // Sizzling Coral (Urgency & Appetite)
+      accentColor: "#E040A0"
     },
     {
       id: "step-4",
-      number: "04",
-      icon: "forum",
-      title: "Bite Talk & Squad Perks",
-      description: "Post honest bite reviews, earn foodie street cred, and climb the squad savings milestones.",
+      number: "4",
+      icon: "groups",
+      title: "Share the feast",
+      description: "Split the bill effortlessly, share dining moments, and level up perks.",
       image: "assets/screens/06_social.png",
       tag: "SQUAD SOCIAL",
-      accentColor: "#0096CC" // Fresh Cyan Mint
+      accentColor: "#E040A0"
     }
   ],
   availableScreens: [
     { id: "lib-0", title: "Welcome & Onboarding", image: "assets/screens/00_welcome.png", icon: "celebration" },
-    { id: "lib-1", title: "Crave-Worthy Feast Drops", image: "assets/screens/01_explore.png", icon: "local_fire_department" },
-    { id: "lib-2", title: "Zero-Math Squad Budget", image: "assets/screens/02_budget.png", icon: "calculate" },
+    { id: "lib-1", title: "Discover a deal", image: "assets/screens/01_explore.png", icon: "local_fire_department" },
+    { id: "lib-2", title: "Match your budget", image: "assets/screens/02_budget.png", icon: "tune" },
     { id: "lib-3", title: "Platter Packages in Budget", image: "assets/screens/03_platters.png", icon: "restaurant" },
-    { id: "lib-4", title: "2-Min Flash Table Lock", image: "assets/screens/04_hold.png", icon: "timer" },
+    { id: "lib-4", title: "Hold the table", image: "assets/screens/04_hold.png", icon: "timer" },
     { id: "lib-5", title: "Digital Voucher & Check-in", image: "assets/screens/05_voucher.png", icon: "qr_code_2" },
-    { id: "lib-6", title: "Bite Talk & Squad Perks", image: "assets/screens/06_social.png", icon: "forum" },
+    { id: "lib-6", title: "Share the feast", image: "assets/screens/06_social.png", icon: "groups" },
     { id: "lib-7", title: "Kitchen Floor & Table Manager", image: "assets/screens/07_kitchen.png", icon: "table_restaurant" }
   ],
   foodPhotos: [
-    { src: "assets/images/fiesta_platter.jpg", title: "Fiesta Platter Deluxe", tag: "2-for-1 Mega Platter", price: "$38.00" },
-    { src: "assets/images/churro_sundae.jpg", title: "Churro Lava Sundae", tag: "Dessert Craze", price: "$14.50" },
-    { src: "assets/images/taco_bodega.jpg", title: "Taco Bodega Box", tag: "Squad Feast (4-6)", price: "$46.00" },
-    { src: "assets/images/bistro_bella.jpg", title: "Bistro Truffle Feast", tag: "Chef Special", price: "$52.00" }
+    { src: "assets/images/fiesta_platter.jpg", title: "Fiesta Platter Deluxe", tag: "2-for-1 Mega Platter", price: "৳ 380" },
+    { src: "assets/images/churro_sundae.jpg", title: "Churro Lava Sundae", tag: "Dessert Craze", price: "৳ 145" },
+    { src: "assets/images/taco_bodega.jpg", title: "Taco Bodega Box", tag: "Squad Feast (4-6)", price: "৳ 460" },
+    { src: "assets/images/bistro_bella.jpg", title: "Bistro Truffle Feast", tag: "Chef Special", price: "৳ 520" }
   ],
   reviews: [
     {
-      name: "Mia Candy",
-      role: "VIP Sweetie • Squad of 5",
+      name: "Mila Candy",
+      role: "Foodie • Squad of 6",
       avatar: "assets/images/churro_sundae.jpg",
-      comment: "Treat saved our Friday night! The Zero-Math Budget Matcher picked a massive fiesta platter that fit our $15/person limit down to the cent.",
+      comment: "Found an amazing platter deal nearby. The 2-minute hold feature is a game changer!",
       rating: 5
     },
     {
       name: "Chef Marco V.",
-      role: "Head Chef @ Taco Bodega",
+      role: "Food Lover",
       avatar: "assets/images/taco_bodega.jpg",
-      comment: "The kitchen floor manager synced directly with diners holding tables live. Zero no-shows and our 2-for-1 platter drops sold out in 18 minutes.",
+      comment: "The budget matcher helped us find the perfect spot. Great food, great people!",
       rating: 5
     },
     {
-      name: "Leo 'Bites' Chen",
-      role: "Community Food Bar Host",
-      avatar: "assets/images/fiesta_platter.jpg",
-      comment: "The 3D slip and QR voucher worked seamlessly at the counter. The UI is funky, vibrant, and incredibly smooth.",
+      name: "Leo Chen",
+      role: "Community Foodie",
+      avatar: "assets/images/bistro_bella.jpg",
+      comment: "The app is super smooth and the restaurant team is amazing. Highly recommended!",
       rating: 5
     }
-  ]
+  ],
+  developer: {
+    name: "Eftakhar Amin Sakib",
+    role: "Lead Full-Stack & Mobile Software Engineer",
+    location: "Dhaka, Bangladesh",
+    status: "Active Engineering • Dhaka",
+    bio: "Passionate about engineering delightful, high-performance digital products. Focused on clean architecture, interactive 3D micro-interactions, and human-centered design that brings foodies and local kitchens together.",
+    avatar: "https://github.com/EFTAKHAR-AMIN-SAKIB.png",
+    githubUrl: "https://github.com/EFTAKHAR-AMIN-SAKIB",
+    repoUrl: "https://github.com/EFTAKHAR-AMIN-SAKIB/treat-landing-page",
+    skills: ["Flutter & Android", "Tailwind CSS", "Node.js & APIs", "Interactive 3D UI", "Realtime Sync", "UI/UX Architecture"]
+  }
 };
 
 if (typeof window !== "undefined") {

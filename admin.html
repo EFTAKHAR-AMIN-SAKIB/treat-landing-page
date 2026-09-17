@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treat - Admin Studio Dashboard</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/treat_bubble_logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans, DM Sans, Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Google Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#E040A0",
+            "primary-dark": "#C02080",
+            secondary: "#9357E8",
+            "secondary-dark": "#7C52AA",
+            "secondary-container": "#F2E8FA",
+            dark: "#181024",
+            "dark-card": "#241836",
+            "surface-low": "#FAF6FE",
+            "surface-container": "#F5EDFC",
+            "outline-soft": "#E8DCF2",
+            "on-surface": "#181024",
+            "on-surface-variant": "#584868",
+            success: "#10B981"
+          },
+          fontFamily: {
+            headline: ["Plus Jakarta Sans", "sans-serif"],
+            body: ["DM Sans", "sans-serif"],
+            caveat: ["Caveat", "cursive"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF6FE;
+      color: #181024;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .sidebar-tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #584868;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+    .sidebar-tab-btn:hover {
+      background-color: #F2E8FA;
+      color: #181024;
+    }
+    .sidebar-tab-btn.active {
+      background: linear-gradient(135deg, #E040A0 0%, #9357E8 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(224, 64, 160, 0.25);
+    }
+    .admin-card {
+      background-color: #FFFFFF;
+      border: 1px solid #E8DCF2;
+      border-radius: 24px;
+      box-shadow: 0 4px 20px rgba(124, 82, 170, 0.05);
+      transition: box-shadow 0.2s ease;
+    }
+    .admin-card:hover {
+      box-shadow: 0 8px 30px rgba(124, 82, 170, 0.09);
+    }
+    .form-input {
+      width: 100%;
+      padding: 10px 14px;
+      background-color: #FAF6FE;
+      border: 1.5px solid #E8DCF2;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #181024;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+    .form-input:focus {
+      background-color: #FFFFFF;
+      border-color: #E040A0;
+      box-shadow: 0 0 0 3px rgba(224, 64, 160, 0.15);
+    }
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #7C52AA;
+      margin-bottom: 6px;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+    .shake-error {
+      animation: shake 0.4s ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-primary selection:text-white">
+
+  <!-- =========================================================================
+       1. PASSKEY AUTHENTICATION OVERLAY (133162029)
+       ========================================================================= -->
+  <div id="admin-login-screen" class="fixed inset-0 z-[200] bg-dark/70 backdrop-blur-md flex items-center justify-center p-4">
+    <div id="admin-login-card" class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-outline-soft flex flex-col items-center text-center">
+      
+      <!-- Brand Lock Icon -->
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary to-secondary text-white flex items-center justify-center shadow-lg shadow-primary/25 mb-4">
+        <span class="material-symbols-outlined text-[32px]">shield_lock</span>
+      </div>
+
+      <h1 class="font-headline font-black text-2xl text-dark tracking-tight">Admin Studio Dashboard</h1>
+      <p class="text-xs text-on-surface-variant font-medium mt-1.5 mb-6">
+        Enter master passkey to unlock full page management for all sections, 3D phones, and content.
+      </p>
+
+      <form id="admin-login-form" class="w-full flex flex-col gap-3.5" onsubmit="return false;">
+        <div class="relative w-full">
+          <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">key</span>
+          <input 
+            type="password" 
+            id="admin-passkey-input" 
+            placeholder="Enter passkey (133162029)" 
+            class="form-input pl-11 pr-11 py-3 text-sm"
+            autocomplete="current-password"
+            required
+          >
+          <button 
+            type="button" 
+            id="admin-passkey-toggle" 
+            class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-dark transition-colors"
+            title="Toggle visibility"
+          >
+            <span id="pass-toggle-icon" class="material-symbols-outlined text-[20px]">visibility</span>
+          </button>
+        </div>
+
+        <div id="admin-login-error" class="hidden text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 py-2 px-3 rounded-xl flex items-center justify-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px]">error</span>
+          <span id="admin-login-error-text">Incorrect passkey. Access denied.</span>
+        </div>
+
+        <button 
+          type="submit" 
+          id="admin-login-submit" 
+          class="w-full py-3.5 rounded-full bg-dark hover:bg-dark-card text-white text-xs font-extrabold uppercase tracking-wider shadow-md hover:shadow-lg active:scale-98 transition-all flex items-center justify-center gap-2 mt-2"
+        >
+          <span class="material-symbols-outlined text-[18px]">lock_open</span>
+          <span>Unlock Admin Dashboard</span>
+        </button>
+      </form>
+
+      <div class="mt-6 pt-4 border-t border-outline-soft w-full flex items-center justify-between text-[11px] font-bold text-gray-500">
+        <a href="index.html" class="hover:text-primary transition-colors flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">arrow_back</span> Return to Website
+        </a>
+        <span class="flex items-center gap-1 text-secondary-dark">
+          <span class="material-symbols-outlined text-[14px]">verified_user</span> Master Security
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. FULL PAGE ADMIN DASHBOARD (UNLOCKED)
+       ========================================================================= -->
+  <div id="admin-dashboard-app" class="hidden flex-1 flex flex-col">
+
+    <!-- Top Global Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-outline-soft shadow-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4 py-3">
+        
+        <!-- Left: Logo & Title -->
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center group" title="Return to Treat Website">
+            <img src="assets/images/treat_bubble_logo.png" alt="Treat" class="h-10 w-auto object-contain">
+          </a>
+          <div class="h-6 w-px bg-outline-soft hidden sm:block"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="font-headline font-black text-base sm:text-lg text-dark leading-tight">Admin Studio</h1>
+              <span class="px-2.5 py-0.5 rounded-full bg-pink-50 border border-pink-200 text-primary text-[10px] font-black uppercase tracking-wide">
+                Full Page Mode
+              </span>
+            </div>
+            <p class="text-[11px] text-gray-500 font-semibold hidden sm:flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Live LocalStorage Synchronization Active</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Action Buttons -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a 
+            href="index.html" 
+            target="_blank" 
+            class="px-3 sm:px-4 py-2 rounded-full bg-surface-low hover:bg-secondary-container text-secondary-dark text-xs font-extrabold flex items-center gap-1.5 border border-outline-soft transition-all active:scale-95"
+            title="Open website in new tab"
+          >
+            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+            <span class="hidden md:inline">View Live Site</span>
+          </a>
+
+          <button 
+            type="button" 
+            id="admin-save-all-btn" 
+            class="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-xs font-black uppercase tracking-wider flex items-center gap-2 shadow-md hover:shadow-lg active:scale-95 transition-all"
+            title="Save all changes and update landing page immediately"
+          >
+            <span class="material-symbols-outlined text-[18px]">save</span>
+            <span>Save All</span>
+          </button>
+
+          <button 
+            type="button" 
+            id="admin-logout-btn" 
+            class="w-9 h-9 rounded-full bg-surface-low hover:bg-rose-50 text-gray-600 hover:text-rose-600 flex items-center justify-center border border-outline-soft transition-all"
+            title="Lock Admin Studio (Logout)"
+          >
+            <span class="material-symbols-outlined text-[18px]">lock</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Workspace: Sidebar + Content -->
+    <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col lg:flex-row gap-6 lg:gap-8">
+      
+      <!-- Left Sidebar Navigation -->
+      <aside class="lg:w-72 shrink-0 flex flex-col gap-4">
+        
+        <div class="bg-white rounded-3xl border border-outline-soft p-3 sm:p-4 shadow-xs">
+          <span class="text-[10px] font-black uppercase tracking-widest text-gray-400 px-3 block mb-2">
+            Configuration Sections
+          </span>
+
+          <nav class="flex flex-col gap-1" id="sidebar-nav">
+            <button type="button" class="sidebar-tab-btn active" data-tab="flow">
+              <span class="material-symbols-outlined text-[20px]">smartphone</span>
+              <span>3D Mobile Flow (4 Phones)</span>
+            </button>
+            <button type="button" class="sidebar-tab-btn" data-tab="hero">
+              <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+              <span>Hero & Brand Vision</span>
+            </button>
+            <button type="button" class="sidebar-tab-btn" data-tab="developer">
+              <span class="material-symbols-outlined text-[20px]">terminal</span>
+              <span>Developer Profile</span>
+            </button>
+            <button type="button" class="sidebar-tab-btn" data-tab="platters">
+              <span class="material-symbols-outlined text-[20px]">restaurant</span>
+              <span>Featured Platters</span>
+            </button>
+            <button type="button" class="sidebar-tab-btn" data-tab="reviews">
+              <span class="material-symbols-outlined text-[20px]">rate_review</span>
+              <span>Foodie Reviews</span>
+            </button>
+            <button type="button" class="sidebar-tab-btn" data-tab="download">
+              <span class="material-symbols-outlined text-[20px]">download</span>
+              <span>Download & APK Targets</span>
+            </button>
+            <button type="button" class="sidebar-tab-btn" data-tab="backup">
+              <span class="material-symbols-outlined text-[20px]">settings_backup_restore</span>
+              <span>Backup & Config (JSON)</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Quick Info Card -->
+        <div class="bg-white rounded-3xl border border-outline-soft p-4 shadow-xs text-xs font-medium text-gray-500 flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-dark">Security Status</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold">Passkey Active</span>
+          </div>
+          <p class="text-[11px] text-gray-400">
+            Changes are saved to browser local storage and immediately reflect on the landing page.
+          </p>
+        </div>
+
+      </aside>
+
+      <!-- Right Main Content Panel -->
+      <main class="flex-1 min-w-0" id="main-tab-content">
+        <!-- Injected dynamically based on active tab -->
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="admin-toast" class="fixed bottom-6 right-6 z-[250] px-5 py-3 rounded-2xl bg-dark text-white text-xs font-bold shadow-2xl flex items-center gap-2.5 border border-white/10 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none">
+    <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+    <span id="admin-toast-text">Changes saved successfully</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/defaultData.js"></script>
+  <script>
+    (function() {
+      const storageKey = 'treat_landing_config_v4';
+      const authSessionKey = 'treat_admin_session_auth_v1';
+      const masterPasskey = '133162029';
+
+      let activeTab = 'flow';
+      let config = loadConfig();
+
+      // DOM Elements - Auth Screen
+      const loginScreen = document.getElementById('admin-login-screen');
+      const dashboardApp = document.getElementById('admin-dashboard-app');
+      const loginForm = document.getElementById('admin-login-form');
+      const passInput = document.getElementById('admin-passkey-input');
+      const passToggle = document.getElementById('admin-passkey-toggle');
+      const passToggleIcon = document.getElementById('pass-toggle-icon');
+      const loginError = document.getElementById('admin-login-error');
+      const loginErrorText = document.getElementById('admin-login-error-text');
+      const loginCard = document.getElementById('admin-login-card');
+
+      // DOM Elements - Header & Tabs
+      const saveAllBtn = document.getElementById('admin-save-all-btn');
+      const logoutBtn = document.getElementById('admin-logout-btn');
+      const sidebarNav = document.getElementById('sidebar-nav');
+      const mainContent = document.getElementById('main-tab-content');
+
+      function loadConfig() {
+        try {
+          const stored = localStorage.getItem(storageKey);
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed && Array.isArray(parsed.flowSteps) && parsed.flowSteps.length >= 4) {
+              if (!parsed.developer && window.TREAT_DEFAULT_DATA && window.TREAT_DEFAULT_DATA.developer) {
+                parsed.developer = JSON.parse(JSON.stringify(window.TREAT_DEFAULT_DATA.developer));
+              }
+              return parsed;
+            }
+          }
+        } catch (e) {
+          console.warn('Error reading config from localStorage:', e);
+        }
+        return JSON.parse(JSON.stringify(window.TREAT_DEFAULT_DATA || {}));
+      }
+
+      function saveConfig(silent) {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(config));
+          if (!silent) showToast('All changes saved to website');
+        } catch (e) {
+          console.error('Failed to save config:', e);
+          showToast('Error saving changes');
+        }
+      }
+
+      function isAuthenticated() {
+        try {
+          return sessionStorage.getItem(authSessionKey) === 'true';
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function checkAuth() {
+        if (isAuthenticated()) {
+          loginScreen.classList.add('hidden');
+          dashboardApp.classList.remove('hidden');
+          renderCurrentTab();
+        } else {
+          loginScreen.classList.remove('hidden');
+          dashboardApp.classList.add('hidden');
+          setTimeout(() => passInput.focus(), 100);
+        }
+      }
+
+      function submitAuth() {
+        const val = passInput.value.trim();
+        if (val === masterPasskey) {
+          try {
+            sessionStorage.setItem(authSessionKey, 'true');
+          } catch(e) {}
+          checkAuth();
+          showToast('Welcome to Treat Admin Dashboard');
+        } else {
+          loginError.classList.remove('hidden');
+          loginErrorText.textContent = val === '' ? 'Please enter the security passkey.' : 'Incorrect passkey. Access denied.';
+          loginCard.classList.remove('shake-error');
+          void loginCard.offsetWidth;
+          loginCard.classList.add('shake-error');
+          passInput.select();
+        }
+      }
+
+      function logout() {
+        try {
+          sessionStorage.removeItem(authSessionKey);
+        } catch (e) {}
+        checkAuth();
+        showToast('Admin Studio Locked');
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById('admin-toast');
+        const text = document.getElementById('admin-toast-text');
+        text.textContent = msg;
+        toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        clearTimeout(window._toastTimeout);
+        window._toastTimeout = setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        }, 2800);
+      }
+
+      // Event Listeners for Authentication
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitAuth();
+      });
+
+      passToggle.addEventListener('click', () => {
+        if (passInput.type === 'password') {
+          passInput.type = 'text';
+          passToggleIcon.textContent = 'visibility_off';
+        } else {
+          passInput.type = 'password';
+          passToggleIcon.textContent = 'visibility';
+        }
+      });
+
+      logoutBtn.addEventListener('click', logout);
+      saveAllBtn.addEventListener('click', () => saveConfig(false));
+
+      // Sidebar Tab Clicking
+      sidebarNav.querySelectorAll('.sidebar-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          sidebarNav.querySelectorAll('.sidebar-tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeTab = btn.getAttribute('data-tab');
+          renderCurrentTab();
+        });
+      });
+
+      // --- RENDERING TABS ---
+
+      function renderCurrentTab() {
+        mainContent.innerHTML = '';
+        switch(activeTab) {
+          case 'flow':
+            renderFlowTab(mainContent);
+            break;
+          case 'hero':
+            renderHeroTab(mainContent);
+            break;
+          case 'developer':
+            renderDeveloperTab(mainContent);
+            break;
+          case 'platters':
+            renderPlattersTab(mainContent);
+            break;
+          case 'reviews':
+            renderReviewsTab(mainContent);
+            break;
+          case 'download':
+            renderDownloadTab(mainContent);
+            break;
+          case 'backup':
+            renderBackupTab(mainContent);
+            break;
+        }
+      }
+
+      // =====================================================================
+      // TAB 1: 3D MOBILE FLOW (4 PHONES)
+      // =====================================================================
+      function renderFlowTab(container) {
+        const wrap = document.createElement('div');
+        wrap.className = 'flex flex-col gap-6';
+        wrap.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-outline-soft">
+            <div>
+              <h2 class="font-headline font-black text-2xl text-dark">3D Mobile Flow (4 Phones)</h2>
+              <p class="text-xs sm:text-sm text-gray-500 font-medium">Edit the content, deals, screenshots, and copy for each of the 4 upright mockup phones.</p>
+            </div>
+            <button type="button" id="save-flow-btn" class="px-5 py-2.5 rounded-full bg-dark hover:bg-dark-card text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 self-start sm:self-auto shadow-sm active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+              <span>Update 4 Phones</span>
+            </button>
+          </div>
+
+          <div class="flex flex-col gap-6" id="flow-cards-list"></div>
+        `;
+        container.appendChild(wrap);
+
+        wrap.querySelector('#save-flow-btn').addEventListener('click', () => {
+          saveConfig(false);
+        });
+
+        const cardsList = wrap.querySelector('#flow-cards-list');
+
+        const stepDescriptions = [
+          'Position 1 displays the featured platter drop deal with pricing, discount badge, and photo.',
+          'Position 2 displays the interactive budget matcher slider and auto-matched feast.',
+          'Position 3 displays the 2-minute table hold countdown timer ring and kitchen floor sync.',
+          'Position 4 displays the squad social feed photo, community review quote, likes, and perks.'
+        ];
+
+        config.flowSteps.slice(0, 4).forEach((step, idx) => {
+          const card = document.createElement('div');
+          card.className = 'admin-card p-6 flex flex-col lg:flex-row gap-6 items-start';
+
+          card.innerHTML = `
+            <!-- Left Form Controls (lg:w-2/3) -->
+            <div class="w-full lg:w-2/3 flex flex-col gap-4">
+              
+              <div class="flex items-center justify-between pb-2 border-b border-outline-soft">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-8 h-8 rounded-full bg-primary text-white font-black text-sm flex items-center justify-center shadow-xs">${idx + 1}</span>
+                  <div>
+                    <h3 class="font-headline font-black text-base text-dark">Phone #${idx + 1}: ${step.title}</h3>
+                    <span class="text-[11px] text-gray-400 font-medium">${stepDescriptions[idx]}</span>
+                  </div>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-secondary-container text-secondary-dark text-[10px] font-black uppercase tracking-wide">
+                  ${step.tag || 'STEP ' + (idx + 1)}
+                </span>
+              </div>
+
+              <!-- Step Title & Badge Tag -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="form-label">Step Title (Below Phone)</label>
+                  <input type="text" class="form-input flow-input-title" data-idx="${idx}" value="${step.title || ''}">
+                </div>
+                <div>
+                  <label class="form-label">Category Badge Tag</label>
+                  <input type="text" class="form-input flow-input-tag" data-idx="${idx}" value="${step.tag || ''}">
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div>
+                <label class="form-label">Step Description</label>
+                <textarea rows="2" class="form-input flow-input-desc" data-idx="${idx}">${step.description || ''}</textarea>
+              </div>
+
+              <!-- Image & Upload -->
+              <div>
+                <label class="form-label">Phone Screen / Food Image</label>
+                <div class="flex items-center gap-2">
+                  <input type="text" class="form-input flex-1 flow-input-image text-xs" data-idx="${idx}" value="${step.image || ''}" placeholder="Image URL or path">
+                  <label class="px-3 py-2.5 rounded-xl bg-pink-50 hover:bg-pink-100 text-primary border border-pink-200 text-xs font-bold cursor-pointer flex items-center gap-1 shrink-0 transition-all">
+                    <span class="material-symbols-outlined text-[16px]">upload_file</span>
+                    <span>Upload</span>
+                    <input type="file" class="hidden flow-file-upload" data-idx="${idx}" accept="image/*">
+                  </label>
+                </div>
+              </div>
+
+              <!-- Specific controls per phone -->
+              ${idx === 0 ? `
+                <div class="p-4 rounded-2xl bg-surface-low border border-outline-soft flex flex-col gap-3">
+                  <span class="text-xs font-black text-dark">Phone 1: Deal Drop Overlay</span>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="form-label">Platter Name</label>
+                      <input type="text" class="form-input" id="flow-deal-name" value="${step.dealName || 'The Backyard Platter'}">
+                    </div>
+                    <div>
+                      <label class="form-label">Deal Price (৳)</label>
+                      <input type="text" class="form-input" id="flow-deal-price" value="${step.dealPrice || '৳ 320'}">
+                    </div>
+                  </div>
+                </div>
+              ` : ''}
+
+              ${idx === 1 ? `
+                <div class="p-4 rounded-2xl bg-surface-low border border-outline-soft flex flex-col gap-3">
+                  <span class="text-xs font-black text-dark">Phone 2: Budget Matcher Defaults</span>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="form-label">Default Budget Value</label>
+                      <input type="text" class="form-input" id="flow-budget-val" value="${step.budgetAmount || '300'}">
+                    </div>
+                    <div>
+                      <label class="form-label">Matched Dish Name</label>
+                      <input type="text" class="form-input" id="flow-budget-dish" value="${step.budgetPlatter || 'Bistro Feast Board'}">
+                    </div>
+                  </div>
+                </div>
+              ` : ''}
+
+              ${idx === 2 ? `
+                <div class="p-4 rounded-2xl bg-surface-low border border-outline-soft flex flex-col gap-3">
+                  <span class="text-xs font-black text-dark">Phone 3: 2-Minute Table Hold</span>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="form-label">Reserved Heading</label>
+                      <input type="text" class="form-input" id="flow-hold-title" value="${step.holdTableTitle || 'Table 12 Reserved!'}">
+                    </div>
+                    <div>
+                      <label class="form-label">Initial Countdown (MM:SS)</label>
+                      <input type="text" class="form-input" id="flow-hold-timer" value="${step.holdTimerStart || '01:42'}">
+                    </div>
+                  </div>
+                </div>
+              ` : ''}
+
+              ${idx === 3 ? `
+                <div class="p-4 rounded-2xl bg-surface-low border border-outline-soft flex flex-col gap-3">
+                  <span class="text-xs font-black text-dark">Phone 4: Squad Dining Feed</span>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="form-label">Dining Post Title</label>
+                      <input type="text" class="form-input" id="flow-squad-title" value="${step.squadMealTitle || 'The Backyard Feast'}">
+                    </div>
+                    <div>
+                      <label class="form-label">Squad Likes</label>
+                      <input type="text" class="form-input" id="flow-squad-likes" value="${step.squadLikes || '142 likes'}">
+                    </div>
+                  </div>
+                </div>
+              ` : ''}
+
+            </div>
+
+            <!-- Right Mini Preview (lg:w-1/3) -->
+            <div class="w-full lg:w-1/3 flex flex-col items-center bg-surface-low rounded-2xl p-4 border border-outline-soft">
+              <span class="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2">Live Visual Preview</span>
+              <div class="w-36 h-64 rounded-2xl overflow-hidden border-2 border-dark/10 shadow-md relative bg-white flex flex-col">
+                <div class="h-28 w-full relative bg-gray-100 overflow-hidden">
+                  <img src="${step.image || 'assets/screens/01_explore.png'}" id="flow-preview-img-${idx}" class="w-full h-full object-cover">
+                  <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-full bg-primary text-white text-[8px] font-black">
+                    #0${idx + 1}
+                  </span>
+                </div>
+                <div class="p-2.5 flex flex-col justify-between flex-1 text-left">
+                  <div>
+                    <h5 class="font-headline font-black text-[11px] text-dark truncate" id="flow-preview-title-${idx}">${step.title}</h5>
+                    <p class="text-[9px] text-gray-500 line-clamp-3 mt-1" id="flow-preview-desc-${idx}">${step.description}</p>
+                  </div>
+                  <span class="text-[8.5px] font-black text-primary uppercase" id="flow-preview-tag-${idx}">${step.tag}</span>
+                </div>
+              </div>
+            </div>
+          `;
+
+          // Event bindings
+          const titleIn = card.querySelector('.flow-input-title');
+          const tagIn = card.querySelector('.flow-input-tag');
+          const descIn = card.querySelector('.flow-input-desc');
+          const imgIn = card.querySelector('.flow-input-image');
+          const fileIn = card.querySelector('.flow-file-upload');
+
+          const prevTitle = card.querySelector(`#flow-preview-title-${idx}`);
+          const prevTag = card.querySelector(`#flow-preview-tag-${idx}`);
+          const prevDesc = card.querySelector(`#flow-preview-desc-${idx}`);
+          const prevImg = card.querySelector(`#flow-preview-img-${idx}`);
+
+          titleIn.addEventListener('input', () => {
+            step.title = titleIn.value;
+            prevTitle.textContent = titleIn.value;
+            saveConfig(true);
+          });
+          tagIn.addEventListener('input', () => {
+            step.tag = tagIn.value;
+            prevTag.textContent = tagIn.value;
+            saveConfig(true);
+          });
+          descIn.addEventListener('input', () => {
+            step.description = descIn.value;
+            prevDesc.textContent = descIn.value;
+            saveConfig(true);
+          });
+          imgIn.addEventListener('input', () => {
+            step.image = imgIn.value.trim();
+            prevImg.src = imgIn.value.trim();
+            saveConfig(true);
+          });
+
+          fileIn.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (re) => {
+                imgIn.value = re.target.result;
+                prevImg.src = re.target.result;
+                step.image = re.target.result;
+                saveConfig(true);
+                showToast(`Image uploaded for Phone #${idx + 1}`);
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+
+          // Extra phone fields
+          if (idx === 0) {
+            const dn = card.querySelector('#flow-deal-name');
+            const dp = card.querySelector('#flow-deal-price');
+            dn.addEventListener('input', () => { step.dealName = dn.value; saveConfig(true); });
+            dp.addEventListener('input', () => { step.dealPrice = dp.value; saveConfig(true); });
+          }
+          if (idx === 1) {
+            const bv = card.querySelector('#flow-budget-val');
+            const bd = card.querySelector('#flow-budget-dish');
+            bv.addEventListener('input', () => { step.budgetAmount = bv.value; saveConfig(true); });
+            bd.addEventListener('input', () => { step.budgetPlatter = bd.value; saveConfig(true); });
+          }
+          if (idx === 2) {
+            const ht = card.querySelector('#flow-hold-title');
+            const tm = card.querySelector('#flow-hold-timer');
+            ht.addEventListener('input', () => { step.holdTableTitle = ht.value; saveConfig(true); });
+            tm.addEventListener('input', () => { step.holdTimerStart = tm.value; saveConfig(true); });
+          }
+          if (idx === 3) {
+            const st = card.querySelector('#flow-squad-title');
+            const sl = card.querySelector('#flow-squad-likes');
+            st.addEventListener('input', () => { step.squadMealTitle = st.value; saveConfig(true); });
+            sl.addEventListener('input', () => { step.squadLikes = sl.value; saveConfig(true); });
+          }
+
+          cardsList.appendChild(card);
+        });
+      }
+
+      // =====================================================================
+      // TAB 2: HERO & BRAND VISION
+      // =====================================================================
+      function renderHeroTab(container) {
+        const brand = config.brand || {};
+        const wrap = document.createElement('div');
+        wrap.className = 'flex flex-col gap-6';
+
+        wrap.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-outline-soft">
+            <div>
+              <h2 class="font-headline font-black text-2xl text-dark">Hero Section & Brand Vision</h2>
+              <p class="text-xs sm:text-sm text-gray-500 font-medium">Customize the headline lines, script badge, short-form vision caption, and proof metrics.</p>
+            </div>
+            <button type="button" id="save-hero-btn" class="px-5 py-2.5 rounded-full bg-dark hover:bg-dark-card text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 self-start sm:self-auto shadow-sm active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+              <span>Update Hero</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Form Fields (lg:col-span-7) -->
+            <div class="lg:col-span-7 admin-card p-6 flex flex-col gap-4">
+              
+              <div>
+                <label class="form-label">Script Pill Badge (Above Headline)</label>
+                <input type="text" id="hero-badge-input" class="form-input" value="${brand.heroBadge || 'SWEET SQUAD MOMENTS'}">
+              </div>
+
+              <div>
+                <label class="form-label">3-Line Headline (1 Line per row)</label>
+                <textarea id="hero-headline-input" rows="3" class="form-input font-bold text-sm">${brand.heroHeadline || 'Find Your Craving\nShare the Good Stuff\nMake It a Treat'}</textarea>
+                <span class="text-[11px] text-gray-400 mt-1 block">Line 1: Dark | Line 2: Treat Pink with swoop underline | Line 3: Dark with heart doodle</span>
+              </div>
+
+              <div>
+                <label class="form-label">Vision Caption (Short-Form Brand Story)</label>
+                <textarea id="hero-caption-input" rows="4" class="form-input">${brand.heroCaption || ''}</textarea>
+              </div>
+
+              <div>
+                <label class="form-label">Live Social Proof Strip Text</label>
+                <input type="text" id="hero-proof-input" class="form-input" value="${brand.liveSocialProof || ''}">
+              </div>
+
+              <div>
+                <label class="form-label">Gourmet Food Bowl Note (In Hero)</label>
+                <input type="text" id="hero-bowl-input" class="form-input" value="${brand.foodBowlNote || 'Crispy Garlic Butter Chicken Skillet'}">
+              </div>
+
+            </div>
+
+            <!-- Right Live Preview (lg:col-span-5) -->
+            <div class="lg:col-span-5 admin-card p-6 flex flex-col gap-3 bg-surface-low">
+              <span class="text-[10px] font-black uppercase tracking-wider text-gray-400">Live Headline Preview</span>
+              
+              <div class="p-5 rounded-2xl bg-white border border-outline-soft shadow-xs flex flex-col gap-3">
+                <span class="font-caveat font-bold text-base text-secondary-dark" id="hero-preview-badge">
+                  ${brand.heroBadge || 'SWEET SQUAD MOMENTS'} ↗
+                </span>
+
+                <div class="font-headline font-black text-2xl text-dark leading-tight" id="hero-preview-headline">
+                  <div>Find Your Craving</div>
+                  <div class="text-primary underline decoration-2 underline-offset-4">Share the Good Stuff</div>
+                  <div>Make It a Treat </div>
+                </div>
+
+                <p class="text-xs text-gray-600 font-medium leading-relaxed" id="hero-preview-caption">
+                  ${brand.heroCaption || ''}
+                </p>
+
+                <div class="pt-2 border-t border-outline-soft text-[10px] font-bold text-gray-400" id="hero-preview-proof">
+                  ${brand.liveSocialProof || ''}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+        container.appendChild(wrap);
+
+        const badgeIn = wrap.querySelector('#hero-badge-input');
+        const headIn = wrap.querySelector('#hero-headline-input');
+        const capIn = wrap.querySelector('#hero-caption-input');
+        const proofIn = wrap.querySelector('#hero-proof-input');
+        const bowlIn = wrap.querySelector('#hero-bowl-input');
+
+        const prevBadge = wrap.querySelector('#hero-preview-badge');
+        const prevHead = wrap.querySelector('#hero-preview-headline');
+        const prevCap = wrap.querySelector('#hero-preview-caption');
+        const prevProof = wrap.querySelector('#hero-preview-proof');
+
+        function updateHeroLive() {
+          if (!config.brand) config.brand = {};
+          config.brand.heroBadge = badgeIn.value;
+          config.brand.heroHeadline = headIn.value;
+          config.brand.heroCaption = capIn.value;
+          config.brand.liveSocialProof = proofIn.value;
+          config.brand.foodBowlNote = bowlIn.value;
+
+          prevBadge.textContent = badgeIn.value + ' ↗';
+          const lines = headIn.value.split('\n');
+          prevHead.innerHTML = lines.map((l, i) => {
+            if (i === 1) return `<div class="text-primary underline decoration-2 underline-offset-4">${l}</div>`;
+            return `<div>${l}</div>`;
+          }).join('');
+          prevCap.textContent = capIn.value;
+          prevProof.textContent = proofIn.value;
+
+          saveConfig(true);
+        }
+
+        badgeIn.addEventListener('input', updateHeroLive);
+        headIn.addEventListener('input', updateHeroLive);
+        capIn.addEventListener('input', updateHeroLive);
+        proofIn.addEventListener('input', updateHeroLive);
+        bowlIn.addEventListener('input', updateHeroLive);
+
+        wrap.querySelector('#save-hero-btn').addEventListener('click', () => {
+          updateHeroLive();
+          saveConfig(false);
+        });
+      }
+
+      // =====================================================================
+      // TAB 3: DEVELOPER PROFILE SHOWCASE
+      // =====================================================================
+      function renderDeveloperTab(container) {
+        const dev = config.developer || (window.TREAT_DEFAULT_DATA ? window.TREAT_DEFAULT_DATA.developer : {});
+        const wrap = document.createElement('div');
+        wrap.className = 'flex flex-col gap-6';
+
+        wrap.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-outline-soft">
+            <div>
+              <h2 class="font-headline font-black text-2xl text-dark">Developer Profile Showcase</h2>
+              <p class="text-xs sm:text-sm text-gray-500 font-medium">Manage developer credentials, GitHub URLs, role description, and tech stack chips.</p>
+            </div>
+            <button type="button" id="save-dev-btn" class="px-5 py-2.5 rounded-full bg-dark hover:bg-dark-card text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 self-start sm:self-auto shadow-sm active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+              <span>Save Developer</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Form (lg:col-span-7) -->
+            <div class="lg:col-span-7 admin-card p-6 flex flex-col gap-4">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="form-label">Full Name</label>
+                  <input type="text" id="dev-name" class="form-input font-bold" value="${dev.name || ''}">
+                </div>
+                <div>
+                  <label class="form-label">Role / Job Title</label>
+                  <input type="text" id="dev-role" class="form-input" value="${dev.role || ''}">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="form-label">Status Pill Text</label>
+                  <input type="text" id="dev-status" class="form-input" value="${dev.status || 'Active Engineering • Dhaka'}">
+                </div>
+                <div>
+                  <label class="form-label">Location</label>
+                  <input type="text" id="dev-location" class="form-input" value="${dev.location || 'Dhaka, Bangladesh'}">
+                </div>
+              </div>
+
+              <div>
+                <label class="form-label">Bio / Engineering Statement</label>
+                <textarea id="dev-bio" rows="3" class="form-input">${dev.bio || ''}</textarea>
+              </div>
+
+              <div>
+                <label class="form-label">Avatar Photo URL or Upload</label>
+                <div class="flex items-center gap-2">
+                  <input type="text" id="dev-avatar" class="form-input flex-1 text-xs" value="${dev.avatar || ''}">
+                  <label class="px-3 py-2.5 rounded-xl bg-pink-50 hover:bg-pink-100 text-primary border border-pink-200 text-xs font-bold cursor-pointer flex items-center gap-1 shrink-0 transition-all">
+                    <span class="material-symbols-outlined text-[16px]">upload_file</span>
+                    <span>Upload</span>
+                    <input type="file" id="dev-avatar-file" class="hidden" accept="image/*">
+                  </label>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="form-label">GitHub Profile URL</label>
+                  <input type="text" id="dev-github" class="form-input text-xs" value="${dev.githubUrl || ''}">
+                </div>
+                <div>
+                  <label class="form-label">Project Repository URL</label>
+                  <input type="text" id="dev-repo" class="form-input text-xs" value="${dev.repoUrl || ''}">
+                </div>
+              </div>
+
+              <div>
+                <label class="form-label">Skills & Technologies (Comma-separated)</label>
+                <input type="text" id="dev-skills" class="form-input text-xs" value="${Array.isArray(dev.skills) ? dev.skills.join(', ') : ''}">
+              </div>
+
+            </div>
+
+            <!-- Right Preview (lg:col-span-5) -->
+            <div class="lg:col-span-5 admin-card p-6 flex flex-col gap-3 bg-surface-low">
+              <span class="text-[10px] font-black uppercase tracking-wider text-gray-400">Live Developer Card</span>
+
+              <div class="p-6 rounded-3xl bg-white border border-outline-soft shadow-sm flex flex-col items-center text-center">
+                <div class="w-24 h-24 rounded-2xl p-0.5 bg-gradient-to-tr from-primary via-secondary to-blue-500 shadow-md mb-3">
+                  <img src="${dev.avatar || 'https://github.com/EFTAKHAR-AMIN-SAKIB.png'}" id="dev-prev-avatar" class="w-full h-full rounded-[14px] object-cover">
+                </div>
+
+                <div class="px-3 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-black mb-2" id="dev-prev-status">
+                  ${dev.status || 'Active Engineering'}
+                </div>
+
+                <h4 class="font-headline font-black text-lg text-dark" id="dev-prev-name">${dev.name}</h4>
+                <p class="text-xs font-bold text-secondary-dark mt-0.5 mb-2" id="dev-prev-role">${dev.role}</p>
+                <p class="text-[11px] text-gray-500 font-medium line-clamp-3 mb-3" id="dev-prev-bio">${dev.bio}</p>
+
+                <div class="flex flex-wrap items-center justify-center gap-1.5 w-full" id="dev-prev-skills">
+                  ${(dev.skills || []).map(s => `<span class="px-2.5 py-0.5 rounded-full bg-purple-50 text-secondary-dark text-[10px] font-bold border border-purple-100">${s}</span>`).join('')}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+        container.appendChild(wrap);
+
+        const nameIn = wrap.querySelector('#dev-name');
+        const roleIn = wrap.querySelector('#dev-role');
+        const statusIn = wrap.querySelector('#dev-status');
+        const locIn = wrap.querySelector('#dev-location');
+        const bioIn = wrap.querySelector('#dev-bio');
+        const avatarIn = wrap.querySelector('#dev-avatar');
+        const avatarFile = wrap.querySelector('#dev-avatar-file');
+        const gitIn = wrap.querySelector('#dev-github');
+        const repoIn = wrap.querySelector('#dev-repo');
+        const skillsIn = wrap.querySelector('#dev-skills');
+
+        const prevAvatar = wrap.querySelector('#dev-prev-avatar');
+        const prevStatus = wrap.querySelector('#dev-prev-status');
+        const prevName = wrap.querySelector('#dev-prev-name');
+        const prevRole = wrap.querySelector('#dev-prev-role');
+        const prevBio = wrap.querySelector('#dev-prev-bio');
+        const prevSkills = wrap.querySelector('#dev-prev-skills');
+
+        function updateDevLive() {
+          if (!config.developer) config.developer = {};
+          config.developer.name = nameIn.value;
+          config.developer.role = roleIn.value;
+          config.developer.status = statusIn.value;
+          config.developer.location = locIn.value;
+          config.developer.bio = bioIn.value;
+          config.developer.avatar = avatarIn.value;
+          config.developer.githubUrl = gitIn.value;
+          config.developer.repoUrl = repoIn.value;
+          config.developer.skills = skillsIn.value.split(',').map(s => s.trim()).filter(Boolean);
+
+          prevName.textContent = nameIn.value;
+          prevRole.textContent = roleIn.value;
+          prevStatus.textContent = statusIn.value;
+          prevBio.textContent = bioIn.value;
+          prevAvatar.src = avatarIn.value;
+          prevSkills.innerHTML = config.developer.skills.map(s => `<span class="px-2.5 py-0.5 rounded-full bg-purple-50 text-secondary-dark text-[10px] font-bold border border-purple-100">${s}</span>`).join('');
+
+          saveConfig(true);
+        }
+
+        [nameIn, roleIn, statusIn, locIn, bioIn, avatarIn, gitIn, repoIn, skillsIn].forEach(inp => {
+          inp.addEventListener('input', updateDevLive);
+        });
+
+        avatarFile.addEventListener('change', (e) => {
+          const f = e.target.files[0];
+          if (f) {
+            const reader = new FileReader();
+            reader.onload = (re) => {
+              avatarIn.value = re.target.result;
+              updateDevLive();
+              showToast('Developer avatar uploaded');
+            };
+            reader.readAsDataURL(f);
+          }
+        });
+
+        wrap.querySelector('#save-dev-btn').addEventListener('click', () => {
+          updateDevLive();
+          saveConfig(false);
+        });
+      }
+
+      // =====================================================================
+      // TAB 4: FEATURED PLATTERS & DEALS
+      // =====================================================================
+      function renderPlattersTab(container) {
+        if (!config.foodPhotos) config.foodPhotos = (window.TREAT_DEFAULT_DATA ? window.TREAT_DEFAULT_DATA.foodPhotos : []);
+        const wrap = document.createElement('div');
+        wrap.className = 'flex flex-col gap-6';
+
+        wrap.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-outline-soft">
+            <div>
+              <h2 class="font-headline font-black text-2xl text-dark">Featured Platters & Deals</h2>
+              <p class="text-xs sm:text-sm text-gray-500 font-medium">Manage featured platter specials, discount tags, prices in Taka (৳), and dish photos.</p>
+            </div>
+            <button type="button" id="save-platters-btn" class="px-5 py-2.5 rounded-full bg-dark hover:bg-dark-card text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 self-start sm:self-auto shadow-sm active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+              <span>Update Platters</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="platters-list"></div>
+        `;
+        container.appendChild(wrap);
+
+        const list = wrap.querySelector('#platters-list');
+
+        config.foodPhotos.forEach((dish, idx) => {
+          const itemCard = document.createElement('div');
+          itemCard.className = 'admin-card p-5 flex flex-col gap-3';
+          itemCard.innerHTML = `
+            <div class="flex items-center justify-between pb-2 border-b border-outline-soft">
+              <span class="font-headline font-black text-sm text-dark">Platter Dish #${idx + 1}</span>
+              <span class="text-xs font-black text-primary">${dish.price || '৳ 0'}</span>
+            </div>
+
+            <div class="flex gap-3 items-center">
+              <div class="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-outline-soft shadow-xs">
+                <img src="${dish.src}" id="platter-img-prev-${idx}" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-1">
+                <label class="form-label">Dish Image URL or Upload</label>
+                <div class="flex gap-2">
+                  <input type="text" class="form-input text-xs" id="platter-src-${idx}" value="${dish.src}">
+                  <label class="px-2.5 py-1.5 rounded-xl bg-pink-50 hover:bg-pink-100 text-primary border border-pink-200 text-xs font-bold cursor-pointer flex items-center shrink-0">
+                    <span class="material-symbols-outlined text-[15px]">upload</span>
+                    <input type="file" id="platter-file-${idx}" class="hidden" accept="image/*">
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2">
+              <div class="col-span-2">
+                <label class="form-label">Dish Title</label>
+                <input type="text" class="form-input text-xs font-bold" id="platter-title-${idx}" value="${dish.title}">
+              </div>
+              <div>
+                <label class="form-label">Price (৳)</label>
+                <input type="text" class="form-input text-xs font-bold" id="platter-price-${idx}" value="${dish.price}">
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Badge Tag</label>
+              <input type="text" class="form-input text-xs" id="platter-tag-${idx}" value="${dish.tag}">
+            </div>
+          `;
+
+          const tIn = itemCard.querySelector(`#platter-title-${idx}`);
+          const pIn = itemCard.querySelector(`#platter-price-${idx}`);
+          const tagIn = itemCard.querySelector(`#platter-tag-${idx}`);
+          const srcIn = itemCard.querySelector(`#platter-src-${idx}`);
+          const fileIn = itemCard.querySelector(`#platter-file-${idx}`);
+          const imgPrev = itemCard.querySelector(`#platter-img-prev-${idx}`);
+
+          tIn.addEventListener('input', () => { dish.title = tIn.value; saveConfig(true); });
+          pIn.addEventListener('input', () => { dish.price = pIn.value; saveConfig(true); });
+          tagIn.addEventListener('input', () => { dish.tag = tagIn.value; saveConfig(true); });
+          srcIn.addEventListener('input', () => { dish.src = srcIn.value; imgPrev.src = srcIn.value; saveConfig(true); });
+
+          fileIn.addEventListener('change', (e) => {
+            const f = e.target.files[0];
+            if (f) {
+              const r = new FileReader();
+              r.onload = (re) => {
+                dish.src = re.target.result;
+                srcIn.value = re.target.result;
+                imgPrev.src = re.target.result;
+                saveConfig(true);
+                showToast(`Platter #${idx + 1} photo updated`);
+              };
+              r.readAsDataURL(f);
+            }
+          });
+
+          list.appendChild(itemCard);
+        });
+
+        wrap.querySelector('#save-platters-btn').addEventListener('click', () => {
+          saveConfig(false);
+        });
+      }
+
+      // =====================================================================
+      // TAB 5: FOODIE REVIEWS
+      // =====================================================================
+      function renderReviewsTab(container) {
+        if (!config.reviews) config.reviews = (window.TREAT_DEFAULT_DATA ? window.TREAT_DEFAULT_DATA.reviews : []);
+        const wrap = document.createElement('div');
+        wrap.className = 'flex flex-col gap-6';
+
+        wrap.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-outline-soft">
+            <div>
+              <h2 class="font-headline font-black text-2xl text-dark">Foodie Reviews & Ratings</h2>
+              <p class="text-xs sm:text-sm text-gray-500 font-medium">Customize community testimonials, reviewer roles, star ratings, and quotes.</p>
+            </div>
+            <button type="button" id="save-reviews-btn" class="px-5 py-2.5 rounded-full bg-dark hover:bg-dark-card text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 self-start sm:self-auto shadow-sm active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+              <span>Update Reviews</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="reviews-list"></div>
+        `;
+        container.appendChild(wrap);
+
+        const list = wrap.querySelector('#reviews-list');
+
+        config.reviews.forEach((rev, idx) => {
+          const revCard = document.createElement('div');
+          revCard.className = 'admin-card p-5 flex flex-col gap-3';
+          revCard.innerHTML = `
+            <div class="flex items-center justify-between pb-2 border-b border-outline-soft">
+              <span class="font-headline font-black text-sm text-dark">Reviewer #${idx + 1}</span>
+              <div class="flex text-amber-400">
+                <span class="material-symbols-outlined text-[16px]">star</span>
+                <span class="material-symbols-outlined text-[16px]">star</span>
+                <span class="material-symbols-outlined text-[16px]">star</span>
+                <span class="material-symbols-outlined text-[16px]">star</span>
+                <span class="material-symbols-outlined text-[16px]">star</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Reviewer Name</label>
+              <input type="text" class="form-input text-xs font-bold" id="rev-name-${idx}" value="${rev.name}">
+            </div>
+
+            <div>
+              <label class="form-label">Role / Squad Info</label>
+              <input type="text" class="form-input text-xs" id="rev-role-${idx}" value="${rev.role}">
+            </div>
+
+            <div>
+              <label class="form-label">Review Comment</label>
+              <textarea rows="3" class="form-input text-xs" id="rev-comment-${idx}">${rev.comment}</textarea>
+            </div>
+          `;
+
+          const nIn = revCard.querySelector(`#rev-name-${idx}`);
+          const rIn = revCard.querySelector(`#rev-role-${idx}`);
+          const cIn = revCard.querySelector(`#rev-comment-${idx}`);
+
+          nIn.addEventListener('input', () => { rev.name = nIn.value; saveConfig(true); });
+          rIn.addEventListener('input', () => { rev.role = rIn.value; saveConfig(true); });
+          cIn.addEventListener('input', () => { rev.comment = cIn.value; saveConfig(true); });
+
+          list.appendChild(revCard);
+        });
+
+        wrap.querySelector('#save-reviews-btn').addEventListener('click', () => {
+          saveConfig(false);
+        });
+      }
+
+      // =====================================================================
+      // TAB 6: DOWNLOAD CTA & APK TARGETS
+      // =====================================================================
+      function renderDownloadTab(container) {
+        const dl = config.download || {};
+        const wrap = document.createElement('div');
+        wrap.className = 'flex flex-col gap-6';
+
+        wrap.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-outline-soft">
+            <div>
+              <h2 class="font-headline font-black text-2xl text-dark">Download CTA & APK Targets</h2>
+              <p class="text-xs sm:text-sm text-gray-500 font-medium">Configure download buttons, direct APK package URLs, file sizes, and Google Play links.</p>
+            </div>
+            <button type="button" id="save-dl-btn" class="px-5 py-2.5 rounded-full bg-dark hover:bg-dark-card text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 self-start sm:self-auto shadow-sm active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[16px]">check</span>
+              <span>Update Download</span>
+            </button>
+          </div>
+
+          <div class="admin-card p-6 flex flex-col gap-4 max-w-2xl">
+            
+            <div>
+              <label class="form-label">Download CTA Button Label</label>
+              <input type="text" id="dl-cta-text" class="form-input font-bold" value="${dl.ctaText || 'Download Treat for Android'}">
+            </div>
+
+            <div>
+              <label class="form-label">Subtitle / Squad Callout</label>
+              <textarea id="dl-cta-subtext" rows="2" class="form-input">${dl.ctaSubtext || ''}</textarea>
+            </div>
+
+            <div>
+              <label class="form-label">Android APK Package Download URL</label>
+              <input type="text" id="dl-apk-url" class="form-input text-xs" value="${dl.apkDownloadUrl || 'assets/downloads/Treat-v1.0.4-release.apk'}">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="form-label">Version Number</label>
+                <input type="text" id="dl-version" class="form-input text-xs" value="${dl.apkVersion || 'v1.0.4 (Android 9.0+)'}">
+              </div>
+              <div>
+                <label class="form-label">Package Size</label>
+                <input type="text" id="dl-size" class="form-input text-xs" value="${dl.apkSize || '24.8 MB'}">
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Google Play Store URL</label>
+              <input type="text" id="dl-playstore" class="form-input text-xs" value="${dl.playStoreUrl || ''}">
+            </div>
+
+            <div>
+              <label class="form-label">Web Demo URL</label>
+              <input type="text" id="dl-webdemo" class="form-input text-xs" value="${dl.webDemoUrl || 'http://localhost:8080'}">
+            </div>
+
+            <div>
+              <label class="form-label">Security & Trust Badge Text</label>
+              <input type="text" id="dl-trust" class="form-input text-xs" value="${dl.trustBadge || '100% Virus-Free APK • 24.8 MB • Android 9.0+ • Instant Access'}">
+            </div>
+
+          </div>
+        `;
+        container.appendChild(wrap);
+
+        const ctaT = wrap.querySelector('#dl-cta-text');
+        const ctaS = wrap.querySelector('#dl-cta-subtext');
+        const apkU = wrap.querySelector('#dl-apk-url');
+        const verIn = wrap.querySelector('#dl-version');
+        const szIn = wrap.querySelector('#dl-size');
+        const playU = wrap.querySelector('#dl-playstore');
+        const webU = wrap.querySelector('#dl-webdemo');
+        const truIn = wrap.querySelector('#dl-trust');
+
+        function updateDlLive() {
+          if (!config.download) config.download = {};
+          config.download.ctaText = ctaT.value;
+          config.download.ctaSubtext = ctaS.value;
+          config.download.apkDownloadUrl = apkU.value;
+          config.download.apkVersion = verIn.value;
+          config.download.apkSize = szIn.value;
+          config.download.playStoreUrl = playU.value;
+          config.download.webDemoUrl = webU.value;
+          config.download.trustBadge = truIn.value;
+          saveConfig(true);
+        }
+
+        [ctaT, ctaS, apkU, verIn, szIn, playU, webU, truIn].forEach(i => i.addEventListener('input', updateDlLive));
+
+        wrap.querySelector('#save-dl-btn').addEventListener('click', () => {
+          updateDlLive();
+          saveConfig(false);
+        });
+      }
+
+      // =====================================================================
+      // TAB 7: BACKUP & CONFIG (JSON)
+      // =====================================================================
+      function renderBackupTab(container) {
+        const wrap = document.createElement('div');
+        wrap.className = 'flex flex-col gap-6';
+
+        wrap.innerHTML = `
+          <div class="pb-4 border-b border-outline-soft">
+            <h2 class="font-headline font-black text-2xl text-dark">Backup & Configuration (JSON)</h2>
+            <p class="text-xs sm:text-sm text-gray-500 font-medium">Export all settings into a JSON backup file, restore previous backups, or reset to factory defaults.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Export Card -->
+            <div class="admin-card p-6 flex flex-col justify-between gap-4">
+              <div>
+                <div class="w-12 h-12 rounded-2xl bg-secondary-container text-secondary-dark flex items-center justify-center mb-3">
+                  <span class="material-symbols-outlined text-[24px]">download</span>
+                </div>
+                <h4 class="font-headline font-black text-base text-dark">Export Backup</h4>
+                <p class="text-xs text-gray-500 font-medium mt-1">Download complete JSON configuration file including 4-phone flow, hero, developer, and platters.</p>
+              </div>
+              <button type="button" id="backup-export-btn" class="w-full py-3 rounded-full bg-dark hover:bg-dark-card text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-[16px]">file_download</span>
+                <span>Export JSON</span>
+              </button>
+            </div>
+
+            <!-- Import Card -->
+            <div class="admin-card p-6 flex flex-col justify-between gap-4">
+              <div>
+                <div class="w-12 h-12 rounded-2xl bg-pink-50 text-primary flex items-center justify-center mb-3">
+                  <span class="material-symbols-outlined text-[24px]">upload_file</span>
+                </div>
+                <h4 class="font-headline font-black text-base text-dark">Import Backup</h4>
+                <p class="text-xs text-gray-500 font-medium mt-1">Upload a previously exported JSON backup file to instantly restore your custom landing page configuration.</p>
+              </div>
+              <label class="w-full py-3 rounded-full bg-pink-50 hover:bg-pink-100 text-primary border border-pink-200 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-[16px]">file_upload</span>
+                <span>Import JSON</span>
+                <input type="file" id="backup-import-file" accept=".json" class="hidden">
+              </label>
+            </div>
+
+            <!-- Reset Card -->
+            <div class="admin-card p-6 flex flex-col justify-between gap-4">
+              <div>
+                <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mb-3">
+                  <span class="material-symbols-outlined text-[24px]">restart_alt</span>
+                </div>
+                <h4 class="font-headline font-black text-base text-rose-600">Factory Reset</h4>
+                <p class="text-xs text-gray-500 font-medium mt-1">Clear custom configurations in browser storage and restore default Treat settings.</p>
+              </div>
+              <button type="button" id="backup-reset-btn" class="w-full py-3 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-2xs active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-[16px]">refresh</span>
+                <span>Reset Defaults</span>
+              </button>
+            </div>
+
+          </div>
+        `;
+        container.appendChild(wrap);
+
+        // Export
+        wrap.querySelector('#backup-export-btn').addEventListener('click', () => {
+          const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(config, null, 2));
+          const dlAnchor = document.createElement('a');
+          dlAnchor.setAttribute('href', dataStr);
+          dlAnchor.setAttribute('download', 'treat-landing-config.json');
+          document.body.appendChild(dlAnchor);
+          dlAnchor.click();
+          dlAnchor.remove();
+          showToast('Backup JSON exported successfully');
+        });
+
+        // Import
+        wrap.querySelector('#backup-import-file').addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (re) => {
+              try {
+                const parsed = JSON.parse(re.target.result);
+                if (parsed && Array.isArray(parsed.flowSteps) && parsed.flowSteps.length >= 4) {
+                  config = parsed;
+                  saveConfig(false);
+                  showToast('Backup JSON imported successfully');
+                  renderCurrentTab();
+                } else {
+                  showToast('Invalid Treat configuration file');
+                }
+              } catch (err) {
+                showToast('Error reading JSON: ' + err.message);
+              }
+            };
+            reader.readAsText(file);
+          }
+        });
+
+        // Reset
+        wrap.querySelector('#backup-reset-btn').addEventListener('click', () => {
+          if (confirm('Are you sure you want to restore factory default settings?')) {
+            localStorage.removeItem(storageKey);
+            config = JSON.parse(JSON.stringify(window.TREAT_DEFAULT_DATA || {}));
+            saveConfig(false);
+            showToast('Treat defaults restored');
+            renderCurrentTab();
+          }
+        });
+      }
+
+      // Initialize
+      checkAuth();
+
+    })();
+  </script>
+</body>
+</html>

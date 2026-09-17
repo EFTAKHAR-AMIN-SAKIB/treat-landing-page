@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-      showToast('✨ Treat-v1.0.4-release.apk download started!');
+      showToast('Treat-v1.0.4-release.apk download started!');
     }, 600);
   }
 
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const circleEl = document.getElementById('flow-countdown-circle') || document.getElementById('hold-progress-circle');
     if (!timerEl) return;
 
-    let secondsLeft = 105; // 01:45 matching reference design
+    let secondsLeft = 102; // 01:42 matching reference design
     const totalSeconds = 120;
     const circumference = 251.3;
 
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!slider || !amountVal) return;
 
     slider.addEventListener('input', (e) => {
-      amountVal.textContent = `$ ${e.target.value}`;
+      amountVal.textContent = `৳ ${e.target.value}`;
     });
   }
 

@@ -44,6 +44,9 @@ class TreatAdminPanel {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed && Array.isArray(parsed.flowSteps) && parsed.flowSteps.length >= 4) {
+          if (!parsed.developer && window.TREAT_DEFAULT_DATA && window.TREAT_DEFAULT_DATA.developer) {
+            parsed.developer = JSON.parse(JSON.stringify(window.TREAT_DEFAULT_DATA.developer));
+          }
           return parsed;
         }
       }
@@ -67,6 +70,14 @@ class TreatAdminPanel {
     this.renderTabs();
     this.renderCurrentTab();
     this.applyLiveChanges();
+
+    // Synchronize changes made in full-page admin.html across browser tabs
+    window.addEventListener('storage', (e) => {
+      if (e.key === this.storageKey) {
+        this.config = this.loadConfig();
+        this.applyLiveChanges();
+      }
+    });
   }
 
   // --- AUTHENTICATION & SECURITY ---
@@ -255,6 +266,7 @@ class TreatAdminPanel {
     const tabs = [
       { id: 'flow', label: '4 Mockup Phones', icon: 'smartphone' },
       { id: 'hero', label: 'Hero & Vision', icon: 'auto_awesome' },
+      { id: 'developer', label: 'Developer Profile', icon: 'terminal' },
       { id: 'downloads', label: 'Download CTA', icon: 'download' },
       { id: 'backup', label: 'Config / JSON', icon: 'save' }
     ];
@@ -287,6 +299,9 @@ class TreatAdminPanel {
         break;
       case 'hero':
         this.renderHeroTab(contentArea);
+        break;
+      case 'developer':
+        this.renderDeveloperTab(contentArea);
         break;
       case 'downloads':
         this.renderDownloadsTab(contentArea);
@@ -541,7 +556,91 @@ class TreatAdminPanel {
     });
   }
 
-  // --- TAB 4: BACKUP & CONFIG ---
+  // --- TAB: DEVELOPER PROFILE ---
+
+  renderDeveloperTab(container) {
+    const dev = this.config.developer || (window.TREAT_DEFAULT_DATA ? window.TREAT_DEFAULT_DATA.developer : {});
+    const wrapper = document.createElement('div');
+    wrapper.className = 'flex flex-col gap-4';
+
+    wrapper.innerHTML = `
+      <div class="pb-2 border-b border-outline-variant/30">
+        <h3 class="font-headline font-bold text-base text-on-surface">Developer Profile Showcase</h3>
+        <p class="text-xs text-on-surface-variant font-medium">Customize the developer profile shown on the Treat landing page.</p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Developer Full Name</label>
+          <input type="text" id="admin-dev-name" value="${dev.name || ''}" class="admin-input">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Role / Job Title</label>
+          <input type="text" id="admin-dev-role" value="${dev.role || ''}" class="admin-input">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Location & Status</label>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" id="admin-dev-location" value="${dev.location || ''}" class="admin-input" placeholder="Location">
+            <input type="text" id="admin-dev-status" value="${dev.status || ''}" class="admin-input" placeholder="Status">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Bio / Craft Statement</label>
+          <textarea id="admin-dev-bio" rows="3" class="admin-input text-xs font-medium">${dev.bio || ''}</textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Avatar Image URL</label>
+          <input type="text" id="admin-dev-avatar" value="${dev.avatar || ''}" class="admin-input text-xs" placeholder="https://github.com/username.png">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">GitHub Profile URL</label>
+          <input type="text" id="admin-dev-github" value="${dev.githubUrl || ''}" class="admin-input text-xs" placeholder="https://github.com/username">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Project Repository URL</label>
+          <input type="text" id="admin-dev-repo" value="${dev.repoUrl || ''}" class="admin-input text-xs" placeholder="https://github.com/username/repo">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Technologies & Skills (comma-separated)</label>
+          <input type="text" id="admin-dev-skills" value="${Array.isArray(dev.skills) ? dev.skills.join(', ') : ''}" class="admin-input text-xs" placeholder="Flutter, Android, Tailwind CSS, Node.js">
+        </div>
+
+        <button type="button" id="admin-save-dev-btn" class="w-full py-2.5 rounded-xl bg-primary text-white text-xs font-extrabold shadow-md hover:bg-primary/90 transition-all flex items-center justify-center gap-2 mt-2">
+          <span class="material-symbols-outlined text-[16px]">save</span>
+          <span>Save Developer Profile</span>
+        </button>
+      </div>
+    `;
+
+    container.appendChild(wrapper);
+
+    wrapper.querySelector('#admin-save-dev-btn').addEventListener('click', () => {
+      if (!this.config.developer) this.config.developer = {};
+      this.config.developer.name = wrapper.querySelector('#admin-dev-name').value.trim();
+      this.config.developer.role = wrapper.querySelector('#admin-dev-role').value.trim();
+      this.config.developer.location = wrapper.querySelector('#admin-dev-location').value.trim();
+      this.config.developer.status = wrapper.querySelector('#admin-dev-status').value.trim();
+      this.config.developer.bio = wrapper.querySelector('#admin-dev-bio').value.trim();
+      this.config.developer.avatar = wrapper.querySelector('#admin-dev-avatar').value.trim();
+      this.config.developer.githubUrl = wrapper.querySelector('#admin-dev-github').value.trim();
+      this.config.developer.repoUrl = wrapper.querySelector('#admin-dev-repo').value.trim();
+      const rawSkills = wrapper.querySelector('#admin-dev-skills').value;
+      this.config.developer.skills = rawSkills.split(',').map(s => s.trim()).filter(Boolean);
+
+      this.saveConfig();
+      this.showToast('Developer profile updated');
+    });
+  }
+
+  // --- TAB 5: BACKUP & CONFIG ---
 
   renderBackupTab(container) {
     container.innerHTML = `
@@ -651,25 +750,25 @@ class TreatAdminPanel {
 
     const heroHeadline = document.getElementById('hero-headline-text');
     if (heroHeadline && this.config.brand.heroHeadline) {
-      if (this.config.brand.heroHeadline.includes('Feast Together') || this.config.brand.heroHeadline.includes('Find Treat')) {
+      if (this.config.brand.heroHeadline.includes('Feast Together') || this.config.brand.heroHeadline.includes('Find Treat') || this.config.brand.heroHeadline.includes('Find your people')) {
         this.config.brand.heroHeadline = "Find Your Craving\nShare the Good Stuff\nMake It a Treat";
         try { localStorage.setItem(this.storageKey, JSON.stringify(this.config)); } catch(e) {}
       }
 
       if (this.config.brand.heroHeadline.includes('Find Your Craving')) {
         heroHeadline.innerHTML = `
-          <span class="hero-title-line flex items-center justify-center gap-2 sm:gap-3 text-[#181024]">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] -rotate-12 shrink-0 select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <span class="hero-title-line flex items-center justify-center lg:justify-start gap-2 sm:gap-3 text-[#181024]">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] -rotate-12 shrink-0 select-none hidden sm:inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
               <path d="M6 15 C5 12 5.5 8 8 6" />
               <path d="M12 18 C11 16 11.5 13.5 13 11" />
             </svg>
             <span>Find Your Craving</span>
-            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] rotate-12 shrink-0 select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] rotate-12 shrink-0 select-none hidden sm:inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
               <path d="M18 15 C19 12 18.5 8 16 6" />
               <path d="M12 18 C13 16 12.5 13.5 11 11" />
             </svg>
           </span>
-          <span class="hero-title-line inline-block text-center text-[#E040A0]">
+          <span class="hero-title-line block text-center lg:text-left text-[#E040A0] my-0.5">
             <span class="hero-title-primary text-[#E040A0]">
               <span>Share </span>
               <span class="relative inline-block">
@@ -680,9 +779,9 @@ class TreatAdminPanel {
               </span>
             </span>
           </span>
-          <span class="hero-title-line inline-flex items-center justify-center gap-2 sm:gap-3 text-[#181024]">
+          <span class="hero-title-line inline-flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-[#181024]">
             <span>Make It a Treat</span>
-            <svg class="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 text-[#9357E8] -rotate-12 translate-y-0.5 shrink-0 select-none" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 text-[#9357E8] -rotate-12 translate-y-0.5 shrink-0 select-none" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
               <path d="M16 27 C16 27, 4.5 19, 4.5 11.5 C4.5 6.5, 8.5 3.5, 12.5 4.5 C14.8 5.1, 15.6 6.8, 16 8 C16.4 6.8, 17.2 5.1, 19.5 4.5 C23.5 3.5, 27.5 6.5, 27.5 11.5 C27.5 19, 16 27, 16 27 Z" />
             </svg>
           </span>
@@ -704,6 +803,10 @@ class TreatAdminPanel {
 
     const heroCaption = document.getElementById('hero-caption-text');
     if (heroCaption && this.config.brand.heroCaption) {
+      if (this.config.brand.heroCaption.includes('Discover amazing deals')) {
+        this.config.brand.heroCaption = "Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.";
+        try { localStorage.setItem(this.storageKey, JSON.stringify(this.config)); } catch(e) {}
+      }
       heroCaption.textContent = this.config.brand.heroCaption;
     }
 
@@ -730,6 +833,109 @@ class TreatAdminPanel {
     // 3. Update 4-Phone Screen Flow in DOM
     if (this.flow && Array.isArray(this.config.flowSteps)) {
       this.flow.setSteps(this.config.flowSteps);
+    }
+
+    // 4. Update Developer Profile in DOM
+    if (this.config.developer) {
+      const devName = document.getElementById('dev-profile-name');
+      const devRole = document.getElementById('dev-profile-role');
+      const devBio = document.getElementById('dev-profile-bio');
+      const devStatus = document.getElementById('dev-profile-status');
+      const devLocation = document.getElementById('dev-profile-location');
+      const devAvatar = document.getElementById('dev-profile-avatar');
+      const devGithub = document.getElementById('dev-profile-github');
+      const devRepo = document.getElementById('dev-profile-repo');
+      const devSkills = document.getElementById('dev-profile-skills');
+
+      if (devName && this.config.developer.name) devName.textContent = this.config.developer.name;
+      if (devRole && this.config.developer.role) devRole.textContent = this.config.developer.role;
+      if (devBio && this.config.developer.bio) devBio.textContent = this.config.developer.bio;
+      if (devStatus && this.config.developer.status) devStatus.textContent = this.config.developer.status;
+      if (devLocation && this.config.developer.location) devLocation.textContent = this.config.developer.location;
+      if (devAvatar && this.config.developer.avatar) devAvatar.src = this.config.developer.avatar;
+      if (devGithub && this.config.developer.githubUrl) devGithub.href = this.config.developer.githubUrl;
+      if (devRepo && this.config.developer.repoUrl) devRepo.href = this.config.developer.repoUrl;
+      if (devSkills && Array.isArray(this.config.developer.skills)) {
+        devSkills.innerHTML = this.config.developer.skills.map(s => 
+          `<span class="px-3 py-1 rounded-full bg-purple-50 text-[#7C52AA] text-[11px] font-extrabold border border-purple-100">${s}</span>`
+        ).join('');
+      }
+    }
+
+    // 5. Update Flow Step Titles & Descriptions below phones
+    if (Array.isArray(this.config.flowSteps)) {
+      this.config.flowSteps.forEach((step, idx) => {
+        const titleEl = document.getElementById(`step-title-${idx}`);
+        const descEl = document.getElementById(`step-desc-${idx}`);
+        if (titleEl && step.title) titleEl.textContent = step.title;
+        if (descEl && step.description) descEl.textContent = step.description;
+      });
+
+      // Update Phone 2 Budget Matcher defaults
+      if (this.config.flowSteps[1] && this.config.flowSteps[1].budgetAmount) {
+        const budgetVal = document.getElementById('budget-amount-val');
+        const budgetSlider = document.getElementById('interactive-budget-slider');
+        if (budgetVal) budgetVal.textContent = '৳ ' + this.config.flowSteps[1].budgetAmount;
+        if (budgetSlider) budgetSlider.value = this.config.flowSteps[1].budgetAmount;
+      }
+
+      // Update Phone 3 Countdown timer default
+      if (this.config.flowSteps[2] && this.config.flowSteps[2].holdTimerStart) {
+        const holdTimer = document.getElementById('flow-countdown-timer');
+        if (holdTimer) holdTimer.textContent = this.config.flowSteps[2].holdTimerStart;
+      }
+    }
+
+    // 6. Update Featured Platters in DOM
+    const foodContainer = document.getElementById('foodie-deals-container');
+    if (foodContainer && Array.isArray(this.config.foodPhotos) && this.config.foodPhotos.length > 0) {
+      foodContainer.innerHTML = this.config.foodPhotos.map(item => `
+        <div class="snap-start shrink-0 w-[260px] md:w-[280px] rounded-3xl overflow-hidden glass-panel flex flex-col group transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+          <div class="h-44 w-full relative overflow-hidden bg-surface-container">
+            <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary text-white text-[10px] font-extrabold tracking-wide uppercase shadow-md">
+              ${item.tag}
+            </span>
+            <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-md text-on-surface text-xs font-black shadow">
+              ${item.price}
+            </span>
+          </div>
+          <div class="p-4 flex flex-col justify-between flex-1">
+            <h4 class="font-headline font-bold text-sm text-on-surface truncate">${item.title}</h4>
+            <p class="text-xs text-on-surface-variant font-medium mt-1">Available across top participating Treat partner kitchens.</p>
+            <div class="mt-3 pt-2 border-t border-outline-variant/30 flex items-center justify-between">
+              <span class="text-[11px] font-bold text-secondary flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">bolt</span> Instant Match
+              </span>
+              <span class="text-xs font-black text-primary">Explore Platter →</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 7. Update Reviews in DOM
+    const reviewsContainer = document.getElementById('reviews-container');
+    if (reviewsContainer && Array.isArray(this.config.reviews) && this.config.reviews.length > 0) {
+      reviewsContainer.innerHTML = this.config.reviews.map(rev => `
+        <div class="p-6 rounded-3xl glass-panel flex flex-col justify-between gap-4 transition-transform hover:-translate-y-1">
+          <div class="flex items-center gap-1 text-primary">
+            ${'<span class="material-symbols-outlined text-[18px]">star</span>'.repeat(rev.rating || 5)}
+          </div>
+          <p class="text-xs md:text-sm text-on-surface-variant font-medium leading-relaxed italic">
+            "${rev.comment}"
+          </p>
+          <div class="flex items-center gap-3 pt-3 border-t border-outline-variant/30">
+            <div class="w-9 h-9 rounded-full overflow-hidden bg-surface-container shrink-0 border border-primary/20">
+              <img src="${rev.avatar}" alt="${rev.name}" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h5 class="font-headline font-bold text-xs text-on-surface leading-tight">${rev.name}</h5>
+              <span class="text-[10px] text-on-surface-variant font-medium">${rev.role}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
     }
   }
 }

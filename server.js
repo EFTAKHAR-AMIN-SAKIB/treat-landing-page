@@ -22,6 +22,7 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   let cleanUrl = req.url.split('?')[0];
   if (cleanUrl === '/') cleanUrl = '/index.html';
+  if (cleanUrl === '/admin') cleanUrl = '/admin.html';
 
   let filePath = path.join(PUBLIC_DIR, decodeURIComponent(cleanUrl));
 

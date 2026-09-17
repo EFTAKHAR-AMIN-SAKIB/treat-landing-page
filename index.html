@@ -79,6 +79,7 @@
         <a href="#home" class="px-4 py-1.5 rounded-full bg-secondary-container text-secondary-dark text-xs font-extrabold shadow-2xs">Home</a>
         <a href="#workflow-flow" class="px-4 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-bold transition-colors">How It Works</a>
         <a href="#reviews" class="px-4 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-bold transition-colors">Reviews</a>
+        <a href="#developer" class="px-4 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-bold transition-colors">Developer</a>
       </nav>
 
       <!-- Action Buttons -->
@@ -89,10 +90,10 @@
         </button>
 
         <!-- Admin Studio Button -->
-        <button id="admin-open-btn" class="px-2.5 sm:px-3.5 py-2 rounded-full bg-surface-container hover:bg-secondary-fixed text-on-surface text-xs font-bold transition-all flex items-center gap-1 sm:gap-1.5 border border-outline-variant/50 shadow-sm active:scale-95" title="Open Mockup Admin Studio (Ctrl+Shift+A)">
+        <a href="admin.html" id="admin-open-btn" class="px-2.5 sm:px-3.5 py-2 rounded-full bg-surface-container hover:bg-secondary-fixed text-on-surface text-xs font-bold transition-all flex items-center gap-1 sm:gap-1.5 border border-outline-variant/50 shadow-sm active:scale-95" title="Open Full-Page Admin Studio (133162029)">
           <span class="material-symbols-outlined text-secondary text-[18px]">settings</span>
           <span class="hidden sm:inline">Admin Studio</span>
-        </button>
+        </a>
 
         <!-- Download CTA -->
         <a href="#download-cta" class="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-extrabold tracking-wide uppercase flex items-center gap-1.5 sm:gap-2 bg-[#181024] hover:bg-[#2A1D3D] text-white shadow-md hover:shadow-lg transition-all active:scale-95">
@@ -118,15 +119,19 @@
         <span class="material-symbols-outlined text-amber-500 text-[18px]">star</span>
         <span>Food Bar Voices & Reviews</span>
       </a>
+      <a href="#developer" class="mobile-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-on-surface hover:bg-purple-50 transition-colors">
+        <span class="material-symbols-outlined text-purple-600 text-[18px]">terminal</span>
+        <span>Developer Profile</span>
+      </a>
       <div class="pt-2 mt-1 border-t border-outline-variant/30 flex items-center gap-2">
         <a href="#download-cta" class="mobile-nav-item flex-1 py-2.5 px-4 rounded-xl text-center text-xs font-extrabold bg-[#181024] text-white flex items-center justify-center gap-2 active:scale-95 transition-all">
           <span class="material-symbols-outlined text-[16px]">download</span>
           <span>Download Treat App</span>
         </a>
-        <button onclick="window.treatApp.admin.open(); document.getElementById('mobile-nav-dropdown').classList.add('hidden');" class="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-surface-container text-on-surface flex items-center gap-1.5 border border-outline-variant/40 active:scale-95 transition-all">
+        <a href="admin.html" class="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-surface-container text-on-surface flex items-center gap-1.5 border border-outline-variant/40 active:scale-95 transition-all" title="Admin Studio Dashboard">
           <span class="material-symbols-outlined text-secondary text-[16px]">tune</span>
           <span>Studio</span>
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -147,706 +152,882 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
       <!-- ======================================================================
-           PART 1: HERO (CENTERED 3-LINE HEADLINE & DUAL ACTION CTAS)
+           PART 1: HERO (SPLIT LAYOUT: STORYTELLING COPY + FLAGSHIP 3D PHONE)
            ====================================================================== -->
-      <div id="hero" class="text-center pt-6 pb-4 relative z-10 max-w-4xl mx-auto">
-        
-        <!-- Ambient Floating Lilac Petals (Left side matching reference art) -->
-        <div class="hidden lg:block absolute -left-12 xl:-left-24 top-1/2 -translate-y-4 pointer-events-none select-none z-10">
-          <div class="relative w-12 h-12">
-            <!-- Upper Petal -->
-            <div class="w-4 h-2.5 rounded-full bg-[#9357E8]/60 -rotate-25 transform mb-1.5 shadow-2xs"></div>
-            <!-- Lower Petal -->
-            <div class="w-3 h-2 rounded-full bg-[#9357E8]/40 rotate-15 transform ml-2.5"></div>
-          </div>
-        </div>
-
-        <!-- Ambient floating side props -->
-        <!-- Right: Gourmet Food Bowl & Flourish -->
-        <div class="hidden xl:block absolute -right-44 top-4 pointer-events-none select-none z-20">
-          <!-- Top-Right Accent Rays on Food Bowl -->
-          <svg class="absolute -top-2 -right-1 w-6 h-6 text-[#9357E8] select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-            <path d="M14 4 C16 6 17 9 17 9" />
-            <path d="M19 7 C20 8.5 21 10.5 21 10.5" />
-          </svg>
-          <div class="w-40 h-40 rounded-full p-1.5 bg-white/80 backdrop-blur-md shadow-[0_20px_45px_rgba(46,26,40,0.18)] ring-4 ring-white hero-food-bowl-wrapper relative">
-            <img src="assets/images/hero_food_bowl.jpg" alt="Food Bowl" class="w-full h-full rounded-full object-cover">
-          </div>
-          <img src="assets/images/prop_leaf.svg" alt="Basil Leaf" class="w-12 h-12 floating-prop prop-leaf-1 -mt-4 ml-6">
-          <span class="font-caveat font-bold text-xl text-[#7C52AA] tracking-wide rotate-3 block mt-2 text-center">
-            Good Food<br>Great Vibes ♡
-          </span>
-        </div>
-
-        <!-- Treat Logo Text (Replacing Marked Category Pill Section) -->
-        <div class="flex items-center justify-center mb-3 sm:mb-4 select-none">
-          <img src="assets/images/treat_bubble_logo.png" alt="Treat" class="h-10 sm:h-12 md:h-14 w-auto object-contain drop-shadow-[0_6px_22px_rgba(124,82,170,0.28)] hover:scale-105 transition-all duration-300">
-        </div>
-
-        <!-- 3 Captions Stacked in the Middle (Matching Reference Design Art) -->
-        <h1 id="hero-headline-text" class="font-headline font-black text-[32px] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[76px] tracking-tight leading-[1.12] text-[#181024] flex flex-col items-center justify-center gap-1 sm:gap-1.5 md:gap-2 text-center select-none px-2 sm:px-0">
+      <div id="hero" class="pt-4 sm:pt-6 pb-6 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          <!-- Line 1: Find Your Craving (with Radiating Accent Sparkles) -->
-          <span class="hero-title-line flex items-center justify-center gap-2 sm:gap-3 text-[#181024]">
-            <!-- Left Spark Rays -->
-            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] -rotate-12 shrink-0 select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
-              <path d="M6 15 C5 12 5.5 8 8 6" />
-              <path d="M12 18 C11 16 11.5 13.5 13 11" />
-            </svg>
+          <!-- LEFT COLUMN: BRAND STORYTELLING & CTAS (7 COLS) -->
+          <div class="lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
             
-            <span>Find Your Craving</span>
-            
-            <!-- Right Spark Rays -->
-            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] rotate-12 shrink-0 select-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
-              <path d="M18 15 C19 12 18.5 8 16 6" />
-              <path d="M12 18 C13 16 12.5 13.5 11 11" />
-            </svg>
-          </span>
+            <!-- Hand-drawn Script Tagline -->
+            <div class="flex items-center gap-2 mb-2 select-none">
+              <span class="font-caveat font-bold text-xl sm:text-2xl text-[#7C52AA] tracking-wide -rotate-2 inline-block">
+                Good Food Better Together
+              </span>
+              <svg class="w-5 h-5 text-[#9357E8] select-none inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M12 3 L12 7" />
+                <path d="M18 6 L15 9" />
+                <path d="M6 6 L9 9" />
+              </svg>
+            </div>
 
-          <!-- Line 2: Share the Good Stuff (in Treat Primary Color #E040A0) -->
-          <span class="hero-title-line inline-block text-center text-[#E040A0]">
-            <span class="hero-title-primary text-[#E040A0]">
-              <span>Share </span>
-              <span class="relative inline-block">
-                <span>the Good Stuff</span>
-                <!-- Hand-Drawn Underline Swoosh in Treat Primary Color -->
-                <svg class="absolute -bottom-2 sm:-bottom-3.5 left-0 w-full h-3 sm:h-4 overflow-visible pointer-events-none" viewBox="0 0 240 16" fill="none" preserveAspectRatio="none">
-                  <path d="M 3 8 C 65 14, 155 15, 237 6" stroke="#E040A0" stroke-width="4.5" stroke-linecap="round" />
+            <!-- 3-Line Headline (Bold, Impactful, Artful) -->
+            <h1 id="hero-headline-text" class="font-headline font-black text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] tracking-tight leading-[1.1] text-[#181024] select-none text-center lg:text-left">
+              
+              <!-- Line 1: Find Your Craving (with Radiating Accent Sparkles) -->
+              <span class="hero-title-line flex items-center justify-center lg:justify-start gap-2 sm:gap-3 text-[#181024]">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] -rotate-12 shrink-0 select-none hidden sm:inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+                  <path d="M6 15 C5 12 5.5 8 8 6" />
+                  <path d="M12 18 C11 16 11.5 13.5 13 11" />
+                </svg>
+                <span>Find Your Craving</span>
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#9357E8] rotate-12 shrink-0 select-none hidden sm:inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+                  <path d="M18 15 C19 12 18.5 8 16 6" />
+                  <path d="M12 18 C13 16 12.5 13.5 11 11" />
                 </svg>
               </span>
-            </span>
-          </span>
 
-          <!-- Line 3: Make It a Treat (with Outline Heart Doodle) -->
-          <span class="hero-title-line inline-flex items-center justify-center gap-2.5 sm:gap-3 text-[#181024]">
-            <span>Make It a Treat</span>
-            <svg class="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 text-[#9357E8] -rotate-12 translate-y-0.5 shrink-0 select-none" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 27 C16 27, 4.5 19, 4.5 11.5 C4.5 6.5, 8.5 3.5, 12.5 4.5 C14.8 5.1, 15.6 6.8, 16 8 C16.4 6.8, 17.2 5.1, 19.5 4.5 C23.5 3.5, 27.5 6.5, 27.5 11.5 C27.5 19, 16 27, 16 27 Z" />
-            </svg>
-          </span>
+              <!-- Line 2: Share the Good Stuff (in Treat Primary Color #E040A0) -->
+              <span class="hero-title-line block text-[#E040A0] my-0.5">
+                <span class="hero-title-primary text-[#E040A0]">
+                  <span>Share </span>
+                  <span class="relative inline-block">
+                    <span>the Good Stuff</span>
+                    <!-- Hand-Drawn Underline Swoosh in Treat Primary Color -->
+                    <svg class="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-3 sm:h-4 overflow-visible pointer-events-none" viewBox="0 0 240 16" fill="none" preserveAspectRatio="none">
+                      <path d="M 3 8 C 65 14, 155 15, 237 6" stroke="#E040A0" stroke-width="4.5" stroke-linecap="round" />
+                    </svg>
+                  </span>
+                </span>
+              </span>
 
-        </h1>
+              <!-- Line 3: Make It a Treat (with Outline Heart Doodle) -->
+              <span class="hero-title-line inline-flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-[#181024]">
+                <span>Make It a Treat</span>
+                <svg class="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 text-[#9357E8] -rotate-12 translate-y-0.5 shrink-0 select-none" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 27 C16 27, 4.5 19, 4.5 11.5 C4.5 6.5, 8.5 3.5, 12.5 4.5 C14.8 5.1, 15.6 6.8, 16 8 C16.4 6.8, 17.2 5.1, 19.5 4.5 C23.5 3.5, 27.5 6.5, 27.5 11.5 C27.5 19, 16 27, 16 27 Z" />
+                </svg>
+              </span>
 
-        <!-- Short-form Caption -->
-        <p id="hero-caption-text" class="mt-3 sm:mt-5 text-sm sm:text-base md:text-lg text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed text-center px-2 sm:px-0">
-          Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.
-        </p>
+            </h1>
 
-        <!-- Centered Dual Action CTAs -->
-        <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-5 sm:mt-7 px-4 sm:px-0">
-          <a href="#download-cta" class="w-full sm:w-auto px-7 py-3.5 rounded-full text-sm font-extrabold text-white bg-[#181024] hover:bg-[#2A1D3D] shadow-[0_10px_28px_rgba(24,16,36,0.25)] hover:shadow-[0_14px_34px_rgba(24,16,36,0.35)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-[20px]">download</span>
-            <span>Download App</span>
-          </a>
-          
-          <button id="hero-watch-btn" class="w-full sm:w-auto px-6 py-3.5 rounded-full text-sm font-bold text-[#181024] bg-white border border-gray-200/90 shadow-xs hover:bg-gray-50 hover:border-purple-200 active:scale-95 transition-all flex items-center justify-center gap-2.5">
-            <span class="w-6 h-6 rounded-full bg-[#EDE0FA] text-[#7C52AA] flex items-center justify-center">
-              <span class="material-symbols-outlined text-[16px] ml-0.5">play_arrow</span>
-            </span>
-            <span>Watch How It Works</span>
-          </button>
-        </div>
+            <!-- Vision Paragraph -->
+            <p id="hero-caption-text" class="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-600 font-medium max-w-xl leading-relaxed text-center lg:text-left">
+              Treat connects modern foodies with dynamic platter deals, automated budget matching, instant 2-minute table holds, and real-time kitchen floor sync. The all-in-one culinary squad experience.
+            </p>
 
-        <!-- Sleek High-End Platform Badges -->
-        <div class="flex items-center justify-center gap-3 sm:gap-4 mt-5 select-none">
-          <!-- iOS Badge -->
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-gray-200/80 shadow-2xs hover:border-purple-300 hover:shadow-sm transition-all group cursor-default">
-            <svg class="w-3.5 h-3.5 fill-current text-gray-900 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.85.94-2.92-.92.04-2.02.62-2.67 1.38-.57.65-1.07 1.73-.93 2.78 1.02.08 2.03-.53 2.66-1.24z"/>
-            </svg>
-            <span class="font-headline font-bold text-xs text-gray-800 tracking-tight">iOS</span>
-            <span class="text-[10px] text-gray-400 font-semibold">• Apple Store</span>
+            <!-- Dual Action CTAs -->
+            <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-6 sm:mt-7 w-full sm:w-auto">
+              <a href="#download-cta" class="w-full sm:w-auto px-7 py-3.5 rounded-full text-sm font-extrabold text-white bg-[#181024] hover:bg-[#2A1D3D] shadow-[0_10px_28px_rgba(24,16,36,0.25)] hover:shadow-[0_14px_34px_rgba(24,16,36,0.35)] hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5">
+                <span class="material-symbols-outlined text-[20px]">download</span>
+                <span>Download the app</span>
+              </a>
+              
+              <button id="hero-watch-btn" class="w-full sm:w-auto px-6 py-3.5 rounded-full text-sm font-bold text-[#181024] bg-white border border-gray-200 shadow-xs hover:bg-gray-50 hover:border-purple-200 active:scale-95 transition-all flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-[#7C52AA]">play_arrow</span>
+                <span>See how it works</span>
+              </button>
+            </div>
+
+            <!-- Social Proof & Key Capabilities Strip -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 mt-7 pt-5 border-t border-purple-100/70 w-full max-w-xl select-none">
+              <!-- 10,000+ foodies -->
+              <div class="flex items-center gap-2.5">
+                <div class="flex -space-x-2 overflow-hidden">
+                  <img class="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+                  <img class="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+                  <img class="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+                  <img class="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+                </div>
+                <div class="text-left">
+                  <span class="font-headline font-extrabold text-xs text-[#181024] block leading-tight">10,000+</span>
+                  <span class="text-[11px] text-gray-500 font-medium">foodies</span>
+                </div>
+              </div>
+
+              <!-- 2-min table holds -->
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-xl bg-[#F3EBF9] text-[#7C52AA] flex items-center justify-center shadow-2xs">
+                  <span class="material-symbols-outlined text-[16px]">timer</span>
+                </div>
+                <div class="text-left">
+                  <span class="font-headline font-extrabold text-xs text-[#181024] block leading-tight">2-min</span>
+                  <span class="text-[11px] text-gray-500 font-medium">table holds</span>
+                </div>
+              </div>
+
+              <!-- Smart budget matching -->
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shadow-2xs">
+                  <span class="material-symbols-outlined text-[16px]">wallet</span>
+                </div>
+                <div class="text-left">
+                  <span class="font-headline font-extrabold text-xs text-[#181024] block leading-tight">Smart</span>
+                  <span class="text-[11px] text-gray-500 font-medium">budget matching</span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <!-- Android Badge -->
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-gray-200/80 shadow-2xs hover:border-emerald-300 hover:shadow-sm transition-all group cursor-default">
-            <svg class="w-3.5 h-3.5 fill-[#3DDC84] group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-              <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.411 13.8559 8.1 12 8.1s-3.5902.311-5.1368.8497L4.8409 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
-            </svg>
-            <span class="font-headline font-bold text-xs text-gray-800 tracking-tight">Android</span>
-            <span class="text-[10px] text-emerald-600 font-extrabold bg-emerald-50 px-1.5 py-0.5 rounded-full">v1.0.4 APK</span>
+          <!-- RIGHT COLUMN: FLAGSHIP 3D PHONE + FOOD BOWL SHOWCASE (5 COLS) -->
+          <div class="lg:col-span-5 relative flex items-center justify-center pt-4 lg:pt-0">
+            
+            <!-- Soft Ambient Radial Glow -->
+            <div class="absolute w-[340px] sm:w-[420px] h-[340px] sm:h-[420px] rounded-full bg-gradient-to-tr from-[#EDE0FA]/80 to-[#FFF0F8]/90 filter blur-3xl pointer-events-none -z-10"></div>
+            
+            <!-- Overlapping Gourmet Food Bowl & Calligraphic Flourish (Top Right) -->
+            <div class="absolute -right-4 sm:-right-8 -top-6 sm:-top-8 pointer-events-none select-none z-20 hidden sm:block">
+              <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-full p-1.5 bg-white/90 backdrop-blur-md shadow-[0_18px_40px_rgba(46,26,40,0.16)] ring-4 ring-white relative hero-food-bowl-wrapper">
+                <img src="assets/images/hero_food_bowl.jpg" alt="Gourmet Food Bowl" class="w-full h-full rounded-full object-cover">
+              </div>
+              <img src="assets/images/prop_leaf.svg" alt="Basil Leaf" class="w-10 h-10 floating-prop prop-leaf-1 -mt-3 ml-4">
+              <div class="text-center mt-1 -rotate-3">
+                <span class="font-caveat font-bold text-base sm:text-lg text-[#7C52AA] tracking-wide block leading-tight">
+                  Good food,<br>great vibes ♡
+                </span>
+                <svg class="w-6 h-6 text-[#9357E8] mx-auto mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M12 4 C8 10, 10 16, 16 18" />
+                  <path d="M13 18 L16 18 L16 15" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- Flagship 3D Phone Mockup (iPhone 16 Pro displaying Treat Home Feed) -->
+            <div class="hero-flagship-tilt relative z-10">
+              <div class="flagship-phone-chassis w-[260px] sm:w-[282px] h-[530px] sm:h-[565px]">
+                
+                <!-- Hardware Buttons -->
+                <div class="phone-hw-btn phone-hw-action"></div>
+                <div class="phone-hw-btn phone-hw-vol-up"></div>
+                <div class="phone-hw-btn phone-hw-vol-down"></div>
+                <div class="phone-hw-btn phone-hw-power"></div>
+
+                <div class="phone-screen-frame">
+                  <!-- Dynamic Island & Speaker -->
+                  <div class="phone-top-speaker"></div>
+                  <div class="phone-dynamic-island">
+                    <div class="phone-truedepth-sensor"></div>
+                    <div class="phone-camera-lens"></div>
+                  </div>
+
+                  <!-- Realistic Status Bar -->
+                  <div class="phone-status-bar">
+                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                    <div class="flex items-center gap-1 text-[#1E293B]">
+                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                    </div>
+                  </div>
+
+                  <!-- Treat App Home Screen Content -->
+                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                    
+                    <!-- App Top Header (Treat Logo + Dhaka Location) -->
+                    <div class="px-3 pt-[30px] pb-1.5 flex items-center justify-between">
+                      <img src="assets/images/treat_bubble_logo.png" alt="Treat" class="h-5 w-auto object-contain">
+                      <div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-gray-100 shadow-2xs text-[9.5px] font-bold text-gray-700">
+                        <span class="material-symbols-outlined text-[11px] text-[#E040A0]">location_on</span>
+                        <span>Dhaka</span>
+                        <span class="material-symbols-outlined text-[10px] text-gray-400">expand_more</span>
+                      </div>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="px-3 py-1">
+                      <div class="px-2.5 py-1 rounded-xl bg-white border border-gray-100 shadow-2xs flex items-center gap-1.5 text-gray-400">
+                        <span class="material-symbols-outlined text-[13px]">search</span>
+                        <span class="text-[9px] font-medium text-gray-400 truncate">Search deals, restaurants, or cuisines</span>
+                      </div>
+                    </div>
+
+                    <!-- Featured Feast Banner Card (Mediterranean Platter) -->
+                    <div class="px-3 py-1.5">
+                      <div class="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden relative group">
+                        <div class="h-28 w-full relative">
+                          <img src="assets/images/fiesta_platter.jpg" alt="Mediterranean Platter" class="w-full h-full object-cover">
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+                          
+                          <!-- Top Badges -->
+                          <div class="absolute top-2 left-2 flex items-center gap-1">
+                            <span class="px-1.5 py-0.5 rounded-full bg-[#E040A0] text-white text-[7px] font-black tracking-wider uppercase shadow-2xs">Today's Special</span>
+                          </div>
+
+                          <!-- Card Info Overlay -->
+                          <div class="absolute bottom-2 left-2 right-2 text-white">
+                            <h4 class="font-headline font-black text-[12px] leading-tight drop-shadow-xs">Mediterranean Platter</h4>
+                            <div class="flex items-center justify-between mt-0.5 text-[8.5px] text-white/90">
+                              <span>The Loft • 1.2 km</span>
+                              <div class="flex items-center gap-1">
+                                <span class="px-1 py-0.2 rounded bg-pink-500 text-white font-extrabold text-[7px]">45% OFF</span>
+                                <span class="font-black text-[10px]">৳ 320</span>
+                                <span class="line-through text-white/60 text-[8px]">৳ 540</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Quick Category Icon Pills (Deals, Nearby, Budget, Friends) -->
+                    <div class="grid grid-cols-4 gap-1.5 px-3 py-1.5 text-center">
+                      <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-xl bg-[#F3EBF9] text-[#7C52AA] flex items-center justify-center shadow-2xs">
+                          <span class="material-symbols-outlined text-[15px]">local_fire_department</span>
+                        </div>
+                        <span class="text-[8px] font-bold text-gray-700 mt-1">Deals</span>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-xl bg-[#EFF6FF] text-[#2563EB] flex items-center justify-center shadow-2xs">
+                          <span class="material-symbols-outlined text-[15px]">near_me</span>
+                        </div>
+                        <span class="text-[8px] font-bold text-gray-700 mt-1">Nearby</span>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-xl bg-[#FFF5F2] text-[#FF6B4A] flex items-center justify-center shadow-2xs">
+                          <span class="material-symbols-outlined text-[15px]">account_balance_wallet</span>
+                        </div>
+                        <span class="text-[8px] font-bold text-gray-700 mt-1">Budget</span>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 rounded-xl bg-[#ECFEFF] text-[#0096CC] flex items-center justify-center shadow-2xs">
+                          <span class="material-symbols-outlined text-[15px]">groups</span>
+                        </div>
+                        <span class="text-[8px] font-bold text-gray-700 mt-1">Friends</span>
+                      </div>
+                    </div>
+
+                    <!-- Popular Near You Section -->
+                    <div class="px-3 pt-1 pb-16">
+                      <div class="flex items-center justify-between mb-1.5">
+                        <span class="font-headline font-black text-[10px] text-[#181024]">Popular Near You</span>
+                        <span class="text-[8px] font-bold text-[#7C52AA]">See All</span>
+                      </div>
+                      <div class="grid grid-cols-2 gap-2">
+                        <div class="rounded-xl bg-white border border-gray-100 p-1.5 shadow-2xs">
+                          <img src="assets/images/bistro_bella.jpg" class="h-14 w-full rounded-lg object-cover">
+                          <span class="font-bold text-[8.5px] text-[#181024] block mt-1 truncate">Fiesta Platter</span>
+                          <span class="text-[7.5px] text-[#E040A0] font-black">৳ 280</span>
+                        </div>
+                        <div class="rounded-xl bg-white border border-gray-100 p-1.5 shadow-2xs">
+                          <img src="assets/images/taco_bodega.jpg" class="h-14 w-full rounded-lg object-cover">
+                          <span class="font-bold text-[8.5px] text-[#181024] block mt-1 truncate">Taco Board</span>
+                          <span class="text-[7.5px] text-[#E040A0] font-black">৳ 340</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- In-App Bottom Navigation Bar -->
+                    <div class="absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-gray-100 px-3 py-1.5 flex items-center justify-between text-gray-400 z-30">
+                      <div class="flex flex-col items-center text-[#E040A0]">
+                        <span class="material-symbols-outlined text-[15px]">home</span>
+                        <span class="text-[7px] font-extrabold">Home</span>
+                      </div>
+                      <div class="flex flex-col items-center hover:text-gray-600">
+                        <span class="material-symbols-outlined text-[15px]">explore</span>
+                        <span class="text-[7px] font-bold">Discover</span>
+                      </div>
+                      <div class="flex flex-col items-center hover:text-gray-600">
+                        <span class="material-symbols-outlined text-[15px]">timer</span>
+                        <span class="text-[7px] font-bold">Hold</span>
+                      </div>
+                      <div class="flex flex-col items-center hover:text-gray-600">
+                        <span class="material-symbols-outlined text-[15px]">bookmark</span>
+                        <span class="text-[7px] font-bold">Saved</span>
+                      </div>
+                      <div class="flex flex-col items-center hover:text-gray-600">
+                        <span class="material-symbols-outlined text-[15px]">person</span>
+                        <span class="text-[7px] font-bold">Profile</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <!-- Vertical Flow Line Connector & Scroll to Explore -->
-        <div class="hero-flow-connector flex flex-col items-center justify-center pt-6 pb-2 relative z-20">
-          <!-- Slender Connecting Line -->
-          <div class="w-[1.5px] h-8 bg-gradient-to-b from-[#DCC8E0] via-[#A880D0] to-[#7C52AA]"></div>
-          
-          <!-- Round Chevron Down Button -->
-          <a href="#feature-01" class="w-7 h-7 rounded-full bg-white shadow-sm border border-purple-200/80 flex items-center justify-center text-[#7C52AA] hover:border-purple-300 hover:shadow hover:scale-105 active:scale-95 transition-all group my-1 z-10" aria-label="Scroll to explore">
-            <span class="material-symbols-outlined text-[17px] group-hover:translate-y-0.5 transition-transform text-[#7C52AA]">keyboard_arrow_down</span>
-          </a>
-          
-          <!-- "Scroll to explore" Label -->
-          <span class="text-[11.5px] font-medium text-[#8A7D9B] tracking-normal select-none mt-1">Scroll to explore</span>
         </div>
-
       </div>
 
       <!-- ======================================================================
            PART 2: COMPACT 4-FEATURE HORIZONTAL FLOW LINE ("FLOW SHORT IN A LINE")
            ====================================================================== -->
-      <div id="feature-01" class="relative mt-2 mb-10">
+      <div id="feature-01" class="relative mt-8 mb-14">
         <span id="workflow-flow" class="absolute -top-24 pointer-events-none"></span>
-        
-        <!-- Horizontal Continuous 3D Motion Spline (SVG) -->
-        <svg class="absolute top-1/2 left-0 w-full h-44 -translate-y-1/2 pointer-events-none z-0 hidden lg:block" preserveAspectRatio="none" viewBox="0 0 1200 180" fill="none">
-          <defs>
-            <linearGradient id="horizontalSplineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#E040A0" stop-opacity="0.9" />
-              <stop offset="28%" stop-color="#9357E8" stop-opacity="0.95" />
-              <stop offset="60%" stop-color="#FF6B4A" stop-opacity="0.9" />
-              <stop offset="100%" stop-color="#0096CC" stop-opacity="0.95" />
-            </linearGradient>
-            <filter id="hSplineGlow" x="-20%" y="-50%" width="140%" height="200%">
-              <feGaussianBlur stdDeviation="6" result="blur1" />
-              <feGaussianBlur stdDeviation="14" result="blur2" />
-              <feMerge>
-                <feMergeNode in="blur2" />
-                <feMergeNode in="blur1" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
 
-          <!-- Outer glowing diffuse beam -->
-          <path d="M 60 90 C 220 40, 380 140, 560 70 C 740 10, 920 130, 1140 85"
-                stroke="url(#horizontalSplineGradient)" 
-                stroke-width="14" 
-                stroke-linecap="round"
-                stroke-opacity="0.26"
-                filter="url(#hSplineGlow)" />
-
-          <!-- Crisp core motion line with dash animation -->
-          <path class="spline-core-path"
-                d="M 60 90 C 220 40, 380 140, 560 70 C 740 10, 920 130, 1140 85"
-                stroke="url(#horizontalSplineGradient)" 
-                stroke-width="4" 
-                stroke-linecap="round" />
-
-          <!-- Luminous Junction Node Beads -->
-          <circle cx="160" cy="72" r="8.5" fill="#FFFFFF" stroke="#E040A0" stroke-width="3" filter="drop-shadow(0 0 10px #E040A0)" />
-          <circle cx="450" cy="105" r="8.5" fill="#FFFFFF" stroke="#9357E8" stroke-width="3" filter="drop-shadow(0 0 10px #9357E8)" />
-          <circle cx="740" cy="45" r="8.5" fill="#FFFFFF" stroke="#FF6B4A" stroke-width="3" filter="drop-shadow(0 0 10px #FF6B4A)" />
-          <circle cx="1020" cy="98" r="8.5" fill="#FFFFFF" stroke="#0096CC" stroke-width="3" filter="drop-shadow(0 0 10px #0096CC)" />
-        </svg>
-
-        <!-- Mobile Step Segmented Pill Tabs (Instant Jump on Mobile) -->
-        <div id="mobile-step-tabs" class="flex sm:hidden items-center justify-center gap-1.5 p-1 mx-auto mb-4 bg-white/90 border border-purple-200/70 rounded-full shadow-2xs max-w-fit select-none z-20 relative">
-          <button type="button" class="mobile-step-tab active px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5" data-step="0">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#E040A0]"></span>
-            <span>01 Drops</span>
-          </button>
-          <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="1">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#2563EB]"></span>
-            <span>02 Budget</span>
-          </button>
-          <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#FF6B4A]"></span>
-            <span>03 Hold</span>
-          </button>
-          <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="3">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#0096CC]"></span>
-            <span>04 Squad</span>
-          </button>
+        <!-- Section Header (Matching media_1789640259043.jpg) -->
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 px-4">
+          <span class="inline-block px-3.5 py-1 rounded-full bg-pink-50 border border-pink-200 text-[#E040A0] font-headline font-black text-[11px] sm:text-xs uppercase tracking-wider mb-2.5 shadow-2xs">
+            SIMPLE STEPS
+          </span>
+          <h2 class="font-headline font-black text-2xl sm:text-3xl md:text-4xl text-[#181024] tracking-tight mb-2.5">
+            From craving to together
+          </h2>
+          <p class="text-xs sm:text-sm md:text-base text-gray-500 font-medium max-w-xl mx-auto">
+            Four effortless steps from finding a deal to clinking glasses at your favorite spot.
+          </p>
         </div>
 
-        <!-- 4-Phone Horizontal Flow Grid / Track (horizontal snap-scroll on mobile) -->
-        <div id="flow-cards-track" class="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-5 pb-4 pt-1 -mx-4 px-4 sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none lg:grid-cols-4 lg:gap-6 relative z-10 max-w-7xl sm:mx-auto scrollbar-none">
-          
-          <!-- ================= ITEM 01: CRAVE-WORTHY FEAST DROPS ================= -->
-          <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="0">
+        <div class="relative max-w-7xl mx-auto">
+          <!-- Horizontal Continuous 3D Motion Spline (SVG) -->
+          <svg class="absolute top-[260px] left-0 w-full h-44 -translate-y-1/2 pointer-events-none z-0 hidden lg:block" preserveAspectRatio="none" viewBox="0 0 1200 180" fill="none">
+            <defs>
+              <linearGradient id="horizontalSplineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#E040A0" stop-opacity="0.95" />
+                <stop offset="35%" stop-color="#E040A0" stop-opacity="0.95" />
+                <stop offset="70%" stop-color="#FF5AA0" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#E040A0" stop-opacity="0.95" />
+              </linearGradient>
+              <filter id="hSplineGlow" x="-20%" y="-50%" width="140%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="blur1" />
+                <feGaussianBlur stdDeviation="14" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Outer glowing diffuse beam -->
+            <path d="M 60 90 C 220 40, 380 140, 560 70 C 740 10, 920 130, 1140 85"
+                  stroke="url(#horizontalSplineGradient)" 
+                  stroke-width="14" 
+                  stroke-linecap="round"
+                  stroke-opacity="0.28"
+                  filter="url(#hSplineGlow)" />
+
+            <!-- Crisp core motion line with dash animation -->
+            <path class="spline-core-path"
+                  d="M 60 90 C 220 40, 380 140, 560 70 C 740 10, 920 130, 1140 85"
+                  stroke="url(#horizontalSplineGradient)" 
+                  stroke-width="4" 
+                  stroke-linecap="round" />
+
+            <!-- Luminous Junction Node Beads -->
+            <circle cx="160" cy="72" r="8.5" fill="#FFFFFF" stroke="#E040A0" stroke-width="3.5" filter="drop-shadow(0 0 10px #E040A0)" />
+            <circle cx="450" cy="105" r="8.5" fill="#FFFFFF" stroke="#E040A0" stroke-width="3.5" filter="drop-shadow(0 0 10px #E040A0)" />
+            <circle cx="740" cy="45" r="8.5" fill="#FFFFFF" stroke="#E040A0" stroke-width="3.5" filter="drop-shadow(0 0 10px #E040A0)" />
+            <circle cx="1020" cy="98" r="8.5" fill="#FFFFFF" stroke="#E040A0" stroke-width="3.5" filter="drop-shadow(0 0 10px #E040A0)" />
+          </svg>
+
+          <!-- Mobile Step Segmented Pill Tabs (Instant Jump on Mobile) -->
+          <div id="mobile-step-tabs" class="flex sm:hidden items-center justify-center gap-1.5 p-1 mx-auto mb-4 bg-white/90 border border-pink-200/70 rounded-full shadow-2xs max-w-fit select-none z-20 relative">
+            <button type="button" class="mobile-step-tab active px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5" data-step="0">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E040A0]"></span>
+              <span>1 Deal</span>
+            </button>
+            <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E040A0]"></span>
+              <span>2 Budget</span>
+            </button>
+            <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E040A0]"></span>
+              <span>3 Hold</span>
+            </button>
+            <button type="button" class="mobile-step-tab px-3 py-1.5 rounded-full text-xs font-bold transition-all text-gray-500 hover:text-gray-900 flex items-center gap-1.5" data-step="3">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E040A0]"></span>
+              <span>4 Share</span>
+            </button>
+          </div>
+
+          <!-- 4-Phone Horizontal Flow Grid / Track (horizontal snap-scroll on mobile) -->
+          <div id="flow-cards-track" class="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-5 pb-4 pt-1 -mx-4 px-4 sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none lg:grid-cols-4 lg:gap-6 relative z-10 sm:mx-auto scrollbar-none">
             
-            <!-- Step Badge & Title Above -->
-            <div class="mb-3 flex flex-col items-center">
-              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3EBF9] text-[#7C52AA] font-headline font-black text-[11px] mb-1.5 shadow-2xs">
-                <span class="w-5 h-5 rounded-full bg-[#7C52AA] text-white flex items-center justify-center text-[10px]">01</span>
-                <span>Feast Drops</span>
-              </div>
-              <h3 class="font-headline font-black text-sm sm:text-base text-[#181024]">Crave-Worthy Drops</h3>
-            </div>
+            <!-- ================= ITEM 01: DISCOVER A DEAL ================= -->
+            <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="0">
+              
+              <!-- 3D Phone Chassis -->
+              <div class="flow-phone-wrapper phone-line-tilt-1 relative my-2">
+                <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
+                  <!-- Hardware Side Buttons -->
+                  <div class="phone-hw-btn phone-hw-action"></div>
+                  <div class="phone-hw-btn phone-hw-vol-up"></div>
+                  <div class="phone-hw-btn phone-hw-vol-down"></div>
+                  <div class="phone-hw-btn phone-hw-power"></div>
 
-            <!-- 3D Phone Chassis -->
-            <div class="flow-phone-wrapper phone-line-tilt-1 relative my-2">
-              <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
-                <!-- Hardware Side Buttons -->
-                <div class="phone-hw-btn phone-hw-action"></div>
-                <div class="phone-hw-btn phone-hw-vol-up"></div>
-                <div class="phone-hw-btn phone-hw-vol-down"></div>
-                <div class="phone-hw-btn phone-hw-power"></div>
-
-                <div class="phone-screen-frame">
-                  <!-- Top Speaker & Dynamic Island -->
-                  <div class="phone-top-speaker"></div>
-                  <div class="phone-dynamic-island">
-                    <div class="phone-truedepth-sensor"></div>
-                    <div class="phone-camera-lens"></div>
-                  </div>
-
-                  <!-- Realistic Status Bar -->
-                  <div class="phone-status-bar">
-                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
-                    <div class="flex items-center gap-1 text-[#1E293B]">
-                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
-                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
-                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                  <div class="phone-screen-frame">
+                    <!-- Top Speaker & Dynamic Island -->
+                    <div class="phone-top-speaker"></div>
+                    <div class="phone-dynamic-island">
+                      <div class="phone-truedepth-sensor"></div>
+                      <div class="phone-camera-lens"></div>
                     </div>
-                  </div>
-                  
-                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
-                    <!-- In-App Top Search Bar -->
-                    <div class="px-3 pt-[30px] pb-1">
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-1.5">
-                          <img src="assets/images/treat_bubble_logo.png" class="h-5 w-auto object-contain">
-                          <span class="font-headline font-black text-[12px] text-[#181024]">Treat Drops</span>
-                        </div>
-                        <span class="w-6 h-6 rounded-full bg-white border border-gray-100 flex items-center justify-center shadow-2xs">
-                          <span class="material-symbols-outlined text-[13px] text-gray-600">tune</span>
-                        </span>
-                      </div>
-                      
-                      <!-- Mini Search Input -->
-                      <div class="mt-2 px-2.5 py-1 rounded-xl bg-white border border-gray-100 shadow-2xs flex items-center gap-1.5 text-gray-400">
-                        <span class="material-symbols-outlined text-[13px]">search</span>
-                        <span class="text-[9px] font-medium">Search platters, spots...</span>
+
+                    <!-- Realistic Status Bar -->
+                    <div class="phone-status-bar">
+                      <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                      <div class="flex items-center gap-1 text-[#1E293B]">
+                        <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                        <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                        <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
                       </div>
                     </div>
-
-                    <!-- Category Pills -->
-                    <div class="flex items-center gap-1.5 px-3 py-1.5 overflow-x-auto scrollbar-none">
-                      <span class="px-2.5 py-0.5 rounded-full bg-[#7C52AA] text-white text-[8.5px] font-extrabold shadow-2xs shrink-0">Drops</span>
-                      <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold shrink-0">Trending</span>
-                      <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold shrink-0">2-for-1</span>
-                    </div>
-
-                    <!-- Platter Deal Card -->
-                    <div class="px-3 pt-1 pb-16">
-                      <div class="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden transition-all">
-                        <div class="h-28 w-full relative">
-                          <img src="assets/images/fiesta_platter.jpg" class="w-full h-full object-cover">
-                          <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-[#E040A0] text-white text-[7.5px] font-black uppercase tracking-wide shadow-sm">2-for-1 Drop</span>
-                          <span class="absolute top-2 right-2 w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-pink-500 shadow-sm">
-                            <span class="material-symbols-outlined text-[12px]">favorite</span>
+                    
+                    <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                      <!-- In-App Top Search Bar -->
+                      <div class="px-3 pt-[30px] pb-1">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-1.5">
+                            <img src="assets/images/treat_bubble_logo.png" class="h-5 w-auto object-contain" alt="Treat">
+                            <span class="font-headline font-black text-[12px] text-[#181024]">Treat Drops</span>
+                          </div>
+                          <span class="w-6 h-6 rounded-full bg-white border border-gray-100 flex items-center justify-center shadow-2xs">
+                            <span class="material-symbols-outlined text-[13px] text-gray-600">tune</span>
                           </span>
                         </div>
-                        <div class="p-2.5 text-left">
-                          <div class="flex items-center justify-between">
-                            <h4 class="font-headline font-black text-[11px] text-[#181024] truncate">Mediterranean Feast</h4>
-                            <span class="text-[8.5px] font-extrabold text-amber-500 flex items-center gap-0.5">★ 4.9</span>
+                        
+                        <!-- Mini Search Input -->
+                        <div class="mt-2 px-2.5 py-1 rounded-xl bg-white border border-gray-100 shadow-2xs flex items-center gap-1.5 text-gray-400">
+                          <span class="material-symbols-outlined text-[13px]">search</span>
+                          <span class="text-[9px] font-medium">Search platters, spots...</span>
+                        </div>
+                      </div>
+
+                      <!-- Category Pills -->
+                      <div class="flex items-center gap-1.5 px-3 py-1.5 overflow-x-auto scrollbar-none">
+                        <span class="px-2.5 py-0.5 rounded-full bg-[#E040A0] text-white text-[8.5px] font-extrabold shadow-2xs shrink-0">Drops</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold shrink-0">Trending</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold shrink-0">2-for-1</span>
+                      </div>
+
+                      <!-- Platter Deal Card -->
+                      <div class="px-3 pt-1 pb-16">
+                        <div class="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden transition-all text-left">
+                          <div class="h-28 w-full relative">
+                            <img src="assets/images/fiesta_platter.jpg" class="w-full h-full object-cover" alt="The Backyard Platter">
+                            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-[#E040A0] text-white text-[7.5px] font-black uppercase tracking-wide shadow-sm">20% OFF</span>
+                            <span class="absolute top-2 right-2 w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-pink-500 shadow-sm">
+                              <span class="material-symbols-outlined text-[12px]">favorite</span>
+                            </span>
                           </div>
-                          <p class="text-[8.5px] text-gray-500 font-medium">The Food Yard • 1.2 km away</p>
-                          <div class="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
-                            <div class="flex items-baseline gap-1">
-                              <span class="text-[12px] font-black text-[#7C52AA]">$ 320</span>
-                              <span class="text-[8.5px] text-gray-400 line-through">$ 640</span>
+                          <div class="p-2.5">
+                            <div class="flex items-center justify-between">
+                              <h4 class="font-headline font-black text-[11px] text-[#181024] truncate">The Backyard Platter</h4>
+                              <span class="text-[8.5px] font-extrabold text-amber-500 flex items-center gap-0.5">★ 4.9</span>
                             </div>
-                            <span class="px-1.5 py-0.5 rounded-md bg-pink-100 text-primary text-[7.5px] font-black uppercase">50% OFF</span>
+                            <p class="text-[8.5px] text-gray-500 font-medium">Dhanmondi, Dhaka • 1.2 km</p>
+                            <div class="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
+                              <div class="flex items-baseline gap-1">
+                                <span class="text-[12px] font-black text-[#E040A0]">৳ 320</span>
+                                <span class="text-[8.5px] text-gray-400 line-through">৳ 400</span>
+                              </div>
+                              <span class="px-2 py-0.5 rounded-md bg-[#E040A0] text-white text-[8px] font-black">View Deal</span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <!-- In-Phone App Navigation Bar -->
-                  <div class="phone-app-nav">
-                    <div class="phone-nav-item active">
-                      <span class="material-symbols-outlined">restaurant</span>
-                      <span>Drops</span>
+                    <!-- In-Phone App Navigation Bar -->
+                    <div class="phone-app-nav">
+                      <div class="phone-nav-item active">
+                        <span class="material-symbols-outlined">restaurant</span>
+                        <span>Drops</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">payments</span>
+                        <span>Budget</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">table_restaurant</span>
+                        <span>Hold</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">group</span>
+                        <span>Squad</span>
+                      </div>
                     </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">payments</span>
-                      <span>Budget</span>
-                    </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">table_restaurant</span>
-                      <span>Hold</span>
-                    </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">group</span>
-                      <span>Squad</span>
-                    </div>
-                  </div>
 
-                  <div class="phone-glare-overlay"></div>
-                  <div class="phone-gesture-bar"></div>
+                    <div class="phone-glare-overlay"></div>
+                    <div class="phone-gesture-bar"></div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Description & Handwritten Note Below -->
-            <p class="text-xs text-gray-600 font-medium max-w-[210px] mt-2 leading-relaxed">
-              Snag limited 2-for-1 platter drops and secret perks before slots sell out.
-            </p>
-            <div class="font-caveat font-bold text-base text-[#7C52AA] mt-1 select-none">
-              Limited time. Big vibes. ↗
-            </div>
-
-          </div>
-
-          <!-- ================= ITEM 02: ZERO-MATH SQUAD BUDGET ================= -->
-          <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="1">
-            
-            <!-- Step Badge & Title Above -->
-            <div class="mb-3 flex flex-col items-center">
-              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFF6FF] text-[#2563EB] font-headline font-black text-[11px] mb-1.5 shadow-2xs">
-                <span class="w-5 h-5 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-[10px]">02</span>
-                <span>Squad Budget</span>
-              </div>
-              <h3 class="font-headline font-black text-sm sm:text-base text-[#181024]">Zero-Math Budget</h3>
-            </div>
-
-            <!-- 3D Phone Chassis -->
-            <div class="flow-phone-wrapper phone-line-tilt-2 relative my-2">
-              <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
-                <!-- Hardware Side Buttons -->
-                <div class="phone-hw-btn phone-hw-action"></div>
-                <div class="phone-hw-btn phone-hw-vol-up"></div>
-                <div class="phone-hw-btn phone-hw-vol-down"></div>
-                <div class="phone-hw-btn phone-hw-power"></div>
-
-                <div class="phone-screen-frame">
-                  <!-- Top Speaker & Dynamic Island -->
-                  <div class="phone-top-speaker"></div>
-                  <div class="phone-dynamic-island">
-                    <div class="phone-truedepth-sensor"></div>
-                    <div class="phone-camera-lens"></div>
-                  </div>
-
-                  <!-- Realistic Status Bar -->
-                  <div class="phone-status-bar">
-                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
-                    <div class="flex items-center gap-1 text-[#1E293B]">
-                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
-                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
-                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
-                    </div>
-                  </div>
-                  
-                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
-                    <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
-                      <span class="material-symbols-outlined text-[14px] text-gray-500">arrow_back</span>
-                      <span class="font-headline font-black text-[11.5px] text-[#181024]">Squad Budget Match</span>
-                      <span class="material-symbols-outlined text-[14px] text-gray-400">info</span>
-                    </div>
-
-                    <div class="px-3 pt-2 text-center">
-                      <span class="text-[8px] font-black text-gray-400 uppercase tracking-widest">BUDGET PER PERSON</span>
-                      <div class="text-3xl font-headline font-black text-[#181024] my-0.5 tracking-tight" id="budget-amount-val">$ 25</div>
-                      
-                      <div class="px-2 py-2">
-                        <input type="range" id="interactive-budget-slider" min="10" max="60" value="25" class="w-full accent-[#7C52AA] cursor-pointer h-1.5 rounded-lg bg-gray-200">
-                        <div class="flex justify-between text-[8px] font-bold text-gray-400 mt-1">
-                          <span>$10</span>
-                          <span class="text-[#7C52AA] font-black">$25</span>
-                          <span>$50+</span>
-                        </div>
-                      </div>
-
-                      <button class="w-full py-2 rounded-xl bg-gradient-to-r from-[#7C52AA] via-[#9357E8] to-[#E040A0] text-white text-[9.5px] font-black shadow-sm flex items-center justify-center gap-1">
-                        <span class="material-symbols-outlined text-[13px]">auto_awesome</span>
-                        <span>Find Squad Matches</span>
-                      </button>
-                    </div>
-
-                    <div class="px-3 pt-2.5 pb-16 text-left">
-                      <span class="text-[8px] font-black text-gray-400 uppercase tracking-wider block mb-1.5">Auto-Matched Feast</span>
-                      <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs flex items-center gap-2.5">
-                        <img src="assets/images/bistro_bella.jpg" class="w-12 h-12 rounded-xl object-cover shrink-0">
-                        <div class="flex-1 min-w-0">
-                          <div class="flex items-center justify-between">
-                            <span class="text-[7.5px] font-black text-[#7C52AA] uppercase tracking-wide">✓ Tax & Tip Included</span>
-                            <span class="text-[11px] font-black text-[#181024]">$ 22</span>
-                          </div>
-                          <h5 class="font-headline font-bold text-[10px] text-[#181024] truncate">Bistro Feast Board</h5>
-                          <p class="text-[8px] text-gray-400 font-medium">Exact match • 4 pers squad</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- In-Phone App Navigation Bar -->
-                  <div class="phone-app-nav">
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">restaurant</span>
-                      <span>Drops</span>
-                    </div>
-                    <div class="phone-nav-item active">
-                      <span class="material-symbols-outlined">payments</span>
-                      <span>Budget</span>
-                    </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">table_restaurant</span>
-                      <span>Hold</span>
-                    </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">group</span>
-                      <span>Squad</span>
-                    </div>
-                  </div>
-
-                  <div class="phone-glare-overlay"></div>
-                  <div class="phone-gesture-bar"></div>
+              <!-- Numbered solid pink circle badge, Step Title & Description BELOW Phone -->
+              <div class="mt-4 flex flex-col items-center max-w-[220px]">
+                <div class="flow-step-circle-badge mb-2">1</div>
+                <h3 class="font-headline font-black text-base text-[#181024] mb-1" id="step-title-0">Discover a deal</h3>
+                <p class="text-xs text-gray-600 font-medium leading-relaxed" id="step-desc-0">
+                  Browse handpicked dining drops near you with real discounts.
+                </p>
+                <div class="font-caveat font-bold text-base text-[#E040A0] mt-1 select-none">
+                  Limited time. Big vibes. ↗
                 </div>
               </div>
+
             </div>
 
-            <!-- Description & Handwritten Note Below -->
-            <p class="text-xs text-gray-600 font-medium max-w-[210px] mt-2 leading-relaxed">
-              Slide your budget. Treat auto-matches feast boards with tax and tip.
-            </p>
-            <div class="font-caveat font-bold text-base text-[#2563EB] mt-1 select-none">
-              No math. Just treats. ↗
-            </div>
+            <!-- ================= ITEM 02: MATCH YOUR BUDGET ================= -->
+            <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="1">
+              
+              <!-- 3D Phone Chassis -->
+              <div class="flow-phone-wrapper phone-line-tilt-2 relative my-2">
+                <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
+                  <!-- Hardware Side Buttons -->
+                  <div class="phone-hw-btn phone-hw-action"></div>
+                  <div class="phone-hw-btn phone-hw-vol-up"></div>
+                  <div class="phone-hw-btn phone-hw-vol-down"></div>
+                  <div class="phone-hw-btn phone-hw-power"></div>
 
-          </div>
-
-          <!-- ================= ITEM 03: 2-MIN FLASH TABLE LOCK ================= -->
-          <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="2">
-            
-            <!-- Step Badge & Title Above -->
-            <div class="mb-3 flex flex-col items-center">
-              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF5F2] text-[#FF6B4A] font-headline font-black text-[11px] mb-1.5 shadow-2xs">
-                <span class="w-5 h-5 rounded-full bg-[#FF6B4A] text-white flex items-center justify-center text-[10px]">03</span>
-                <span>Flash Lock</span>
-              </div>
-              <h3 class="font-headline font-black text-sm sm:text-base text-[#181024]">2-Min Table Lock</h3>
-            </div>
-
-            <!-- 3D Phone Chassis -->
-            <div class="flow-phone-wrapper phone-line-tilt-3 relative my-2">
-              <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
-                <!-- Hardware Side Buttons -->
-                <div class="phone-hw-btn phone-hw-action"></div>
-                <div class="phone-hw-btn phone-hw-vol-up"></div>
-                <div class="phone-hw-btn phone-hw-vol-down"></div>
-                <div class="phone-hw-btn phone-hw-power"></div>
-
-                <div class="phone-screen-frame">
-                  <!-- Top Speaker & Dynamic Island -->
-                  <div class="phone-top-speaker"></div>
-                  <div class="phone-dynamic-island">
-                    <div class="phone-truedepth-sensor"></div>
-                    <div class="phone-camera-lens"></div>
-                  </div>
-
-                  <!-- Realistic Status Bar -->
-                  <div class="phone-status-bar">
-                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
-                    <div class="flex items-center gap-1 text-[#1E293B]">
-                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
-                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
-                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
-                    </div>
-                  </div>
-                  
-                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
-                    <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
-                      <span class="material-symbols-outlined text-[14px] text-gray-500">arrow_back</span>
-                      <span class="font-headline font-black text-[11.5px] text-[#181024]">Live Floor Lock</span>
-                      <span class="material-symbols-outlined text-[14px] text-gray-400">notifications</span>
+                  <div class="phone-screen-frame">
+                    <!-- Top Speaker & Dynamic Island -->
+                    <div class="phone-top-speaker"></div>
+                    <div class="phone-dynamic-island">
+                      <div class="phone-truedepth-sensor"></div>
+                      <div class="phone-camera-lens"></div>
                     </div>
 
-                    <div class="px-3 pt-1">
-                      <div class="p-3 rounded-2xl bg-gradient-to-b from-[#693BB8] via-[#5425A8] to-[#3E1685] text-white text-center shadow-lg flex flex-col items-center">
-                        <span class="inline-block px-2 py-0.5 rounded-full bg-white/20 text-[7.5px] font-black uppercase tracking-wider mb-1">Zero Deposit</span>
-                        <h4 class="font-headline font-black text-[11px] text-white">Table 12 Reserved!</h4>
-                        <p class="text-[7.5px] text-white/80 font-medium">Prime window booth • 4 persons</p>
+                    <!-- Realistic Status Bar -->
+                    <div class="phone-status-bar">
+                      <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                      <div class="flex items-center gap-1 text-[#1E293B]">
+                        <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                        <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                        <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                      </div>
+                    </div>
+                    
+                    <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                      <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
+                        <span class="material-symbols-outlined text-[14px] text-gray-500">arrow_back</span>
+                        <span class="font-headline font-black text-[11.5px] text-[#181024]">Smart Budget Matcher</span>
+                        <span class="material-symbols-outlined text-[14px] text-gray-400">info</span>
+                      </div>
 
-                        <!-- Circular Countdown Ring -->
-                        <div class="relative w-20 h-20 my-2 flex items-center justify-center">
-                          <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.18)" stroke-width="7" fill="none" />
-                            <circle id="flow-countdown-circle" cx="50" cy="50" r="40" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="31" fill="none" />
-                          </svg>
-                          <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span class="font-headline font-black text-base text-white tracking-wider" id="flow-countdown-timer">01:45</span>
-                            <span class="text-[6.5px] uppercase font-bold tracking-widest text-white/70">Remaining</span>
+                      <div class="px-3 pt-2 text-center">
+                        <span class="text-[8px] font-black text-gray-400 uppercase tracking-widest">BUDGET PER PERSON</span>
+                        <div class="text-3xl font-headline font-black text-[#181024] my-0.5 tracking-tight" id="budget-amount-val">৳ 300</div>
+                        
+                        <div class="px-2 py-2">
+                          <input type="range" id="interactive-budget-slider" min="100" max="800" step="10" value="300" class="w-full accent-[#E040A0] cursor-pointer h-1.5 rounded-lg bg-gray-200">
+                          <div class="flex justify-between text-[8px] font-bold text-gray-400 mt-1">
+                            <span>৳ 100</span>
+                            <span class="text-[#E040A0] font-black">৳ 300</span>
+                            <span>৳ 800+</span>
                           </div>
                         </div>
 
-                        <button class="w-full py-1.5 rounded-xl bg-white text-[#45188E] font-headline font-black text-[9.5px] shadow-sm flex items-center justify-center gap-1">
-                          <span class="material-symbols-outlined text-[13px]">qr_code_2</span>
-                          <span>Show QR Voucher</span>
+                        <button class="w-full py-2 rounded-xl bg-gradient-to-r from-[#E040A0] to-[#9357E8] text-white text-[9.5px] font-black shadow-sm flex items-center justify-center gap-1">
+                          <span class="material-symbols-outlined text-[13px]">auto_awesome</span>
+                          <span>Find matching deals</span>
                         </button>
                       </div>
-                    </div>
 
-                    <div class="px-3 pt-2 pb-16 text-left">
-                      <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                          <span class="material-symbols-outlined text-[16px]">soup_kitchen</span>
-                        </span>
-                        <div class="flex-1 min-w-0">
-                          <div class="flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-                            <span class="text-[7.5px] font-black text-emerald-600 uppercase">Kitchen Synced ✓</span>
+                      <div class="px-3 pt-2.5 pb-16 text-left">
+                        <span class="text-[8px] font-black text-gray-400 uppercase tracking-wider block mb-1.5">Auto-Matched Feast</span>
+                        <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs flex items-center gap-2.5">
+                          <img src="assets/images/bistro_bella.jpg" class="w-12 h-12 rounded-xl object-cover shrink-0" alt="Bistro Feast Board">
+                          <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                              <span class="text-[7.5px] font-black text-[#E040A0] uppercase tracking-wide">✓ Tax & Tip Included</span>
+                              <span class="text-[11px] font-black text-[#181024]">৳ 280</span>
+                            </div>
+                            <h5 class="font-headline font-bold text-[10px] text-[#181024] truncate">Bistro Feast Board</h5>
+                            <p class="text-[8px] text-gray-400 font-medium">Exact match • 4 pers squad</p>
                           </div>
-                          <p class="text-[8.5px] font-bold text-gray-800 truncate">Preparing Mediterranean Feast</p>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <!-- In-Phone App Navigation Bar -->
-                  <div class="phone-app-nav">
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">restaurant</span>
-                      <span>Drops</span>
+                    <!-- In-Phone App Navigation Bar -->
+                    <div class="phone-app-nav">
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">restaurant</span>
+                        <span>Drops</span>
+                      </div>
+                      <div class="phone-nav-item active">
+                        <span class="material-symbols-outlined">payments</span>
+                        <span>Budget</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">table_restaurant</span>
+                        <span>Hold</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">group</span>
+                        <span>Squad</span>
+                      </div>
                     </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">payments</span>
-                      <span>Budget</span>
-                    </div>
-                    <div class="phone-nav-item active">
-                      <span class="material-symbols-outlined">table_restaurant</span>
-                      <span>Hold</span>
-                    </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">group</span>
-                      <span>Squad</span>
-                    </div>
-                  </div>
 
-                  <div class="phone-glare-overlay"></div>
-                  <div class="phone-gesture-bar"></div>
+                    <div class="phone-glare-overlay"></div>
+                    <div class="phone-gesture-bar"></div>
+                  </div>
                 </div>
               </div>
+
+              <!-- Numbered solid pink circle badge, Step Title & Description BELOW Phone -->
+              <div class="mt-4 flex flex-col items-center max-w-[220px]">
+                <div class="flow-step-circle-badge mb-2">2</div>
+                <h3 class="font-headline font-black text-base text-[#181024] mb-1" id="step-title-1">Match your budget</h3>
+                <p class="text-xs text-gray-600 font-medium leading-relaxed" id="step-desc-1">
+                  Set what you want to spend per person. No hidden surprises.
+                </p>
+                <div class="font-caveat font-bold text-base text-[#E040A0] mt-1 select-none">
+                  No math. Just treats. ↗
+                </div>
+              </div>
+
             </div>
 
-            <!-- Description & Handwritten Note Below -->
-            <p class="text-xs text-gray-600 font-medium max-w-[210px] mt-2 leading-relaxed">
-              Lock your prime table live with 120s countdown clock. Zero deposit.
-            </p>
-            <div class="font-caveat font-bold text-base text-[#FF6B4A] mt-1 select-none">
-              + Fast. Fair. Done. ↗
+            <!-- ================= ITEM 03: HOLD THE TABLE ================= -->
+            <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="2">
+              
+              <!-- 3D Phone Chassis -->
+              <div class="flow-phone-wrapper phone-line-tilt-3 relative my-2">
+                <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
+                  <!-- Hardware Side Buttons -->
+                  <div class="phone-hw-btn phone-hw-action"></div>
+                  <div class="phone-hw-btn phone-hw-vol-up"></div>
+                  <div class="phone-hw-btn phone-hw-vol-down"></div>
+                  <div class="phone-hw-btn phone-hw-power"></div>
+
+                  <div class="phone-screen-frame">
+                    <!-- Top Speaker & Dynamic Island -->
+                    <div class="phone-top-speaker"></div>
+                    <div class="phone-dynamic-island">
+                      <div class="phone-truedepth-sensor"></div>
+                      <div class="phone-camera-lens"></div>
+                    </div>
+
+                    <!-- Realistic Status Bar -->
+                    <div class="phone-status-bar">
+                      <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                      <div class="flex items-center gap-1 text-[#1E293B]">
+                        <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                        <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                        <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                      </div>
+                    </div>
+                    
+                    <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                      <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
+                        <span class="material-symbols-outlined text-[14px] text-gray-500">arrow_back</span>
+                        <span class="font-headline font-black text-[11.5px] text-[#181024]">Table Hold</span>
+                        <span class="material-symbols-outlined text-[14px] text-gray-400">notifications</span>
+                      </div>
+
+                      <div class="px-3 pt-1">
+                        <div class="p-3 rounded-2xl bg-gradient-to-b from-[#693BB8] via-[#5425A8] to-[#3E1685] text-white text-center shadow-lg flex flex-col items-center">
+                          <span class="inline-block px-2 py-0.5 rounded-full bg-white/20 text-[7.5px] font-black uppercase tracking-wider mb-1">Zero Deposit</span>
+                          <h4 class="font-headline font-black text-[11px] text-white">Table 12 Reserved!</h4>
+                          <p class="text-[7.5px] text-white/80 font-medium">Prime window booth • 4 persons</p>
+
+                          <!-- Circular Countdown Ring -->
+                          <div class="relative w-20 h-20 my-2 flex items-center justify-center">
+                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                              <circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.18)" stroke-width="7" fill="none" />
+                              <circle id="flow-countdown-circle" cx="50" cy="50" r="40" stroke="#E040A0" stroke-width="7" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="31" fill="none" />
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                              <span class="font-headline font-black text-base text-white tracking-wider" id="flow-countdown-timer">01:42</span>
+                              <span class="text-[6.5px] uppercase font-bold tracking-widest text-white/70">Remaining</span>
+                            </div>
+                          </div>
+
+                          <button class="w-full py-1.5 rounded-xl bg-white text-[#45188E] font-headline font-black text-[9.5px] shadow-sm flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">lock_clock</span>
+                            <span>Keep Holding</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="px-3 pt-2 pb-16 text-left">
+                        <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs flex items-center gap-2">
+                          <span class="w-7 h-7 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-[16px]">soup_kitchen</span>
+                          </span>
+                          <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-1">
+                              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                              <span class="text-[7.5px] font-black text-emerald-600 uppercase">Kitchen Synced ✓</span>
+                            </div>
+                            <p class="text-[8.5px] font-bold text-gray-800 truncate">Preparing Backyard Feast</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- In-Phone App Navigation Bar -->
+                    <div class="phone-app-nav">
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">restaurant</span>
+                        <span>Drops</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">payments</span>
+                        <span>Budget</span>
+                      </div>
+                      <div class="phone-nav-item active">
+                        <span class="material-symbols-outlined">table_restaurant</span>
+                        <span>Hold</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">group</span>
+                        <span>Squad</span>
+                      </div>
+                    </div>
+
+                    <div class="phone-glare-overlay"></div>
+                    <div class="phone-gesture-bar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Numbered solid pink circle badge, Step Title & Description BELOW Phone -->
+              <div class="mt-4 flex flex-col items-center max-w-[220px]">
+                <div class="flow-step-circle-badge mb-2">3</div>
+                <h3 class="font-headline font-black text-base text-[#181024] mb-1" id="step-title-2">Hold the table</h3>
+                <p class="text-xs text-gray-600 font-medium leading-relaxed" id="step-desc-2">
+                  Lock your spot for 2 minutes with zero deposit while the squad gathers.
+                </p>
+                <div class="font-caveat font-bold text-base text-[#E040A0] mt-1 select-none">
+                  Fast. Fair. Done. ↗
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ================= ITEM 04: SHARE THE FEAST ================= -->
+            <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="3">
+              
+              <!-- 3D Phone Chassis -->
+              <div class="flow-phone-wrapper phone-line-tilt-4 relative my-2">
+                <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
+                  <!-- Hardware Side Buttons -->
+                  <div class="phone-hw-btn phone-hw-action"></div>
+                  <div class="phone-hw-btn phone-hw-vol-up"></div>
+                  <div class="phone-hw-btn phone-hw-vol-down"></div>
+                  <div class="phone-hw-btn phone-hw-power"></div>
+
+                  <div class="phone-screen-frame">
+                    <!-- Top Speaker & Dynamic Island -->
+                    <div class="phone-top-speaker"></div>
+                    <div class="phone-dynamic-island">
+                      <div class="phone-truedepth-sensor"></div>
+                      <div class="phone-camera-lens"></div>
+                    </div>
+
+                    <!-- Realistic Status Bar -->
+                    <div class="phone-status-bar">
+                      <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
+                      <div class="flex items-center gap-1 text-[#1E293B]">
+                        <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
+                        <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
+                        <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
+                      </div>
+                    </div>
+                    
+                    <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
+                      <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
+                        <div class="flex items-center gap-1.5">
+                          <span class="px-2.5 py-0.5 rounded-full bg-[#E040A0] text-white text-[8.5px] font-extrabold shadow-2xs">Squad Vibes</span>
+                          <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold">Dhaka</span>
+                        </div>
+                        <span class="material-symbols-outlined text-[14px] text-gray-400">share</span>
+                      </div>
+
+                      <!-- Social Feed Post -->
+                      <div class="px-3 pt-1.5 pb-16 text-left">
+                        <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs">
+                          <!-- User info -->
+                          <div class="flex items-center gap-2 mb-2">
+                            <img class="w-7 h-7 rounded-full object-cover ring-2 ring-[#E040A0]" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Foodie_Queen">
+                            <div>
+                              <div class="flex items-center gap-1">
+                                <span class="font-headline font-black text-[9.5px] text-[#181024]">Foodie_Queen</span>
+                                <span class="px-1.5 py-0.2 rounded-full bg-pink-100 text-[#E040A0] text-[6.5px] font-black">LVL 12</span>
+                              </div>
+                              <span class="text-[7.5px] text-gray-400 font-medium">Squad Captain • Dhanmondi</span>
+                            </div>
+                          </div>
+
+                          <!-- Food Photo -->
+                          <div class="h-28 w-full rounded-xl overflow-hidden mb-2">
+                            <img src="assets/images/squad_dining_table.jpg" class="w-full h-full object-cover" alt="Squad dining table">
+                          </div>
+
+                          <!-- Rating and comment -->
+                          <div class="flex items-center justify-between">
+                            <span class="text-[8.5px] font-black text-[#181024]">The Backyard Feast</span>
+                            <span class="text-[8.5px] text-amber-500 font-bold">★★★★★</span>
+                          </div>
+                          <p class="text-[8px] text-gray-500 font-medium mt-1 leading-relaxed">
+                            Amazing platter! Table was locked right when we arrived, zero wait time.
+                          </p>
+
+                          <!-- Interactions -->
+                          <div class="flex items-center justify-between mt-2 pt-1.5 border-t border-gray-100 text-gray-500 text-[8px] font-bold">
+                            <span class="flex items-center gap-1 text-[#E040A0]">
+                              <span class="material-symbols-outlined text-[11px]">favorite</span>
+                              <span>142 likes</span>
+                            </span>
+                            <span class="flex items-center gap-1">
+                              <span class="material-symbols-outlined text-[11px]">chat_bubble</span>
+                              <span>18 comments</span>
+                            </span>
+                          </div>
+                        </div>
+
+                        <!-- Mini Milestone Bar -->
+                        <div class="mt-2 p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
+                          <div class="flex items-center justify-between text-[7.5px] font-black text-gray-600 mb-1">
+                            <span>Next: Free Dessert Platter</span>
+                            <span class="text-[#E040A0]">4/5 Feasts</span>
+                          </div>
+                          <div class="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-[#E040A0] to-[#9357E8] rounded-full w-4/5"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- In-Phone App Navigation Bar -->
+                    <div class="phone-app-nav">
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">restaurant</span>
+                        <span>Drops</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">payments</span>
+                        <span>Budget</span>
+                      </div>
+                      <div class="phone-nav-item">
+                        <span class="material-symbols-outlined">table_restaurant</span>
+                        <span>Hold</span>
+                      </div>
+                      <div class="phone-nav-item active">
+                        <span class="material-symbols-outlined">group</span>
+                        <span>Squad</span>
+                      </div>
+                    </div>
+
+                    <div class="phone-glare-overlay"></div>
+                    <div class="phone-gesture-bar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Numbered solid pink circle badge, Step Title & Description BELOW Phone -->
+              <div class="mt-4 flex flex-col items-center max-w-[220px]">
+                <div class="flow-step-circle-badge mb-2">4</div>
+                <h3 class="font-headline font-black text-base text-[#181024] mb-1" id="step-title-3">Share the feast</h3>
+                <p class="text-xs text-gray-600 font-medium leading-relaxed" id="step-desc-3">
+                  Split the bill effortlessly, share dining moments, and level up perks.
+                </p>
+                <div class="font-caveat font-bold text-base text-[#E040A0] mt-1 select-none">
+                  Eat. Share. Earn. ↗
+                </div>
+              </div>
+
             </div>
 
           </div>
-
-          <!-- ================= ITEM 04: BITE TALK & SQUAD PERKS ================= -->
-          <div class="flow-card-item flex flex-col items-center text-center group snap-center shrink-0 w-[85vw] max-w-[280px] sm:max-w-none sm:w-auto" data-step-index="3">
-            
-            <!-- Step Badge & Title Above -->
-            <div class="mb-3 flex flex-col items-center">
-              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFEFF] text-[#0096CC] font-headline font-black text-[11px] mb-1.5 shadow-2xs">
-                <span class="w-5 h-5 rounded-full bg-[#0096CC] text-white flex items-center justify-center text-[10px]">04</span>
-                <span>Bite Talk</span>
-              </div>
-              <h3 class="font-headline font-black text-sm sm:text-base text-[#181024]">Squad Perks</h3>
-            </div>
-
-            <!-- 3D Phone Chassis -->
-            <div class="flow-phone-wrapper phone-line-tilt-4 relative my-2">
-              <div class="flow-phone-chassis w-[226px] sm:w-[238px] h-[480px] sm:h-[496px]">
-                <!-- Hardware Side Buttons -->
-                <div class="phone-hw-btn phone-hw-action"></div>
-                <div class="phone-hw-btn phone-hw-vol-up"></div>
-                <div class="phone-hw-btn phone-hw-vol-down"></div>
-                <div class="phone-hw-btn phone-hw-power"></div>
-
-                <div class="phone-screen-frame">
-                  <!-- Top Speaker & Dynamic Island -->
-                  <div class="phone-top-speaker"></div>
-                  <div class="phone-dynamic-island">
-                    <div class="phone-truedepth-sensor"></div>
-                    <div class="phone-camera-lens"></div>
-                  </div>
-
-                  <!-- Realistic Status Bar -->
-                  <div class="phone-status-bar">
-                    <span class="font-headline font-bold text-[10.5px] text-[#1E293B]">9:41</span>
-                    <div class="flex items-center gap-1 text-[#1E293B]">
-                      <svg class="w-3.5 h-2.5 fill-current" viewBox="0 0 17 12"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4.5" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="9" y="3" width="2.5" height="9" rx="0.5"/><rect x="13.5" y="0" width="2.5" height="12" rx="0.5"/></svg>
-                      <svg class="w-3.5 h-3 fill-current" viewBox="0 0 16 12"><path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-4.24-2.83a6.002 6.002 0 018.48 0 .75.75 0 101.06-1.06 7.502 7.502 0 00-10.6 0 .75.75 0 101.06 1.06zm-2.83-2.83a10.003 10.003 0 0114.14 0 .75.75 0 101.06-1.06 11.503 11.503 0 00-16.26 0 .75.75 0 001.06 1.06z"/></svg>
-                      <div class="w-5 h-2.5 rounded-[3px] border-[1.2px] border-[#1E293B] p-[1px] flex items-center relative"><div class="h-full w-full bg-[#1E293B] rounded-[1px]"></div><div class="w-[1.2px] h-[3.5px] bg-[#1E293B] rounded-r-xs absolute -right-[2.5px] top-1/2 -translate-y-1/2"></div></div>
-                    </div>
-                  </div>
-                  
-                  <div class="screen-scroll-container bg-[#FAF8FD] text-[#181024]">
-                    <div class="flex items-center justify-between px-3 pt-[30px] pb-1">
-                      <div class="flex items-center gap-1.5">
-                        <span class="px-2.5 py-0.5 rounded-full bg-[#0096CC] text-white text-[8.5px] font-extrabold shadow-2xs">Community</span>
-                        <span class="px-2.5 py-0.5 rounded-full bg-white border border-gray-200 text-gray-700 text-[8.5px] font-bold">My Squad</span>
-                      </div>
-                      <span class="material-symbols-outlined text-[14px] text-gray-400">share</span>
-                    </div>
-
-                    <!-- User Profile & Level -->
-                    <div class="px-3 pt-1.5 text-center">
-                      <div class="relative inline-block">
-                        <img class="w-11 h-11 rounded-full mx-auto object-cover ring-2 ring-[#0096CC] shadow-sm" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80">
-                        <span class="absolute -bottom-1 -right-1 px-1 py-0.2 rounded-full bg-[#0096CC] text-white text-[6.5px] font-black">LVL 12</span>
-                      </div>
-                      <h5 class="font-headline font-black text-[10.5px] text-[#181024] mt-1">Foodie_Queen</h5>
-                      <span class="inline-block px-2 py-0.2 rounded-full bg-cyan-50 text-[#0096CC] text-[7.5px] font-extrabold">Squad Captain • 2,450 XP</span>
-
-                      <!-- Milestone Progress Bar -->
-                      <div class="mt-2 p-2 rounded-xl bg-white border border-gray-100 text-left shadow-2xs">
-                        <div class="flex items-center justify-between text-[7.5px] font-black text-gray-600 mb-1">
-                          <span>Next Reward: Free Dessert Platter</span>
-                          <span class="text-[#0096CC]">4/5 Feasts</span>
-                        </div>
-                        <div class="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                          <div class="h-full bg-gradient-to-r from-[#0096CC] to-[#22D3EE] rounded-full w-4/5"></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Review Card -->
-                    <div class="px-3 pt-2 pb-16 text-left">
-                      <div class="p-2.5 rounded-2xl bg-white border border-gray-100 shadow-2xs">
-                        <div class="flex items-center gap-2">
-                          <img src="assets/images/taco_bodega.jpg" class="w-9 h-9 rounded-xl object-cover">
-                          <div>
-                            <h6 class="font-headline font-black text-[9.5px] text-[#181024]">Amazing platter!</h6>
-                            <div class="flex text-amber-400 text-[9px] gap-0.5">★★★★★</div>
-                          </div>
-                        </div>
-                        <p class="text-[7.5px] text-gray-500 font-medium mt-1.5 leading-relaxed">
-                          So fresh and flavorful! Table was locked right when we arrived, zero wait time.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- In-Phone App Navigation Bar -->
-                  <div class="phone-app-nav">
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">restaurant</span>
-                      <span>Drops</span>
-                    </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">payments</span>
-                      <span>Budget</span>
-                    </div>
-                    <div class="phone-nav-item">
-                      <span class="material-symbols-outlined">table_restaurant</span>
-                      <span>Hold</span>
-                    </div>
-                    <div class="phone-nav-item active">
-                      <span class="material-symbols-outlined">group</span>
-                      <span>Squad</span>
-                    </div>
-                  </div>
-
-                  <div class="phone-glare-overlay"></div>
-                  <div class="phone-gesture-bar"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Description & Handwritten Note Below -->
-            <p class="text-xs text-gray-600 font-medium max-w-[210px] mt-2 leading-relaxed">
-              Post honest reviews, earn street cred, and climb squad milestones.
-            </p>
-            <div class="font-caveat font-bold text-base text-[#0096CC] mt-1 select-none">
-              Eat. Share. Earn. ↗
-            </div>
-
-          </div>
-
         </div>
 
         <!-- Mobile Swipe Indicator Dots -->
@@ -944,6 +1125,165 @@
     </div>
   </section>
 
+  <!-- ==========================================================================
+       DEVELOPER SHOWCASE SECTION (CREATOR & ARCHITECT PROFILE)
+       ========================================================================== -->
+  <section id="developer" class="relative py-14 sm:py-20 md:py-28 border-t border-purple-100/70 bg-gradient-to-b from-white via-[#FAF6FE] to-white overflow-hidden">
+    <span id="dev" class="absolute -top-20 pointer-events-none"></span>
+
+    <!-- Ambient glowing backdrop orbs -->
+    <div class="absolute top-1/3 left-1/4 w-96 h-96 bg-[#E040A0]/10 rounded-full filter blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-10 right-1/4 w-96 h-96 bg-[#9357E8]/10 rounded-full filter blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-pink-50 border border-pink-200 text-[#E040A0] font-headline font-black text-[11px] sm:text-xs uppercase tracking-wider mb-2.5 shadow-2xs">
+          BEHIND THE CRAFT
+        </span>
+        <h2 class="font-headline font-black text-2xl sm:text-3xl md:text-4xl text-[#181024] tracking-tight mb-2.5">
+          Meet the Developer
+        </h2>
+        <p class="text-xs sm:text-sm md:text-base text-gray-500 font-medium">
+          Architecting modern food experiences with clean code, 3D interaction, and human-centered design.
+        </p>
+      </div>
+
+      <!-- Developer Showcase Card -->
+      <div class="max-w-4xl mx-auto rounded-3xl bg-white/95 border border-purple-100/80 shadow-[0_20px_60px_-15px_rgba(124,82,170,0.18)] p-6 sm:p-10 md:p-12 relative backdrop-blur-md transition-all hover:shadow-[0_25px_70px_-10px_rgba(224,64,160,0.22)]">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10 items-center">
+          
+          <!-- Column 1: Avatar & Status (md:col-span-4) -->
+          <div class="md:col-span-4 flex flex-col items-center text-center">
+            
+            <!-- Avatar Frame with Gradient Border & Glint -->
+            <div class="relative group select-none">
+              <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-1 bg-gradient-to-tr from-[#E040A0] via-[#9357E8] to-[#2563EB] shadow-lg">
+                <img 
+                  id="dev-profile-avatar"
+                  src="https://github.com/EFTAKHAR-AMIN-SAKIB.png" 
+                  alt="Eftakhar Amin Sakib" 
+                  class="w-full h-full rounded-[22px] object-cover bg-purple-50 group-hover:scale-102 transition-transform duration-300"
+                  onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80';"
+                >
+              </div>
+              
+              <!-- Floating Verified Badge -->
+              <span class="absolute -bottom-2 -right-2 w-9 h-9 rounded-2xl bg-[#181024] text-[#E040A0] flex items-center justify-center shadow-md border-2 border-white" title="Verified Creator">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+              </span>
+            </div>
+
+            <!-- Active Status Indicator Pill -->
+            <div class="mt-5 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-[11px] font-extrabold shadow-2xs">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="dev-profile-status">Active Engineering • Dhaka</span>
+            </div>
+
+            <!-- Quick Location -->
+            <div class="mt-2 text-[11px] text-gray-500 font-medium flex items-center gap-1 justify-center">
+              <span class="material-symbols-outlined text-[14px] text-[#7C52AA]">location_on</span>
+              <span id="dev-profile-location">Dhaka, Bangladesh</span>
+            </div>
+
+          </div>
+
+          <!-- Column 2: Bio, Tech Stack & Links (md:col-span-8) -->
+          <div class="md:col-span-8 flex flex-col items-center md:items-start text-center md:text-left">
+            
+            <!-- Name & Role -->
+            <div class="mb-3">
+              <h3 id="dev-profile-name" class="font-headline font-black text-2xl sm:text-3xl text-[#181024] tracking-tight">
+                Eftakhar Amin Sakib
+              </h3>
+              <p id="dev-profile-role" class="text-sm sm:text-base font-bold text-[#7C52AA] mt-0.5">
+                Lead Full-Stack & Mobile Software Engineer
+              </p>
+            </div>
+
+            <!-- Bio Description -->
+            <p id="dev-profile-bio" class="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium mb-5 max-w-xl">
+              Passionate about engineering delightful, high-performance digital products. Focused on clean architecture, interactive 3D micro-interactions, and human-centered design that brings foodies and local kitchens together.
+            </p>
+
+            <!-- Tech Stack & Focus Areas -->
+            <div class="w-full mb-6">
+              <span class="text-[10px] font-black uppercase tracking-widest text-gray-400 block mb-2 text-center md:text-left">
+                Technologies & Craft
+              </span>
+              <div id="dev-profile-skills" class="flex flex-wrap items-center justify-center md:justify-start gap-1.5 sm:gap-2">
+                <span class="px-3 py-1 rounded-full bg-purple-50 text-[#7C52AA] text-[11px] font-extrabold border border-purple-100">Flutter & Android</span>
+                <span class="px-3 py-1 rounded-full bg-pink-50 text-[#E040A0] text-[11px] font-extrabold border border-pink-100">Tailwind CSS</span>
+                <span class="px-3 py-1 rounded-full bg-blue-50 text-[#2563EB] text-[11px] font-extrabold border border-blue-100">Node.js & APIs</span>
+                <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-[11px] font-extrabold border border-amber-200">Interactive 3D UI</span>
+                <span class="px-3 py-1 rounded-full bg-cyan-50 text-cyan-800 text-[11px] font-extrabold border border-cyan-200">Realtime Sync</span>
+                <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-[11px] font-extrabold border border-emerald-200">UI/UX Architecture</span>
+              </div>
+            </div>
+
+            <!-- Metrics / Highlights Row -->
+            <div class="grid grid-cols-3 gap-3 w-full py-3.5 px-4 mb-6 rounded-2xl bg-gray-50/80 border border-gray-100/80 text-center">
+              <div>
+                <span class="font-headline font-black text-base sm:text-lg text-[#181024] block">100%</span>
+                <span class="text-[9.5px] sm:text-[10px] text-gray-500 font-bold uppercase tracking-wider block">Clean Code</span>
+              </div>
+              <div class="border-x border-gray-200/80">
+                <span class="font-headline font-black text-base sm:text-lg text-[#E040A0] block">&lt; 100ms</span>
+                <span class="text-[9.5px] sm:text-[10px] text-gray-500 font-bold uppercase tracking-wider block">Fluid Response</span>
+              </div>
+              <div>
+                <span class="font-headline font-black text-base sm:text-lg text-[#7C52AA] block">4 Steps</span>
+                <span class="text-[9.5px] sm:text-[10px] text-gray-500 font-bold uppercase tracking-wider block">3D Flow UI</span>
+              </div>
+            </div>
+
+            <!-- Social Links & Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 w-full">
+              <a 
+                id="dev-profile-github"
+                href="https://github.com/EFTAKHAR-AMIN-SAKIB" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-2 rounded-full bg-[#181024] hover:bg-[#2A1D3D] text-white text-xs font-extrabold tracking-wide flex items-center gap-2 shadow-sm active:scale-95 transition-all"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span>GitHub Profile</span>
+              </a>
+
+              <a 
+                id="dev-profile-repo"
+                href="https://github.com/EFTAKHAR-AMIN-SAKIB/treat-landing-page" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-2 rounded-full bg-white hover:bg-gray-50 border border-gray-200 text-[#181024] text-xs font-bold flex items-center gap-1.5 shadow-2xs active:scale-95 transition-all"
+              >
+                <span class="material-symbols-outlined text-[16px] text-[#7C52AA]">fork_right</span>
+                <span>View Project Repository</span>
+              </a>
+
+              <a 
+                href="admin.html"
+                class="px-3.5 py-2 rounded-full bg-purple-50 hover:bg-purple-100 border border-purple-200 text-[#7C52AA] text-xs font-bold flex items-center gap-1 active:scale-95 transition-all"
+                title="Edit Developer Profile in Admin Studio"
+              >
+                <span class="material-symbols-outlined text-[15px]">edit</span>
+                <span>Edit in Studio</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="bg-surface-low border-t border-outline-variant/30 py-12 relative z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -955,10 +1295,11 @@
 
       <div class="flex items-center gap-6 text-xs text-on-surface-variant font-medium">
         <a href="#workflow-flow" class="hover:text-primary transition-colors">Workflow Flow</a>
+        <a href="#developer" class="hover:text-primary transition-colors">Developer</a>
         <a href="#download-cta" class="hover:text-primary transition-colors">Download</a>
-        <button onclick="window.treatApp.admin.open()" class="hover:text-secondary transition-colors font-bold flex items-center gap-1">
+        <a href="admin.html" class="hover:text-secondary transition-colors font-bold flex items-center gap-1" title="Open Admin Studio Dashboard">
           <span class="material-symbols-outlined text-[14px]">settings</span> Admin Studio
-        </button>
+        </a>
       </div>
 
     </div>
@@ -1084,6 +1425,14 @@
           <span class="material-symbols-outlined text-[20px]">close</span>
         </button>
       </div>
+    </div>
+
+    <!-- Direct Banner to Full-Page Admin Dashboard -->
+    <div class="pt-3 pb-1">
+      <a href="admin.html" class="w-full py-2.5 px-4 rounded-2xl bg-gradient-to-r from-primary to-secondary text-white text-xs font-black uppercase tracking-wider flex items-center justify-between shadow-md hover:shadow-lg active:scale-98 transition-all group">
+        <span>Open Full-Page Studio Dashboard</span>
+        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">open_in_new</span>
+      </a>
     </div>
 
     <!-- Navigation Tabs -->
