@@ -1833,24 +1833,26 @@ class TreatAdminPanel {
     const foodContainer = document.getElementById('foodie-deals-container');
     if (foodContainer && Array.isArray(this.config.foodPhotos) && this.config.foodPhotos.length > 0) {
       foodContainer.innerHTML = this.config.foodPhotos.map(item => `
-        <div class="snap-start shrink-0 w-[260px] md:w-[280px] rounded-3xl overflow-hidden glass-panel flex flex-col group transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
-          <div class="h-44 w-full relative overflow-hidden bg-surface-container">
-            <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <div class="w-full rounded-3xl overflow-hidden glass-panel flex flex-col group transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-pink-300/60">
+          <div class="h-48 sm:h-52 w-full relative overflow-hidden bg-surface-container">
+            <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='assets/images/fiesta_platter.jpg'">
             <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary text-white text-[10px] font-extrabold tracking-wide uppercase shadow-md">
-              ${item.tag}
+              ${item.tag || 'Special Deal'}
             </span>
-            <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-md text-on-surface text-xs font-black shadow">
-              ${item.price}
+            <span class="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[#181024] text-xs font-black shadow border border-purple-100">
+              ${item.price || '৳ 0'}
             </span>
           </div>
-          <div class="p-4 flex flex-col justify-between flex-1">
-            <h4 class="font-headline font-bold text-sm text-on-surface truncate">${item.title}</h4>
-            <p class="text-xs text-on-surface-variant font-medium mt-1">Available across top participating Treat partner kitchens.</p>
-            <div class="mt-3 pt-2 border-t border-outline-variant/30 flex items-center justify-between">
-              <span class="text-[11px] font-bold text-secondary flex items-center gap-1">
-                <span class="material-symbols-outlined text-[14px]">bolt</span> Instant Match
+          <div class="p-5 flex flex-col justify-between flex-1">
+            <div>
+              <h4 class="font-headline font-black text-base text-on-surface truncate">${item.title}</h4>
+              <p class="text-xs text-on-surface-variant font-medium mt-1 leading-relaxed">Available across top participating Treat partner kitchens with instant 2-min table hold.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between">
+              <span class="text-[11px] font-extrabold text-secondary flex items-center gap-1">
+                <span class="material-symbols-outlined text-[15px]">bolt</span> Instant Match
               </span>
-              <span class="text-xs font-black text-primary">Explore Platter →</span>
+              <a href="#workflow-flow" class="text-xs font-black text-primary hover:underline flex items-center gap-0.5">Explore Platter →</a>
             </div>
           </div>
         </div>

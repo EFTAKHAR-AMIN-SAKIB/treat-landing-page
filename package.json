@@ -26,5 +26,8 @@
     "url": "https://github.com/treatapp2k27/treat-landing-page/issues"
   },
   "homepage": "https://github.com/treatapp2k27/treat-landing-page#readme",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1141.0"
+  }
 }

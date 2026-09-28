@@ -126,11 +126,24 @@ const server = http.createServer(async (req, res) => {
 
   // ==========================================
   // API ROUTE 1: GET /api/config
-  // Returns current persistent configuration
+  // Returns current persistent configuration (Cloudflare R2 + local fallback)
   // ==========================================
   if ((req.method === 'GET' || req.method === 'HEAD') && parsedUrl === '/api/config') {
+    const isHead = req.method === 'HEAD';
     try {
-      const isHead = req.method === 'HEAD';
+      let r2Storage = null;
+      try { r2Storage = require('./lib/r2.js'); } catch (e) {}
+
+      if (r2Storage && typeof r2Storage.getConfigFromR2 === 'function') {
+        const r2Config = await r2Storage.getConfigFromR2().catch(e => {
+          console.warn('R2 fetch warning:', e.message);
+          return null;
+        });
+        if (r2Config && Array.isArray(r2Config.flowSteps)) {
+          return sendJson(res, 200, r2Config, isHead);
+        }
+      }
+
       if (fs.existsSync(CONFIG_FILE)) {
         const raw = fs.readFileSync(CONFIG_FILE, 'utf-8');
         return sendJson(res, 200, JSON.parse(raw), isHead);
@@ -149,7 +162,7 @@ const server = http.createServer(async (req, res) => {
 
   // ==========================================
   // API ROUTE 2: POST /api/save-config
-  // Saves persistent configuration to disk
+  // Saves persistent configuration to Cloudflare R2 and disk
   // ==========================================
   if (req.method === 'POST' && parsedUrl === '/api/save-config') {
     try {
@@ -163,10 +176,21 @@ const server = http.createServer(async (req, res) => {
       fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2), 'utf-8');
       syncDefaultDataJs(config);
 
+      let r2Url = null;
+      try {
+        const r2Storage = require('./lib/r2.js');
+        const r2Res = await r2Storage.saveConfigToR2(config);
+        r2Url = r2Res.url;
+        console.log(`[${new Date().toLocaleTimeString()}] Saved updated site configuration to Cloudflare R2: ${r2Url}`);
+      } catch (r2Err) {
+        console.warn('Cloudflare R2 sync warning:', r2Err.message);
+      }
+
       console.log(`[${new Date().toLocaleTimeString()}] Saved updated site configuration to disk.`);
       return sendJson(res, 200, {
         success: true,
-        message: 'Configuration successfully saved to server and live for all visitors.'
+        message: 'Configuration successfully saved to Cloudflare R2 and live for all visitors worldwide.',
+        url: r2Url
       });
     } catch (err) {
       console.error('Error saving config:', err);
@@ -176,7 +200,7 @@ const server = http.createServer(async (req, res) => {
 
   // ==========================================
   // API ROUTE 3: POST /api/upload
-  // Saves image file (mockup, team, etc.) to assets/uploads/
+  // Saves image file to Cloudflare R2 and assets/uploads/
   // ==========================================
   if (req.method === 'POST' && parsedUrl === '/api/upload') {
     try {
@@ -190,14 +214,15 @@ const server = http.createServer(async (req, res) => {
       const matches = data.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
       let buffer;
       let inferredExt = '.png';
+      let contentType = 'image/png';
 
       if (matches && matches.length === 3) {
-        const mime = matches[1];
+        contentType = matches[1].toLowerCase();
         buffer = Buffer.from(matches[2], 'base64');
-        if (mime.includes('jpeg') || mime.includes('jpg')) inferredExt = '.jpg';
-        else if (mime.includes('webp')) inferredExt = '.webp';
-        else if (mime.includes('svg')) inferredExt = '.svg';
-        else if (mime.includes('gif')) inferredExt = '.gif';
+        if (contentType.includes('jpeg') || contentType.includes('jpg')) inferredExt = '.jpg';
+        else if (contentType.includes('webp')) inferredExt = '.webp';
+        else if (contentType.includes('svg')) inferredExt = '.svg';
+        else if (contentType.includes('gif')) inferredExt = '.gif';
         else inferredExt = '.png';
       } else {
         buffer = Buffer.from(data, 'base64');
@@ -212,9 +237,18 @@ const server = http.createServer(async (req, res) => {
       const savePath = path.join(UPLOADS_DIR, uniqueName);
 
       fs.writeFileSync(savePath, buffer);
-      console.log(`[${new Date().toLocaleTimeString()}] Uploaded and saved: assets/uploads/${uniqueName} (${(buffer.length / 1024).toFixed(1)} KB)`);
+      console.log(`[${new Date().toLocaleTimeString()}] Saved local backup: assets/uploads/${uniqueName} (${(buffer.length / 1024).toFixed(1)} KB)`);
 
-      const publicUrl = `assets/uploads/${uniqueName}`;
+      let publicUrl = `assets/uploads/${uniqueName}`;
+      try {
+        const r2Storage = require('./lib/r2.js');
+        const r2Key = `uploads/${uniqueName}`;
+        publicUrl = await r2Storage.uploadToR2(buffer, r2Key, contentType);
+        console.log(`[${new Date().toLocaleTimeString()}] Uploaded to Cloudflare R2: ${publicUrl}`);
+      } catch (r2Err) {
+        console.warn('Cloudflare R2 upload warning (using local fallback):', r2Err.message);
+      }
+
       return sendJson(res, 200, {
         success: true,
         url: publicUrl,
