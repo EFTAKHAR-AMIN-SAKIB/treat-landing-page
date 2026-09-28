@@ -80,13 +80,44 @@ class TreatAdminPanel {
     return JSON.parse(JSON.stringify(window.TREAT_DEFAULT_DATA));
   }
 
-  saveConfig() {
+  async saveConfig() {
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(this.config));
     } catch (err) {
       console.error('Failed to save to localStorage:', err);
     }
     this.applyLiveChanges();
+
+    try {
+      await fetch('/api/save-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ config: this.config })
+      });
+    } catch (e) {
+      console.warn('Could not persist to server disk:', e);
+    }
+  }
+
+  async fetchServerConfig() {
+    try {
+      const res = await fetch('/api/config');
+      if (res.ok) {
+        const serverConfig = await res.json();
+        if (serverConfig && Array.isArray(serverConfig.flowSteps) && serverConfig.flowSteps.length >= 4) {
+          this.config = serverConfig;
+          try {
+            localStorage.setItem(this.storageKey, JSON.stringify(serverConfig));
+          } catch (e) {}
+          this.applyLiveChanges();
+          if (typeof window.TREAT_DEFAULT_DATA !== 'undefined') {
+            window.TREAT_DEFAULT_DATA = serverConfig;
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('Could not fetch server config, using local cache:', err);
+    }
   }
 
   init() {
@@ -94,6 +125,7 @@ class TreatAdminPanel {
     this.renderTabs();
     this.renderCurrentTab();
     this.applyLiveChanges();
+    this.fetchServerConfig();
 
     // Firebase Auth session observer
     const setupAuthObserver = () => {
@@ -162,7 +194,7 @@ class TreatAdminPanel {
       if (this.googleBtn) this.googleBtn.disabled = false;
       if (this.loginSpinner) this.loginSpinner.classList.add('hidden');
       if (this.loginLockIcon) this.loginLockIcon.classList.remove('hidden');
-      if (this.loginBtnText) this.loginBtnText.textContent = 'Sign In & Unlock';
+      if (this.loginBtnText) this.loginBtnText.textContent = 'Sign In to Dashboard';
     }
   }
 
@@ -216,8 +248,8 @@ class TreatAdminPanel {
       }
       await window.TreatAuth.loginWithEmail(email, pass);
       this.closeLoginModal();
-      this.openDrawer();
-      this.showToast('Admin Studio Unlocked');
+      this.showToast('Redirecting to Admin Studio Dashboard...');
+      window.location.href = 'admin.html';
     } catch (err) {
       this.showLoginError(err.message || 'Access denied. Please check credentials.');
     } finally {
@@ -235,8 +267,8 @@ class TreatAdminPanel {
       }
       await window.TreatAuth.loginWithGoogle();
       this.closeLoginModal();
-      this.openDrawer();
-      this.showToast('Admin Studio Unlocked');
+      this.showToast('Redirecting to Admin Studio Dashboard...');
+      window.location.href = 'admin.html';
     } catch (err) {
       this.showLoginError(err.message || 'Google sign-in failed.');
     } finally {
@@ -374,14 +406,11 @@ class TreatAdminPanel {
       this.openLoginModal();
       return;
     }
-    this.openDrawer();
+    window.location.href = 'admin.html';
   }
 
   openDrawer() {
-    if (!this.drawer) return;
-    this.drawer.classList.add('open');
-    if (this.backdrop) this.backdrop.classList.remove('hidden');
-    this.renderCurrentTab();
+    window.location.href = 'admin.html';
   }
 
   close() {

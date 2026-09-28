@@ -541,15 +541,81 @@
         return JSON.parse(JSON.stringify(window.TREAT_DEFAULT_DATA || {}));
       }
 
-      function saveConfig(silent) {
+      async function saveConfig(silent) {
         try {
           localStorage.setItem(storageKey, JSON.stringify(config));
-          if (!silent) showToast('All changes saved to website');
+          if (!silent) showToast('Saving changes to server...');
         } catch (e) {
-          console.error('Failed to save config:', e);
-          showToast('Error saving changes');
+          console.error('Failed to save config to localStorage:', e);
+        }
+
+        try {
+          const res = await fetch('/api/save-config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ config })
+          });
+          const result = await res.json();
+          if (res.ok && result.success) {
+            if (!silent) showToast('All changes saved to server & live for everyone! ✨');
+          } else {
+            if (!silent) showToast('Saved locally in browser');
+          }
+        } catch (err) {
+          console.warn('Could not save to server:', err);
+          if (!silent) showToast('Saved locally in browser');
         }
       }
+
+      async function uploadFileToServer(file, type = 'upload') {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = async (re) => {
+            const base64Data = re.target.result;
+            try {
+              const res = await fetch('/api/upload', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  filename: file.name,
+                  data: base64Data,
+                  type: type
+                })
+              });
+              const json = await res.json();
+              if (res.ok && json.success && json.url) {
+                resolve({ success: true, url: json.url });
+                return;
+              }
+            } catch (err) {
+              console.warn('Server upload failed, falling back to data URL:', err);
+            }
+            resolve({ success: false, url: base64Data });
+          };
+          reader.onerror = () => {
+            resolve({ success: false, url: '' });
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      async function syncWithServerConfig() {
+        try {
+          const res = await fetch('/api/config');
+          if (res.ok) {
+            const serverConfig = await res.json();
+            if (serverConfig && Array.isArray(serverConfig.flowSteps) && serverConfig.flowSteps.length >= 4) {
+              config = serverConfig;
+              try { localStorage.setItem(storageKey, JSON.stringify(config)); } catch (e) {}
+              renderCurrentTab();
+            }
+          }
+        } catch (e) {
+          console.warn('Could not sync server config on start:', e);
+        }
+      }
+
+      syncWithServerConfig();
 
       // --- FIREBASE AUTHENTICATION LOGIC ---
 
@@ -995,18 +1061,16 @@
             saveConfig(true);
           });
 
-          fileIn.addEventListener('change', (e) => {
+          fileIn.addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (file) {
-              const reader = new FileReader();
-              reader.onload = (re) => {
-                imgIn.value = re.target.result;
-                prevImg.src = re.target.result;
-                step.image = re.target.result;
-                saveConfig(true);
-                showToast(`Image uploaded for Phone #${idx + 1}`);
-              };
-              reader.readAsDataURL(file);
+              showToast(`Uploading mockup image for Phone #${idx + 1}...`);
+              const uploadResult = await uploadFileToServer(file, `mockup_phone_${idx + 1}`);
+              imgIn.value = uploadResult.url;
+              prevImg.src = uploadResult.url;
+              step.image = uploadResult.url;
+              await saveConfig(false);
+              showToast(`Mockup image saved to server for Phone #${idx + 1}!`);
             }
           });
 
@@ -1420,16 +1484,16 @@
           });
 
           if (avatarFile) {
-            avatarFile.addEventListener('change', (e) => {
+            avatarFile.addEventListener('change', async (e) => {
               const file = e.target.files[0];
               if (file) {
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                  avatarInput.value = ev.target.result;
-                  updateCurrentMemberLive();
-                  showToast(`Uploaded photo for ${config.team[activeMemberIdx].name || 'Member'}`);
-                };
-                reader.readAsDataURL(file);
+                const memberName = (config.team[activeMemberIdx] && config.team[activeMemberIdx].name) || `member_${activeMemberIdx + 1}`;
+                showToast(`Uploading profile photo for ${memberName}...`);
+                const uploadResult = await uploadFileToServer(file, `team_${activeMemberIdx + 1}`);
+                avatarInput.value = uploadResult.url;
+                updateCurrentMemberLive();
+                await saveConfig(false);
+                showToast(`Photo saved to server for ${memberName}!`);
               }
             });
           }
@@ -1527,18 +1591,16 @@
           tagIn.addEventListener('input', () => { dish.tag = tagIn.value; saveConfig(true); });
           srcIn.addEventListener('input', () => { dish.src = srcIn.value; imgPrev.src = srcIn.value; saveConfig(true); });
 
-          fileIn.addEventListener('change', (e) => {
+          fileIn.addEventListener('change', async (e) => {
             const f = e.target.files[0];
             if (f) {
-              const r = new FileReader();
-              r.onload = (re) => {
-                dish.src = re.target.result;
-                srcIn.value = re.target.result;
-                imgPrev.src = re.target.result;
-                saveConfig(true);
-                showToast(`Platter #${idx + 1} photo updated`);
-              };
-              r.readAsDataURL(f);
+              showToast(`Uploading photo for Platter #${idx + 1}...`);
+              const uploadResult = await uploadFileToServer(f, `platter_${idx + 1}`);
+              dish.src = uploadResult.url;
+              srcIn.value = uploadResult.url;
+              imgPrev.src = uploadResult.url;
+              await saveConfig(false);
+              showToast(`Platter #${idx + 1} photo saved to server!`);
             }
           });
 

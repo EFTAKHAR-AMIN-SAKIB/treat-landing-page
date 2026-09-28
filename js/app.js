@@ -477,43 +477,48 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setupSecretTitleAdmin(adminInstance) {
-    const titleEl = document.getElementById('hero-headline-text');
-    if (!titleEl) return;
+    const triggerElements = [
+      document.getElementById('hero-headline-text'),
+      document.getElementById('treat-nav-logo')
+    ].filter(Boolean);
 
-    let clickCount = 0;
-    let clickTimer = null;
+    if (triggerElements.length === 0) return;
 
-    titleEl.addEventListener('click', (e) => {
-      clickCount++;
-      clearTimeout(clickTimer);
+    triggerElements.forEach((el) => {
+      let clickCount = 0;
+      let clickTimer = null;
 
-      if (clickCount >= 3) {
-        e.preventDefault();
-        e.stopPropagation();
-        clickCount = 0;
+      el.addEventListener('click', (e) => {
+        clickCount++;
+        clearTimeout(clickTimer);
 
-        // Easter egg micro-animation on hero headline (delightful subtle spring bounce)
-        titleEl.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        titleEl.style.transform = 'scale(1.025)';
-        setTimeout(() => {
-          titleEl.style.transform = '';
-        }, 350);
+        if (clickCount >= 3) {
+          e.preventDefault();
+          e.stopPropagation();
+          clickCount = 0;
 
-        // Open Admin Studio (triggers Firebase login modal if unauthenticated, or drawer if authenticated)
-        if (adminInstance && typeof adminInstance.open === 'function') {
-          adminInstance.open();
-        } else if (window.treatApp && window.treatApp.admin) {
-          window.treatApp.admin.open();
-        } else {
-          const modal = document.getElementById('admin-login-modal');
-          if (modal) modal.classList.remove('hidden');
+          // Easter egg micro-animation (delightful subtle spring bounce)
+          el.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          el.style.transform = 'scale(1.03)';
+          setTimeout(() => {
+            el.style.transform = '';
+          }, 350);
+
+          // Open Full Admin Dashboard (triggers Firebase login modal if unauthenticated, or navigates to admin.html if authenticated)
+          if (adminInstance && typeof adminInstance.open === 'function') {
+            adminInstance.open();
+          } else if (window.treatApp && window.treatApp.admin) {
+            window.treatApp.admin.open();
+          } else {
+            window.location.href = 'admin.html';
+          }
+          return;
         }
-        return;
-      }
 
-      clickTimer = setTimeout(() => {
-        clickCount = 0;
-      }, 850);
+        clickTimer = setTimeout(() => {
+          clickCount = 0;
+        }, 850);
+      });
     });
   }
 

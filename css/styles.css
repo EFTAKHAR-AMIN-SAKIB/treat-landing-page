@@ -860,25 +860,13 @@ body {
   opacity: 0.9;
 }
 
-/* Admin Studio Drawer */
+/* Admin Studio Drawer - Disabled in favor of Full-Page Studio Dashboard (admin.html) */
 #admin-studio-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  max-width: 440px;
-  background: #FFFFFF;
-  box-shadow: -10px 0 40px rgba(46, 26, 40, 0.25);
-  transform: translateX(105%);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 110;
-  display: flex;
-  flex-direction: column;
+  display: none !important;
 }
 
 #admin-studio-drawer.open {
-  transform: translateX(0);
+  display: none !important;
 }
 
 .admin-tab-btn {

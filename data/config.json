@@ -1,9 +1,4 @@
-/**
- * Treat Landing Page - Default Configuration & Workflow Data
- * Synchronized with server persistent storage
- */
-
-const TREAT_DEFAULT_DATA = {
+{
   "brand": {
     "appName": "Treat",
     "tagline": "Funky Foodie Feasts & Squad Deals",
@@ -236,11 +231,4 @@ const TREAT_DEFAULT_DATA = {
     "supportEmail": "support.treat@gmail.com",
     "copyrightText": "� 2026 Treat Inc."
   }
-};
-
-if (typeof window !== "undefined") {
-  window.TREAT_DEFAULT_DATA = TREAT_DEFAULT_DATA;
-}
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = TREAT_DEFAULT_DATA;
 }
